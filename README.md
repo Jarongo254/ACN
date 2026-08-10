@@ -28,13 +28,13 @@ Network can be:
 - simple or multigraph
 - etc.
 
-Number of nodes $n = |V(G)|$
-Number of edges $m = |E(G)|$
+- Number of nodes $n = |V(G)|$
+- Number of edges $m = |E(G)|$
 
-Parallel edges: two edges connect same pair of vertices. - paralel edges form a multi-edge
-Loops: an edge connect a vertex to itself.
-Simple graph: graph with no parallel edges and no loops.
-Multigraph: graph with parallel edges and loops.
+* **Parallel edges**: two edges connect the same pair of vertices (forms a multi-edge).
+* **Loops**: an edge connecting a vertex to itself.
+* **Simple graph**: a graph with no parallel edges and no loops.
+* **Multigraph**: a graph with parallel edges and loops.
 
 * Weighted directed hypergraph - Nodes connected to subset of nodes
 
@@ -49,5 +49,6 @@ Multigraph: graph with parallel edges and loops.
 * Adjacency list - To each node, a list of neighbors/connected nodes
 
 #### Walk
-Alternating sequence of nodes and edges
+Alternating sequence of nodes and edges.
+
 **Formally**: Let $G = (V,E)$ be a simple graph. A sequence $W = (v_1, e_1, v_2, \dots, e_{k-1}, v_k)$ with $v_i \in V(G)$, $1 \leq i \leq k$ and $e_i = \{v_i, v_{i+1}\} \in E(G)$, $1 \leq i \leq k-1$ is called a walk.
