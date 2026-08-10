@@ -9,13 +9,13 @@
     - Their spatio-temporal interactions result in biological system features.
 
 - Function of a component can be inferred from its interactions.
-- Network theory and mathamatical modeling are used to analyze interactions.
+- Network theory and mathematical modeling are used to analyze interactions.
 
 ### Network theory
 
 Graph: abstract representation of a set of components(nodes/vertices) where some components are connected by edges.
 
-Formal definition: Graph is a pair $G = (V,E)$ such that $E \subseteq \{\{u,v\} \mid u,v \in V\}$. $V$ is the set of nodes and $E$ is the set of edges.
+**Formal definition**: Graph is a pair $G = (V,E)$ such that $E \subseteq \{\{u,v\} \mid u,v \in V\}$. $V$ is the set of nodes and $E$ is the set of edges.
 
 
 In context of biology:
