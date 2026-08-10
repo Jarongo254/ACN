@@ -52,3 +52,15 @@ For a given graph $G(V,E)$:
 Alternating sequence of nodes and edges.
 
 **Formally**: Let $G = (V,E)$ be a simple graph. A sequence $W = (v_1, e_1, v_2, \dots, e_{k-1}, v_k)$ with $v_i \in V(G)$, $1 \leq i \leq k$ and $e_i = \{v_i, v_{i+1}\} \in E(G)$, $1 \leq i \leq k-1$ is called a walk.
+
+Walk is closed if $v_1 = v_k$
+
+#### Path
+Given a graph G(V,E), a walk $W = (v_1, e_1, v_2, \dots, e_{k-1}, v_k)$ is a path if $v_i \neq v_j,1 \leq i,j \leq k, i \neq j$.
+
+A path is a cycle if $v_i = v_k$
+
+**Minimality/Maximality**: with respect to a property of a subgraph.
+**Connectedness**: A graph is connected if there exists a path between any two nodes u and v in the graph.
+**Tree**: Connected graph without cycles
+**Forest** Graph with multiple connected components without6 cycles
