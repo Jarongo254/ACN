@@ -36,5 +36,19 @@ Loops: an edge connect a vertex to itself.
 Simple graph: graph with no parallel edges and no loops.
 Multigraph: graph with parallel edges and loops.
 
+* Weighted directed hypergraph - Nodes connected to subset of nodes
 
+#### Graph representation on computers
+* Adjacency matrix - constant time to check for an edge between two nodes
+  - A[u,v] = 1 if {u,v} ∈ E(G)
+  - A[u,v] = 0 if {u,v} ∉ E(G)
+  - Matrix is symmetric for a non directed graph but not for directed
+* Incidence matrix
+  - A[u,e] = 1 if u ∈ E(G)
+  - A[u,e] = 0 if u ∉ E
+* Adjacency list - To each node, a list of neighbors/connected nodes
 
+#### Walk
+Alternating sequence of nodes and edges
+**Formally**: Let G = (V,E) be a simple graph. A sequence W = (v_1, e_1, v_2, ..e_k-1, v_k) with v_i ∈
+V(G), 1 \leq i \leq k and e_i = {v_i, v_i+1} ∈ E(G), 1 \leq i \leq k-1 is called a walk
