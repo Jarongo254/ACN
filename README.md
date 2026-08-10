@@ -15,7 +15,7 @@
 
 Graph: abstract representation of a set of components(nodes/vertices) where some components are connected by edges.
 
-Formal definition: Graph is a pair G = (V,E) such that E ⊆ {{u,v}|u,v ∈ V}.  V is the set of nodes and E is the set of edges.
+Formal definition: Graph is a pair $G = (V,E)$ such that $E \subseteq \{\{u,v\} \mid u,v \in V\}$. $V$ is the set of nodes and $E$ is the set of edges.
 
 
 In context of biology:
@@ -28,8 +28,8 @@ Network can be:
 - simple or multigraph
 - etc.
 
-Number of nodes n = |V(G)|
-Number of edges m = |E(G)|
+Number of nodes $n = |V(G)|$
+Number of edges $m = |E(G)|$
 
 Parallel edges: two edges connect same pair of vertices. - paralel edges form a multi-edge
 Loops: an edge connect a vertex to itself.
@@ -40,15 +40,14 @@ Multigraph: graph with parallel edges and loops.
 
 #### Graph representation on computers
 * Adjacency matrix - constant time to check for an edge between two nodes
-  - A[u,v] = 1 if {u,v} ∈ E(G)
-  - A[u,v] = 0 if {u,v} ∉ E(G)
+  - $A[u,v] = 1$ if $\{u,v\} \in E(G)$
+  - $A[u,v] = 0$ if $\{u,v\} \notin E(G)$
   - Matrix is symmetric for a non directed graph but not for directed
 * Incidence matrix
-  - A[u,e] = 1 if u ∈ E(G)
-  - A[u,e] = 0 if u ∉ E
+  - $A[u,e] = 1$ if $u \in E(G)$
+  - $A[u,e] = 0$ if $u \notin E$
 * Adjacency list - To each node, a list of neighbors/connected nodes
 
 #### Walk
 Alternating sequence of nodes and edges
-**Formally**: Let G = (V,E) be a simple graph. A sequence W = (v_1, e_1, v_2, ..e_k-1, v_k) with v_i ∈
-V(G), 1 \leq i \leq k and e_i = {v_i, v_i+1} ∈ E(G), 1 \leq i \leq k-1 is called a walk
+**Formally**: Let $G = (V,E)$ be a simple graph. A sequence $W = (v_1, e_1, v_2, \dots, e_{k-1}, v_k)$ with $v_i \in V(G)$, $1 \leq i \leq k$ and $e_i = \{v_i, v_{i+1}\} \in E(G)$, $1 \leq i \leq k-1$ is called a walk.
