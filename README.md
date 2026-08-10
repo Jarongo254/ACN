@@ -26,8 +26,8 @@ Network can be:
 - directed or undirected
 - weighted or unweighted
 - simple or multigraph
-- etc.
 
+For a given graph $G(V,E)$:
 - Number of nodes $n = |V(G)|$
 - Number of edges $m = |E(G)|$
 
