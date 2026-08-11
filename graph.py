@@ -20,11 +20,14 @@ class Graph:
             visited_order.append(n)
             for j in range(len(self.A[n])):
                 if self.A[n][j] == 1 and mark[j] == 0:
+                    print(f"Performing dfs on node {j}")
                     _dfs(j)
 
         for n in range(nodes):
             if mark[n] == 0:
+                print(f"Performing dfs on node {n}")
                 _dfs(n)
+
 
         print(f"DFS traversal order: {visited_order}")
 
