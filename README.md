@@ -62,5 +62,35 @@ A path is a cycle if $v_i = v_k$
 
 **Minimality/Maximality**: with respect to a property of a subgraph.
 **Connectedness**: A graph is connected if there exists a path between any two nodes u and v in the graph.
-**Tree**: Connected graph without cycles
-**Forest** Graph with multiple connected components without6 cycles
+**Tree**: Connected graph without cycles.
+**Forest**: Graph with multiple connected components without cycles. 
+**Rooted Tree**: One vertex has been designated as root
+
+### Determining connectedness
+- How to traverse the graph: 
+  * DFS
+  * BFS
+
+#### Depth First Search(DFS)
+- Is done recursively
+1. Choose a starting node v
+2. Mark node v as visited
+3. If node adjacent to v is not marked as visited, select as starting point
+4. Perform DFS on the node
+5. Return to other nodes adjacent to v and perform DFS until all neghbors of v have been visited
+
+##### Pseusdocode
+```text
+procedure dfsearch(G)
+  for each v \in V(G) do
+    mark[v] <- 0  # means node has not been visited
+  for each v \in V(G) do
+    if mark[v] \neq 1 then
+      dfs(v)
+      
+procedure dfs(v)
+  mark[v] <- 1 # Node is now marked as visited
+  for each node w adjacent to v do
+    if mark[w] \neq 1 then
+      dfs(w)
+```
