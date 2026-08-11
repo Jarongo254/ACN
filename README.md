@@ -82,15 +82,17 @@ A path is a cycle if $v_i = v_k$
 ##### Pseusdocode
 ```text
 procedure dfsearch(G)
-  for each v \in V(G) do
+  for each v ∈ V(G) do
     mark[v] <- 0  # means node has not been visited
-  for each v \in V(G) do
-    if mark[v] \neq 1 then
+  for each v ∈ V(G) do
+    if mark[v] ≠ 1 then
       dfs(v)
       
 procedure dfs(v)
   mark[v] <- 1 # Node is now marked as visited
   for each node w adjacent to v do
-    if mark[w] \neq 1 then
+    if mark[w] ≠ 1 then
       dfs(w)
 ```
+
+Example execution
