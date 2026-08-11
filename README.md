@@ -113,9 +113,9 @@ Performing dfs on node 1
 DFS traversal order: [0, 2, 3, 1]
 ```
 
-Each node is visited once as the mark of its neighbors are checked. 
-Adjacency list results in a complecity of $\theta (max(m,n))$.
-DFS (recursive) results in spanning tree rotted at the starting node with edges directed based on traversal order
-For an unconnected graph results in a forest
-For a directed graph it can produce a spanning forest even if the graph is connected
+- Each node is visited once as the mark of its neighbors are checked. 
+- Adjacency list results in a complexity of $\theta (max(m,n))$.
+- DFS (recursive) results in spanning tree rooted at the starting node with edges directed based on traversal order
+- For an unconnected graph results in a forest
+- For a directed graph it can produce a spanning forest even if the graph is connected
 
