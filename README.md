@@ -95,4 +95,16 @@ procedure dfs(v)
       dfs(w)
 ```
 
-Example execution
+Example execution:
+```python
+from graph import Graph
+g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
+graph = Graph(g)
+graph.describe_graph()
+graph.dfsearch()
+```
+output:
+```text
+There are 4 nodes and 7 edges in this graph
+DFS traversal order: [0, 2, 3, 1]
+```
