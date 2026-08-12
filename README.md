@@ -171,6 +171,31 @@ DFS traversal order: [0, 2, 3, 1]
 
 #### Breadth First Search
 
-Given a starting node v, mark it as visited and visit all its immediate adjacent nodes. find other unvisited/unmarked node until all nodes have been marked as visited.
+Given a starting node v, mark it as visited and visit all its immediate adjacent nodes. Find another unvisited/unmarked node until all nodes have been marked as visited.
 
 Uses Queue as the data structure(First in first out).
+
+Generates a tree for a connected graph and a forest for a disconnected graph.
+
+Same complexity as DFS
+
+Pseudocode:
+```text
+procudure bfsearch(G)
+  for each v ∈ V(G) do
+    mark[v] ← 0
+  for each v ∈ V(G) do
+    if mark[v] ≠ 1 then
+      bfs(v)
+      
+procedure bfs(v)
+  Q ← empty queue
+  mark[v] ← 1 # node is marked as visited
+  while Q is not empty do
+    u ← first(Q)
+    dequeue u from Q
+    for each node w adjacent to u do
+      if mark[w] ≠ 1 then
+        mark[w] ← 1
+        enqueue w into Q
+```
