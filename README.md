@@ -83,13 +83,13 @@ A path is a cycle if $v_i = v_k$
 ```text
 procedure dfsearch(G)
   for each v ∈ V(G) do
-    mark[v] <- 0  # means node has not been visited
+    mark[v] ← 0  # means node has not been visited
   for each v ∈ V(G) do
     if mark[v] ≠ 1 then
       dfs(v)
       
 procedure dfs(v)
-  mark[v] <- 1 # Node is now marked as visited
+  mark[v] ← 1 # Node is now marked as visited
   for each node w adjacent to v do
     if mark[w] ≠ 1 then
       dfs(w)
@@ -111,7 +111,7 @@ from graph import Graph
 g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
 graph = Graph(g)
 graph.describe_graph()
-graph.dfsearch()
+graph.dfsearch(mode="recursive")
 ```
 output:
 ```text
@@ -131,4 +131,44 @@ DFS traversal order: [0, 2, 3, 1]
 
 #### Depth First Search(Iterative)
 - Same logic but uses a stack
+
+##### Pseudocode:
+```text
+procedure dfs2(v)
+  P ← empty_stack
+  mark[v] ← 1
+  push v unto P
+  while P is not empty
+    while there exists a node w adjacent to top P
+      such that mark[w] ≠ 1 do
+        mark[w] ← 1
+        push w unto P # w is the new top of P
+    pop P
+```
+Example execution:
+```python
+g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
+graph = Graph(g)
+graph.describe_graph()
+graph.dfsearch(mode="iterative")
+```
+output:
+```text
+Performing iterative dfs on node 0
+marking 2 as visited
+pushed 2 to stack. New Stack: [0, 2]
+marking 3 as visited
+pushed 3 to stack. New Stack: [0, 2, 3]
+marking 1 as visited
+pushed 1 to stack. New Stack: [0, 2, 3, 1]
+Stack: [0, 2, 3, 1]. popping stack
+New Stack: [0, 2, 3]
+Stack: [0, 2, 3]. popping stack
+New Stack: [0, 2]
+Stack: [0, 2]. popping stack
+New Stack: [0]
+Stack: [0]. popping stack
+New Stack: []
+DFS traversal order: [0, 2, 3, 1]
+```
 
