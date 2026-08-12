@@ -55,11 +55,38 @@ class Graph:
 
         print(f"DFS traversal order: {visited_order}")
 
+    def bfsearch(self):
+        nodes = len(self.A)
+        mark = [0] * nodes
+        visited_order = []
+        def _bfs(v):
+            Q = [] # empty queue
+            print(f"marking {v} as visited")
+            mark[v] = 1 # mark node as visited
+            Q.append(v)
+            print(f"enqueued {v}. New Queue: {Q}")
+            visited_order.append(v)
+            while Q:
+                u = Q[0]
+                Q.pop(0)
+                print(f"popping {u}. Queue is now {Q}")
+                for j in range(len(self.A[u])):
+                    if self.A[u][j] == 1 and mark[j] == 0:
+                        print(f"marking {j} as visited")
+                        mark[j] = 1
+                        Q.append(j)
+                        print(f"enqueued {j}. New Queue: {Q}")
+                        visited_order.append(j)
+        for v in range(nodes):
+            if mark[v] == 0:
+                print(f"Performing bfs on node {v}")
+                _bfs(v)
 
-
+        print(f"BFS traversal order: {visited_order}")
 
 g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
 graph = Graph(g)
 graph.describe_graph()
 graph.dfsearch(mode="recursive")
 graph.dfsearch(mode="iterative")
+graph.bfsearch()

@@ -199,3 +199,26 @@ procedure bfs(v)
         mark[w] ← 1
         enqueue w into Q
 ```
+Example:
+```python
+g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
+graph = Graph(g)
+graph.bfsearch()
+```
+output:
+```text
+Performing bfs on node 0
+marking 0 as visited
+enqueued 0. New Queue: [0]
+popping 0. Queue is now []
+marking 2 as visited
+enqueued 2. New Queue: [2]
+popping 2. Queue is now []
+marking 3 as visited
+enqueued 3. New Queue: [3]
+popping 3. Queue is now []
+marking 1 as visited
+enqueued 1. New Queue: [1]
+popping 1. Queue is now []
+BFS traversal order: [0, 2, 3, 1]
+```
