@@ -79,7 +79,7 @@ A path is a cycle if $v_i = v_k$
 4. Perform DFS on the node
 5. Return to other nodes adjacent to v and perform DFS until all neghbors of v have been visited
 
-##### Pseusdocode
+##### Pseusdocode:
 ```text
 procedure dfsearch(G)
   for each v ∈ V(G) do
@@ -96,6 +96,13 @@ procedure dfs(v)
 ```
 
 Example execution:
+```mermaid
+graph TD
+    0((0)) --> 1((1))
+    1((1)) --> 2((2))
+    2((2)) --> 3((3))
+    3((3)) --> 1((1))
+```
 ```python
 from graph import Graph
 g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
@@ -118,4 +125,7 @@ DFS traversal order: [0, 2, 3, 1]
 - DFS (recursive) results in spanning tree rooted at the starting node with edges directed based on traversal order
 - For an unconnected graph results in a forest
 - For a directed graph it can produce a spanning forest even if the graph is connected
+
+#### Depth First Search(Iterative)
+- Same logic but uses a stack
 
