@@ -98,11 +98,13 @@ procedure dfs(v)
 Example execution:
 ```mermaid
 graph TD
-    0((0)) --> 1((1))
-    1((1)) --> 1((1))
-    1((1)) --> 2((2))
-    2((2)) --> 3((3))
-    3((3)) --> 1((1))
+    0((0)) --- 1((1))
+    1((1)) --- 1((1))
+    1((1)) --- 2((2))
+    2((2)) --- 3((3))
+    3((3)) --- 1((1))
+    
+    linkStyle default interpolate linear
 ```
 ```python
 from graph import Graph
