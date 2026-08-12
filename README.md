@@ -147,9 +147,6 @@ procedure dfs2(v)
 ```
 Example execution:
 ```python
-g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
-graph = Graph(g)
-graph.describe_graph()
 graph.dfsearch(mode="iterative")
 ```
 output:
@@ -172,3 +169,8 @@ New Stack: []
 DFS traversal order: [0, 2, 3, 1]
 ```
 
+#### Breadth First Search
+
+Given a starting node v, mark it as visited and visit all its immediate adjacent nodes. find other unvisited/unmarked node until all nodes have been marked as visited.
+
+Uses Queue as the data structure(First in first out).
