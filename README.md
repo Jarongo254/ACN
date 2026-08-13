@@ -247,5 +247,6 @@ for every node u
 ```
 
 Given that DFS with adjacency list implementation results in a complexity of:
-$\theta(max(m,n))=\theta(m)$
-Naive approach requires DFS n times leating to acomplexity of $\theta(nm)$ that becomes cubic for dense graphs **INEFFICIENT**
+$\theta(max(m,n))=\theta(m)$.
+
+Naive approach requires DFS n times leating to acomplexity of $\theta(nm)$ that becomes cubic for dense graphs. **INEFFICIENT!!**
