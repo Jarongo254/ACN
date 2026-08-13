@@ -177,6 +177,8 @@ Uses Queue as the data structure(First in first out).
 
 Generates a tree for a connected graph and a forest for a disconnected graph.
 
+It checks the nodes by order of increasing distance from the reference/starting node, therefor it gives the shortest path fro a start node to all other nodes **(but for non-weighted graphs)**.
+
 Same complexity as DFS
 
 Pseudocode:
@@ -228,5 +230,22 @@ BFS traversal order: [0, 2, 3, 1]
 - **Pre-order** traversal means we record the node the moment it is visited during dfs traversal
 - **Post-order** traversal means we record the node after both the left and right children(or just child if one) has been visited
 - Leads to the ancestry rule:
-  * $pre(v) < pre(w)$ and $post(v) > post(w)$, then v is an ancestor of w
+  * $pre(v) < pre(w)$ and $post(v) > post(w)$, then $v$ is an ancestor of $w$
 - offers precondition with a time complexity of $\theta(1)$(constant time)
+
+### Articulation point
+- Is a vertex whose removal(as well as its incident edges) disconnects the graph
+
+- Naive approach to determining articulation points is performing dfs on the graph with each of the nodes removed, to dtermine which ones result in more than one connected component. i.e.
+
+Pseudocode:
+```text
+for every node u
+  Remove node u
+  Perform DFS in G - u
+  If G - u is a single connected component, node u is an articulation point
+```
+
+Given that DFS with adjacency list implementation results in a complexity of:
+$\theta(max(m,n))=\theta(m)$
+Naive approach requires DFS n times leating to acomplexity of $\theta(nm)$ that becomes cubic for dense graphs **INEFFICIENT**
