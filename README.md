@@ -222,3 +222,11 @@ enqueued 1. New Queue: [1]
 popping 1. Queue is now []
 BFS traversal order: [0, 2, 3, 1]
 ```
+
+### Tree traversal
+- When traversing a graph and generating a spanning tree, we keep track of the order the nodes are visited.
+- **Pre-order** traversal means we record the node the moment it is visited during dfs traversal
+- **Post-order** traversal means we record the node after both the left and right children(or just child if one) has been visited
+- Leads to the ancestry rule:
+  * $pre(v) < pre(w)$ and $post(v) > post(w)$, then v is an ancestor of w
+- offers precondition with a time complexity of $\theta(1)$(constant time)
