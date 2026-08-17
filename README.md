@@ -250,3 +250,22 @@ Given that DFS with adjacency list implementation results in a complexity of:
 $\theta(max(m,n))=\theta(m)$.
 
 Naive approach requires DFS n times leading to a complexity of $\theta(nm)$ that becomes cubic for dense graphs. **INEFFICIENT!!**
+
+#### Efficient approach
+1. Apply DFS to generate DFS tree
+2. Nodes visited earlier are then considered parents of later nodes
+3. If a node child lacks a path(separate) to an ancestor of the particular node, removing said node would disconnect the child from the rest of the graph
+4. Root is an articulation point if it has more than one child
+
+We use the pre-order and post order numbering of nodes as visited during DFS tree construction.
+
+For every node we solve the recurrence relation:
+
+$highest[v] = min(pre-order[v], pre-order[w], highest[x])$
+
+where pre-order[v] is the pre-order numbering of node v, pre-order[w] is the pre-order numbering of a node w reachable by going through a back edge that is not in the DFS tree, and highest[x] is the highest reachable node by going through a child of node v instead (taking another route to an ancestor of v)
+
+A node v is then an articulation point if at least one of its children has no way of getting back to an ancestor of v without going through the node v
+
+- **Biconnected graph** - graph without an articulation point
+- **Bicoherent graph** - Every articulation point is connected by two edges to each component of remaining graph
