@@ -279,5 +279,7 @@ where pre-order[v] is the pre-order numbering of node v, pre-order[w] is the pre
 
 A node v is then an articulation point if at least one of its children has no way of getting back to an ancestor of v without going through the node v
 
+i.e. $highest[x] \geq pre-order[v]$ - The highest level node reachable from a child is lower than or equal to the node itself
+
 - **Biconnected graph** - graph without an articulation point
 - **Bicoherent graph** - Every articulation point is connected by two edges to each component of remaining graph
