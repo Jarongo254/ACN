@@ -382,3 +382,7 @@ Articulation points: [3, 0]
     * High-throughput affinity purification with mass spectrometry - exploiting protein binding to isolate targets
     * Yeast two-hybrid assay - gene promoter activity
 - Determining articulation points in PPI networks identifies lethal proteins. Their absence means non-functionality leading to death at a cellular and organismal level
+
+### Network Properties
+
+
