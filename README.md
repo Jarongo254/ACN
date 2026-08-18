@@ -120,19 +120,34 @@ graph TD
 ```
 ```python
 from graph import Graph
-g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
+g = [
+    [0, 1, 1, 1, 0, 0, 0, 0],
+    [1, 0, 1, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 0, 1, 0, 0],
+    [1, 0, 0, 0, 0, 0, 1, 1],
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 0, 0, 1, 0],
+]
 graph = Graph(g)
 graph.describe_graph()
 graph.dfsearch(mode="recursive")
 ```
 output:
 ```text
-There are 4 nodes and 7 edges in this graph
-Performing dfs on node 0
-Performing dfs on node 2
-Performing dfs on node 3
+There are 8 nodes and 11 edges in this graph
+Performing recursive dfs on node 0
 Performing dfs on node 1
-DFS traversal order: [0, 2, 3, 1]
+Performing dfs on node 2
+Performing dfs on node 5
+Performing dfs on node 4
+Performing dfs on node 3
+Performing dfs on node 6
+Performing dfs on node 7
+DFS traversal order(pre-order): [0, 1, 2, 5, 4, 3, 6, 7]
+DFS tree edges: [(0, 1), (1, 2), (2, 5), (5, 4), (0, 3), (3, 6), (6, 7)]
+Post order: [4, 5, 2, 1, 7, 6, 3, 0]
 ```
 
 - Each node is visited once as the mark of its neighbors are checked. 
@@ -164,21 +179,39 @@ graph.dfsearch(mode="iterative")
 output:
 ```text
 Performing iterative dfs on node 0
-marking 2 as visited
-pushed 2 to stack. New Stack: [0, 2]
-marking 3 as visited
-pushed 3 to stack. New Stack: [0, 2, 3]
 marking 1 as visited
-pushed 1 to stack. New Stack: [0, 2, 3, 1]
-Stack: [0, 2, 3, 1]. popping stack
-New Stack: [0, 2, 3]
-Stack: [0, 2, 3]. popping stack
-New Stack: [0, 2]
-Stack: [0, 2]. popping stack
+pushed 1 to stack. New Stack: [0, 1]
+marking 2 as visited
+pushed 2 to stack. New Stack: [0, 1, 2]
+marking 5 as visited
+pushed 5 to stack. New Stack: [0, 1, 2, 5]
+marking 4 as visited
+pushed 4 to stack. New Stack: [0, 1, 2, 5, 4]
+Stack: [0, 1, 2, 5, 4]. popping stack
+New Stack: [0, 1, 2, 5]
+Stack: [0, 1, 2, 5]. popping stack
+New Stack: [0, 1, 2]
+Stack: [0, 1, 2]. popping stack
+New Stack: [0, 1]
+Stack: [0, 1]. popping stack
+New Stack: [0]
+marking 3 as visited
+pushed 3 to stack. New Stack: [0, 3]
+marking 6 as visited
+pushed 6 to stack. New Stack: [0, 3, 6]
+marking 7 as visited
+pushed 7 to stack. New Stack: [0, 3, 6, 7]
+Stack: [0, 3, 6, 7]. popping stack
+New Stack: [0, 3, 6]
+Stack: [0, 3, 6]. popping stack
+New Stack: [0, 3]
+Stack: [0, 3]. popping stack
 New Stack: [0]
 Stack: [0]. popping stack
 New Stack: []
-DFS traversal order: [0, 2, 3, 1]
+DFS traversal order(pre-order): [0, 1, 2, 5, 4, 3, 6, 7]
+DFS tree edges: [(0, 1), (1, 2), (2, 5), (5, 4), (0, 3), (3, 6), (6, 7)]
+Post order: [4, 5, 2, 1, 7, 6, 3, 0]
 ```
 
 #### Breadth First Search
@@ -215,7 +248,16 @@ procedure bfs(v)
 ```
 Example:
 ```python
-g = [[0,0,1,0],[0,1,0,1],[1,0,0,1],[0,1,1,0]]
+g = g = [
+    [0, 1, 1, 1, 0, 0, 0, 0],
+    [1, 0, 1, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 0, 1, 0, 0],
+    [1, 0, 0, 0, 0, 0, 1, 1],
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 0, 0, 1, 0],
+]
 graph = Graph(g)
 graph.bfsearch()
 ```
@@ -225,16 +267,28 @@ Performing bfs on node 0
 marking 0 as visited
 enqueued 0. New Queue: [0]
 popping 0. Queue is now []
-marking 2 as visited
-enqueued 2. New Queue: [2]
-popping 2. Queue is now []
-marking 3 as visited
-enqueued 3. New Queue: [3]
-popping 3. Queue is now []
 marking 1 as visited
 enqueued 1. New Queue: [1]
-popping 1. Queue is now []
-BFS traversal order: [0, 2, 3, 1]
+marking 2 as visited
+enqueued 2. New Queue: [1, 2]
+marking 3 as visited
+enqueued 3. New Queue: [1, 2, 3]
+popping 1. Queue is now [2, 3]
+marking 4 as visited
+enqueued 4. New Queue: [2, 3, 4]
+marking 5 as visited
+enqueued 5. New Queue: [2, 3, 4, 5]
+popping 2. Queue is now [3, 4, 5]
+popping 3. Queue is now [4, 5]
+marking 6 as visited
+enqueued 6. New Queue: [4, 5, 6]
+marking 7 as visited
+enqueued 7. New Queue: [4, 5, 6, 7]
+popping 4. Queue is now [5, 6, 7]
+popping 5. Queue is now [6, 7]
+popping 6. Queue is now [7]
+popping 7. Queue is now []
+BFS traversal order: [0, 1, 2, 3, 4, 5, 6, 7]
 ```
 
 ### Tree traversal
@@ -281,5 +335,50 @@ A node v is then an articulation point if at least one of its children has no wa
 
 i.e. $highest[x] \geq pre-order[v]$ - The highest level node reachable from a child is lower than or equal to the node itself
 
+Example:
+```python
+g = [
+    [0, 1, 1, 1, 0, 0, 0, 0],
+    [1, 0, 1, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 0, 1, 0, 0],
+    [1, 0, 0, 0, 0, 0, 1, 1],
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 0, 0, 1, 0],
+]
+graph = Graph(g)
+graph.art_point()
+```
+output:
+```text
+pre-order: [0, 1, 2, 5, 4, 3, 6, 7]
+post-order: [4, 5, 2, 1, 7, 6, 3, 0]
+tree-edges: [(0, 1), (1, 2), (2, 5), (5, 4), (0, 3), (3, 6), (6, 7)]
+back edge: 2 -> 0
+back edge: 4 -> 1
+back edge: 5 -> 1
+back edge: 7 -> 3
+0 parent = -1 pre = 0 low = 0
+1 parent = 0 pre = 1 low = 0
+2 parent = 1 pre = 2 low = 0
+3 parent = 0 pre = 5 low = 5
+4 parent = 5 pre = 4 low = 1
+5 parent = 2 pre = 3 low = 1
+6 parent = 3 pre = 6 low = 5
+7 parent = 6 pre = 7 low = 5
+
+Articulation points: [3, 0]
+```
+
 - **Biconnected graph** - graph without an articulation point
+    * Functionality is maintained even without any of the nodes - biological aspect would be a missing component in a biochemical reaction does not affect the process. Its absence is remedied through an alternative pathway
 - **Bicoherent graph** - Every articulation point is connected by two edges to each component of remaining graph
+    * Functionality is preserved even if a connection is lost(the edge only - node loss would result in loss of function). A process is not dependent on a single pathway (contigencies are available). e.g. protein that can bind to more than one enzyme ensures catalysis remains possible even if one of the enzymes is missing
+    
+- **Interactome** - Totallity of Protein-protein interactions that happen in a cell or organism
+
+- Interactomes can be determined using large-scale PPI screening techniques:
+    * High-throughput affinity purification with mass spectrometry - exploiting protein binding to isolate targets
+    * Yeast two-hybrid assay - gene promoter activity
+- Determining articulation points in PPI networks identifies lethal proteins. Their absence means non-functionality leading to death at a cellular and organismal level
