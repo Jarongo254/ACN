@@ -385,4 +385,25 @@ Articulation points: [3, 0]
 
 ### Network Properties
 
+- Network properties are network invariant (does not depend a particular drawing of the graph)
+    * Properties are preserved in isomorphic networks
+
+#### Isomorphism
+- two graphs are isomorphic if there is a one-to-one mapping(bijection)
+
+i.e. $\phi: V(G) \rightarrow V(H)$ such that ${u, v} \in E(G)$ if and only if ${\phi(u),\phi(v)} \in E(H)$
+
+$\phi$ being the mapping function that maps the vertices and edges of graph G to graph H
+
+#### Classification of network properties
+- is it on a subset of nodes/edges or the entire network?
+- which information is needed to dtermine the property: local info about node/edge or global network info?
+
+These criteria classify a property as:
+  - Local: pertaining to a subset of nodes/edges, info on nodes/edges is enough to calculate
+  - Global: property arising from the entire network
+  - Local-global: Pertains to subset of nodes/edges but needs info from whole network to calculate
+  
+### Seminal network properties
+
 
