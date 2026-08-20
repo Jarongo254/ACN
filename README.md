@@ -422,3 +422,7 @@ $\sum_{u \in V(G)}d(u) = 2m$
 
 #### Degree Sequence
 Given a graph G, degree sequence is a non-increasing(decreasing) sequence of node degrees
+
+A degree sequence $S$ is graphic if one can find a simple graph which has S as its degree sequence
+
+
