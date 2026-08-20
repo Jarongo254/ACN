@@ -385,7 +385,7 @@ Articulation points: [3, 0]
 
 ### Network Properties
 
-- Network properties are network invariant (does not depend a particular drawing of the graph)
+- Network properties are network invariant (do not depend a particular drawing of the graph)
     * Properties are preserved in isomorphic networks
 
 #### Isomorphism
@@ -406,4 +406,11 @@ These criteria classify a property as:
   
 ### Seminal network properties
 
+#### Node degree (local property)
+
+For an undirected graph $G$, node degree of a node $u$ is the number of edges incident on the node, denoted by $d(u)$
+
+For a directed graph $G$, a node has both indegree (number of incoming edges) and out degree(number of outgoing edges) denoted by:
+    * $d^{-}(u) for indegree
+    * $d^{-}(u) for outdegree
 
