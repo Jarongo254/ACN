@@ -415,7 +415,7 @@ For a directed graph $G$, a node has both indegree (number of incoming edges) an
   * $d^{+}(u)$ for outdegree (0 if node $u$ is a sink node)
   
 For an undirected graph:
-$\sum_{u \in V(G)}d(u)$
+$\sum_{u \in V(G)}d(u) = 2m$
 
 - A node that is not a sink or a source node is an internal node
 - if for every $u, d^{-}(u) = d^{+}(u)$, the graph is balanced
