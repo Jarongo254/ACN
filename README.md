@@ -412,5 +412,5 @@ For an undirected graph $G$, node degree of a node $u$ is the number of edges in
 
 For a directed graph $G$, a node has both indegree (number of incoming edges) and out degree(number of outgoing edges) denoted by:
   * $d^{-}(u)$ for indegree
-  * $d^{-}(u)$ for outdegree
+  * $d^{+}(u)$ for outdegree
 
