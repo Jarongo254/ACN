@@ -411,6 +411,14 @@ These criteria classify a property as:
 For an undirected graph $G$, node degree of a node $u$ is the number of edges incident on the node, denoted by $d(u)$
 
 For a directed graph $G$, a node has both indegree (number of incoming edges) and out degree(number of outgoing edges) denoted by:
-  * $d^{-}(u)$ for indegree
-  * $d^{+}(u)$ for outdegree
+  * $d^{-}(u)$ for indegree (0 if $u$ is a source node)
+  * $d^{+}(u)$ for outdegree (0 if node $u$ is a sink node)
+  
+For an undirected graph:
+$\sum_{u\inV(G)}d(u)$
 
+- A node that is not a sink or a source node is an internal node
+- if for every $u, d^{-}(u) = d^{+}(u)$, the graph is balanced
+
+#### Degree Sequence
+Given a graph G, degree sequence is a non-increasing(decreasing) sequence of node degrees
