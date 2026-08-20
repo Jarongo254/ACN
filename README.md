@@ -411,6 +411,6 @@ These criteria classify a property as:
 For an undirected graph $G$, node degree of a node $u$ is the number of edges incident on the node, denoted by $d(u)$
 
 For a directed graph $G$, a node has both indegree (number of incoming edges) and out degree(number of outgoing edges) denoted by:
-    * $d^{-}(u) for indegree
-    * $d^{-}(u) for outdegree
+    * $d^{-}(u) for indegree$
+    * $d^{-}(u) for outdegree$
 
