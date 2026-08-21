@@ -434,7 +434,7 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
 3. **Erdos-Gallai theorem**:
     * A sequence is graphic if and only if:
       * $\sum_{i=1}^n d_i$ is even - sum of all node degrees is even
-      * $\sum_{i=1}^k d_i \geq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k$, 1 \leq k \leq n
+      * $\sum_{i=1}^k d_i \geq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k, 1 \leq k \leq n$
 
 
 
