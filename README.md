@@ -429,7 +429,12 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
 
 2. **Havel and Hakimi**:
     * A degree sequence $\\{d_1,\dots d_n\\}$ with $n \geq 3$ and $d_1 \geq 1$ is graphic if and only if the sequence $\\{d_2 - 1, d_3 - 1,\dots,d_{d_1 + 1} - 1, d_{d_1 + 2},\dots, d_p\\}$ is graphic
-
+    * A degree sequence is not graphic if all node degrees occur with a multiplicity of 1 (there must be at least two nodes of same degree) i.e. {4,2,3,1} is not graphic
+    
+3. **Erdos-Gallai theorem**:
+    * A sequence is graphic if and only if:
+      * $\sum_{i=1}^n d_i$ is even - sum of all node degrees is even
+      * $\sum_{i=1}^k d_i \geq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k$, 1 \leq k \leq n
 
 
 
