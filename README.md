@@ -423,6 +423,13 @@ $\sum_{u \in V(G)}d(u) = 2m$
 #### Degree Sequence
 Given a graph G, degree sequence is a non-increasing(decreasing) sequence of node degrees
 
-A degree sequence $S$ is graphic if one can find a simple graph which has S as its degree sequence
+**When is a degree sequence graphic?**
+
+1. A degree sequence $S$ is graphic if one can find a simple graph which has S as its degree sequence
+
+2. **Havel and Hakimi**:
+  * A degree sequence ${d_1, \dots d_n}$ with $n \geq 3$ and $d_1 \geq 1$ is graphic if and only if the sequence ${d_2 - 1, d_3 - 1, \dots ,d_{d_1 + 1} - 1, d_{d_1 + 2}, \dots , d_p}$ is graphic
+
+
 
 
