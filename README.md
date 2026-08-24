@@ -440,7 +440,7 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
       * $\sum_{i=1}^k d_i \leq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k, 1 \leq k \leq n$
         - given a graph, we consider nodes of k largest degrees(1, 2, 3...k highest degrees)e.g. {4, 3, 3, 3, 3, 2, 2, 2}; the 3 largest degrees would be the first 3 node degrees 4, 3, 3
         - How many edges the nodes collectively demand = 4 + 3 + 3 = 10 i.e. $\sum_{i=1}^k d_i$
-        - Can this requirement be satisfied by the available connections: connections between the nodes themselves($k(k-1)$) + connections to other remaining nodes($\sum_{i=k+1}^n min(d_i,k)$)
+        - Can this requirement be satisfied by the available connections: connections between the nodes themselves( $k(k-1)$ ) + connections to other remaining nodes( $\sum_{i=k+1}^n min(d_i,k)$ )
  * The two theorems have some similarities in that Havel Hakimi checks that the condition holds for a node degree at a time but for all node degrees, and Erdos Galai checks the condition for k largest node degrees at a time
 
 
