@@ -147,6 +147,41 @@ class Graph:
 
         print(f"\nArticulation points: {art_points}")
 
+    def is_graphic(self,mode="Havel-Hakimi"):
+        degrees = []
+        for v in range(self.V): # using an adjacency list would reduce the double for loop (lower complexity)
+            degree = 0
+            for j in range(self.V):
+                if self.A[v][j] == 1:
+                    degree += 1
+            degrees.append(degree)
+            print(f"Node {v}: degree {degree}")
+        degree_sequence = sorted(degrees, reverse=True)
+        ds = degree_sequence.copy()
+
+        def _havel_hakimi(degree_sequence):
+            while degree_sequence:
+                degree_sequence.sort(reverse=True)
+                first = degree_sequence.pop(0)
+
+                if first > len(degree_sequence):
+                    return False
+
+                for i in range(first):
+                    degree_sequence[i] -= 1
+                    if degree_sequence[i] < 0:
+                        return False
+            return True
+
+        def Erdos_Gallai(degree_sequence):
+            pass
+
+        if mode=="Havel-Hakimi":
+            if _havel_hakimi(degree_sequence):
+                print(f"Degree sequence {ds} is graphic")
+            else:
+                print(f"Degree sequence {ds} is NOT graphic")
+
 g = [
     [0, 1, 1, 1, 0, 0, 0, 0],
     [1, 0, 1, 0, 1, 1, 0, 0],
@@ -162,4 +197,5 @@ graph = Graph(g)
 #graph.dfsearch(mode="recursive")
 #graph.dfsearch(mode="iterative")
 #graph.bfsearch()
-graph.art_point()
+#graph.art_point()
+graph.is_graphic()

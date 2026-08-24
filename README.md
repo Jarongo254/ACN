@@ -429,6 +429,9 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
 
 2. **Havel and Hakimi**:
     * A degree sequence $\\{d_1,\dots d_n\\}$ with $n \geq 3$ and $d_1 \geq 1$ is graphic if and only if the sequence $\\{d_2 - 1, d_3 - 1,\dots,d_{d_1 + 1} - 1, d_{d_1 + 2},\dots, d_p\\}$ is graphic
+      1. starting with the first node of degree d in the degree sequence, remove it and subtract 1 from the next d entries
+      2. repeat the same for the resulting sorted sequence
+      3. A Sequence then becomes not graphic if at any poitn the result of subtration is -1 or if the final sequence is not empty
     * A degree sequence is not graphic if all node degrees occur with a multiplicity of 1 (there must be at least two nodes of same degree) i.e. {4,2,3,1} is not graphic
     
 3. **Erdos-Gallai theorem**:
