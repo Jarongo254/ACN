@@ -147,7 +147,7 @@ class Graph:
 
         print(f"\nArticulation points: {art_points}")
 
-    def is_graphic(self,mode="Havel-Hakimi"):
+    def is_graphic(self,mode="Erdos-Gallai"):
         degrees = []
         for v in range(self.V): # using an adjacency list would reduce the double for loop (lower complexity)
             degree = 0
@@ -173,14 +173,30 @@ class Graph:
                         return False
             return True
 
-        def Erdos_Gallai(degree_sequence):
-            pass
+        def _erdos_gallai(degree_sequence):
+            if sum(degree_sequence )% 2 != 0:
+                return False
+
+            for k in range(1, len(degree_sequence) + 1):
+                sub_sum1 = sum(degree_sequence[:k])
+                sub_sum2 = sum(min(d,k) for d in degree_sequence[k:])
+                if sub_sum1 >  k*(k-1) + sub_sum2:
+                    return False
+
+            return True
 
         if mode=="Havel-Hakimi":
             if _havel_hakimi(degree_sequence):
                 print(f"Degree sequence {ds} is graphic")
             else:
                 print(f"Degree sequence {ds} is NOT graphic")
+
+        if mode == "Erdos-Gallai":
+            if _erdos_gallai(degree_sequence):
+               print(f"Degree sequence {ds} is graphic")
+            else:
+                print(f"Degree sequence {ds} is NOT graphic")
+
 
 g = [
     [0, 1, 1, 1, 0, 0, 0, 0],
