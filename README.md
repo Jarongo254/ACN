@@ -431,13 +431,17 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
     * A degree sequence $\\{d_1,\dots d_n\\}$ with $n \geq 3$ and $d_1 \geq 1$ is graphic if and only if the sequence $\\{d_2 - 1, d_3 - 1,\dots,d_{d_1 + 1} - 1, d_{d_1 + 2},\dots, d_p\\}$ is graphic
       1. starting with the first node of degree d in the degree sequence, remove it and subtract 1 from the next d entries
       2. repeat the same for the resulting sorted sequence
-      3. A Sequence then becomes not graphic if at any poitn the result of subtration is -1 or if the final sequence is not empty
+      3. A Sequence then becomes not graphic if at any point the result of subtraction is -1 or if the final sequence is not empty
     * A degree sequence is not graphic if all node degrees occur with a multiplicity of 1 (there must be at least two nodes of same degree) i.e. {4,2,3,1} is not graphic
     
 3. **Erdos-Gallai theorem**:
     * A sequence is graphic if and only if:
       * $\sum_{i=1}^n d_i$ is even - sum of all node degrees is even
-      * $\sum_{i=1}^k d_i \geq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k, 1 \leq k \leq n$
+      * $\sum_{i=1}^k d_i \leq k(k-1) + \sum_{i=k+1}^n min(d_i,k)$ holds for every $k, 1 \leq k \leq n$
+        - given a graph, we consider nodes of k largest degrees(1, 2, 3...k highest degrees)e.g. {4, 3, 3, 3, 3, 2, 2, 2}; the 3 largest degrees would be the first 3 node degrees 4, 3, 3
+        - How many edges the nodes collectively demand = 4 + 3 + 3 = 10 i.e. $\sum_{i=1}^k d_i$
+        - Can this requirement be satisfied by the available connections: connections between the nodes themselves($k(k-1)$) + connections to other remaining nodes($\sum_{i=k+1}^n min(d_i,k)$)
+ * The two theorems have some similarities in that Havel Hakimi checks that the condition holds for a node degree at a time but for all node degrees, and Erdos Galai checks the condition for k largest node degrees at a time
 
 
 
