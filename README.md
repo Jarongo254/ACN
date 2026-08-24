@@ -449,6 +449,6 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
 
 specificies the probability that a randomely chosen node is of degree k. i.e. 
 
-$P(d(u)=k) = {|{u|d(u)=k}|}/{n} = {n_k}/{n}$
+$P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$
 
 
