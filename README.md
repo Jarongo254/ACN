@@ -459,7 +459,7 @@ $P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number o
 **Preferrential attachment(Barabasi-Albert)**: applies to graphs whose degree distribution follows power law
   - Nodes with already higher degrees are more likely to get more new edges from each new node $u$ added to graph $G$
   - Graph have scale invariance
-  - Networks have some nodes as hubs(having higher degree)\
+  - Networks have some nodes as hubs(having higher degree)
   
 #### Graph density(global property)
 
@@ -468,7 +468,7 @@ $P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number o
 $\delta(G) = \frac{m}{\frac{n(n-1)}{2}} = \frac{2m}{n(n-1)}$
 
 In words:
-  - $density(\delta) = \frac{actual edges}{maximum possible edges}$
+  - $density(\delta) = \frac{\text{actual edges}}{\text{maximum possible edges}}$
 
 **Relative density** is the average number of edges per node(and corresponds to average degree). i.e.
 
