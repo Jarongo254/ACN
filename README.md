@@ -443,12 +443,15 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
         - Can this requirement be satisfied by the available connections: connections between the nodes themselves( $k(k-1)$ ) + connections to other remaining nodes( $\sum_{i=k+1}^n min(d_i,k)$ )
  * The two theorems have some similarities in that Havel Hakimi checks that the condition holds for a node degree at a time but for all node degrees, and Erdos Galai checks the condition for k largest node degrees at a time, and has to hold for every k from 1 to the numrber of elements in the degreesequence/total number of nodes
  
-**Isomorphic graphs** have the same degree sequence but not every graph with same degree sequence are isomorphic
+**Isomorphic graphs** have the same degree sequence but not every graph with same degree sequence are isomorphic; same case for degree distribution
 
 #### Degree distribution
 
 specificies the probability that a randomely chosen node is of degree k. i.e. 
 
-$P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$
+$P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number of nodes of degree k
 
+#### Networks types based on degree distribution
 
+**Erdos-Renyi**: applys to regular/almost regular graphs whose degree distribution follows a poisson distribution
+  - For an Erdos-Renyi graph, the expected number of edges for the graph is given by $E[m]=\frac{n(n-1)}{2}p$ while the expected average degree of nodes is given by $E[d(u)]=(n-1)p$ where $n$ is the number of nodes and $p$ is the probability of the edge $(u,v)$ being in the graph $G$
