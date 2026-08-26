@@ -455,3 +455,32 @@ $P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number o
 
 **Erdos-Renyi**: applys to regular/almost regular graphs whose degree distribution follows a poisson distribution
   - For an Erdos-Renyi graph, the expected number of edges for the graph is given by $E[m]=\frac{n(n-1)}{2}p$ while the expected average degree of nodes is given by $E[d(u)]=(n-1)p$ where $n$ is the number of nodes and $p$ is the probability of the edge $(u,v)$ being in the graph $G$
+
+**Preferrential attachment(Barabasi-Albert)**: applies to graphs whose degree distribution follows power law
+  - Nodes with already higher degrees are more likely to get more new edges from each new node $u$ added to graph $G$
+  - Graph have scale invariance
+  - Networks have some nodes as hubs(having higher degree)\
+  
+#### Graph density(global property)
+
+**Absolute density** is the number of edges with respect to the possible number of edges on an $n$ node network. i.e.
+
+$\delta(G) = \frac{m}{\frac{n(n-1)}{2}} = \frac{2m}{n(n-1)}$
+
+In words:
+  - $density(\delta) = \frac{actual edges}{maximum possible edges}$
+
+**Relative density** is the average number of edges per node(and corresponds to average degree). i.e.
+
+$\overline{d}(G)=\frac{\sum_{i=1}^n n_i}{n} = \frac{2m}{n}$
+
+#### Clusterdness
+
+Some networks have denser neighborhoods than others
+
+Determined using:
+  - clustering coefficient
+  - transitivity(triangles)
+  - matching index
+  
+##### Clustering coefficient
