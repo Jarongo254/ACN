@@ -484,3 +484,7 @@ Determined using:
   - matching index
   
 ##### Clustering coefficient
+**Neighborhood** of a node $u$ consists of nodes that are a specied distance away from the node
+  * First neighborhood $\rightarrow$ neighboring nodes that are distance 1 away from node $u$
+  * $k^{th}$ neighborhood $\rightarrow$ neighboring nodes that are distance $k$ away from node $u$
+    * $N^k(u)$ - BFS can be used here, floyd's all pairs shortest paths can also be used here
