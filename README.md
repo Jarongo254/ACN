@@ -500,5 +500,4 @@ Determined using:
   * or in words: $C_u = \frac{\text{number of edges between neighbors of u}}{\text{maximum possible edges between the neighbors of u}}$
   
 The clustering coefficient of the graph is then obtained as an average of the clustering coefficients of all nodes in the graph. i.e.
-  
     $C(G) = \frac{1}[n]\sum_{u\inV(G)}C(u)$
