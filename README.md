@@ -559,11 +559,11 @@ Pertains to two nodes but network information is needed as shortest path may pas
     - $\frac{\sum\limits_{u,v \in V(G)}d(u,v)}{n(n-1)}$
     
 **Eccentricity** of a node $u$ is simply the maximum distance to any other node $v$. i.e.
-  * $e(u) = max\limits_v d(u,v)$
+  * $e(u) = max_v d(u,v)$
   
 **Radius** of a graph is then given by the smallest eccentricity. i.e. 
-  * $R(G) = min\limits_{u \in V(G)}e(u)$
+  * $R(G) = min_{u \in V(G)}e(u)$
 
 **Diameter** of a graph is then given by the largest eccentricity. i.e.
-  * $D(G) = max\limits_{u \in V(G)}e(u)$
+  * $D(G) = max_{u \in V(G)}e(u)$
 
