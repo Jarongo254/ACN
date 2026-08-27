@@ -488,3 +488,12 @@ Determined using:
   * First neighborhood $\rightarrow$ neighboring nodes that are distance 1 away from node $u$
   * $k^{th}$ neighborhood $\rightarrow$ neighboring nodes that are distance $k$ away from node $u$
     * $N^k(u)$ - BFS can be used here, floyd's all pairs shortest paths can also be used here
+    
+**Node induced subgraph** is a graph induced by a subset of nodes.
+  - Given graph $G=(V,E)$, subgraph $H$ induced by node subset $V' = V(H)\subseteq V(G)$ such that for every $u,v \in V(H)
+    - ${u,v} \in E(H) \text{if and only if} {u,v} \in E(G)$
+    - $H = G[V']$
+
+**Clustering coefficient**(determined from the first neighborhood of a node) is then:
+  * let $G_u$ denote the frst neighborhood induced subgraph from neighbors of node $u$. i.e. $G_u = G[N^1(u)]$
+  * Clustering cofficient of node $u$ is then: $C(u)= \frac{|E(G_u)|}{\frac{|V(G_u)|(|V(G_u)|-1)}{2}} = \frac{2|E(G_u)|}{|V(G_u)|(|V(G_u)|-1)}$
