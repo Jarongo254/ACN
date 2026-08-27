@@ -523,3 +523,39 @@ $M(u,v) = \frac{|N^1(u) \bigcap N^1(v)|}{|N^1(u)|+|N^1(v)|-|N^1(u) \bigcap N^1(v
 In words:  $M(u,v) = \frac{\text{shared first neighbors between two nodes}}{\text{sum of the first neighborhoods of the two nodes} - \text{shared first neighbors between the two nodes}}$
 
 ### Assortativity
+
+The goal is to capture:
+  * high degree node - high degree node adjascency
+  * high degree node - low degree node adjascency
+  * lack of adjascency between low degree nodes
+  
+Given a node $u$ and its neighbors, $s(u)$ denotes denotes the average degree of first neighbors of $u$ i.e.
+  - $s(u) = \frac{\sum_{v \in N^1}d(v)}{d(u)}$
+
+or in words
+  - $s(u) = \frac{\text{sum of degrees of first neighbors of u}}{degree of node u}$
+
+And the resulting values for each $u$ can be store in a vector i.e. $[s(u_1),s(u_2), \dots ,s(u_n)]$
+
+And with the vector of degrees for all nodes in the graph i.e. $[d(u_1),d(u_2, \dots ,d(u_n))]$, we can calculate the Pearson correlation coefficient $r$ from the two vectors
+
+And the correlation interpreted as:
+  * $r > 0$ then the network is assortative i.e. high degree nodes tend to be adjascent to high degree nodes
+  * $r < 0$ then the network is disassortative i.e. high degree nodes tend to be adjacent to low degree nodes
+  * $r = 0$ then there is no trend between the node degrees
+  
+### Distance(local global)
+
+Distance between two nodes $u$ and $v$ in a network $G$ is given by lenght of the shortest path between bthe two nodes if it exists, otherwise considered $\inf$ if not existing 
+
+Pertains to two nodes but network information is needed as shortest path may pass through one or multiple other nodes, hence **local-global**.
+
+#### Average path length(characteristic path length)
+- Is the average distance bewteen any pair of nodes.
+- Given by:
+  - For undirected graph:
+    - $l(G) = \frac{\sum_{u,v \in V(G)}d(u,v)}{\frac{n(n-1)}{2}} = \frac{2\sum_{u,v \in V(G)}d(u,v)}{n(n-1)}$
+  - For directed graph:
+    - $\frac{\sum_{u,v \in V(G)}d(u,v)}{n(n-1)}$
+
+
