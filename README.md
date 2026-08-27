@@ -533,7 +533,7 @@ Given a node $u$ and its neighbors, $s(u)$ denotes denotes the average degree of
   - $s(u) = \frac{\sum_{v \in N^1}d(v)}{d(u)}$
 
 or in words
-  - $s(u) = \frac{\text{sum of degrees of first neighbors of u}}{degree of node u}$
+  - $s(u) = \frac{\text{sum of degrees of first neighbors of u}}{\text{degree of node u}}$
 
 And the resulting values for each $u$ can be store in a vector i.e. $[s(u_1),s(u_2), \dots ,s(u_n)]$
 
@@ -544,9 +544,9 @@ And the correlation interpreted as:
   * $r < 0$ then the network is disassortative i.e. high degree nodes tend to be adjacent to low degree nodes
   * $r = 0$ then there is no trend between the node degrees
   
-### Distance(local global)
+### Distance(local-global)
 
-Distance between two nodes $u$ and $v$ in a network $G$ is given by lenght of the shortest path between bthe two nodes if it exists, otherwise considered $\inf$ if not existing 
+Distance between two nodes $u$ and $v$ in a network $G$ is given by length of the shortest path between the two nodes if it exists, otherwise considered $\infty$ if not existing 
 
 Pertains to two nodes but network information is needed as shortest path may pass through one or multiple other nodes, hence **local-global**.
 
@@ -554,8 +554,16 @@ Pertains to two nodes but network information is needed as shortest path may pas
 - Is the average distance bewteen any pair of nodes.
 - Given by:
   - For undirected graph:
-    - $l(G) = \frac{\sum_{u,v \in V(G)}d(u,v)}{\frac{n(n-1)}{2}} = \frac{2\sum_{u,v \in V(G)}d(u,v)}{n(n-1)}$
+    - $l(G) = \frac{\sum\limits_{u,v \in V(G)}d(u,v)}{\frac{n(n-1)}{2}} = \frac{2\sum\limits_{u,v \in V(G)}d(u,v)}{n(n-1)}$
   - For directed graph:
-    - $\frac{\sum_{u,v \in V(G)}d(u,v)}{n(n-1)}$
+    - $\frac{\sum\limits_{u,v \in V(G)}d(u,v)}{n(n-1)}$
+    
+**Eccentricity** of a node $u$ is simply the maximum distance to any other node $v$. i.e.
+  * $\[ e(u) = max_v d(u,v) \]$
+  
+**Radius** of a graph is then given by the smallest eccentricity. i.e. 
+  * $\[ R(G) = min_{u \in V(G)}e(u) \]$
 
+**Diameter** of a graph is then given by the largest eccentricity. i.e.
+  * $\[ D(G) = max_{u \in V(G)}e(u) \]$
 
