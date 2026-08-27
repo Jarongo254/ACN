@@ -520,6 +520,6 @@ given by:
 
 $M(u,v) = \frac{|N^1(u) \bigcap N^1(v)|}{|N^1(u)|+|N^1(v)|-|N^1(u) \bigcap N^1(v)|}$
 
-In words:  $M(u,v) = \frac{\text{number of shared firs neighbors between two nodes}}{\text{sum of the first neighborhoods of the two nodes} - \text{shared neighbors between the two nodes}}$
+In words:  $M(u,v) = \frac{\text{shared first neighbors between two nodes}}{\text{sum of the first neighborhoods of the two nodes} - \text{shared first neighbors between the two nodes}}$
 
 ### Assortativity
