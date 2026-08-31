@@ -632,7 +632,7 @@ Pertains to two nodes but network information is needed as shortest path may pas
     - $C_{stress}(u) = \sum\limits_{s \neq t \neq u \in V(G)} \sigma_{st}(u)$
     
 **Betweenness centrality** - is then the number of shortest paths passing through a node $u$ as a fraction of the shortest paths connecting all nodes in the graph. i.e.
-  * $C_b(u) = \sum\limits_{s \neq t \neq u in V(G)} \frac{\sigma_{st}(u)}{\sigma_{st}}$
+  * $C_b(u) = \sum\limits_{s \neq t \neq u \in V(G)} \frac{\sigma_{st}(u)}{\sigma_{st}}$
   * Node of high centrality lies on considerable fraction of paths connecting other nodes
   
 **Bellmans criterion**
