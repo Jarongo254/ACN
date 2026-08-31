@@ -1,3 +1,5 @@
+import numpy as np
+
 class Graph:
     def __init__(self,A):
         self.A = A
@@ -67,10 +69,15 @@ class Graph:
 
     def bfsearch(self):
         nodes = len(self.A)
-        mark = [0] * nodes
         pre_order = []
+        dist_mat = []
         def _bfs(v):
+            mark = [0] * nodes
             Q = [] # empty queue
+            dist=[float('inf')] * nodes
+            dist[v] = 0
+            paths=[0] * nodes
+            paths[v] = 1
             #print(f"marking {v} as visited")
             mark[v] = 1 # mark node as visited
             Q.append(v)
@@ -87,10 +94,15 @@ class Graph:
                         Q.append(j)
                         #print(f"enqueued {j}. New Queue: {Q}")
                         pre_order.append(j)
+                        dist[j] = dist[u] + 1
+            dist_mat.append(dist)
         for v in range(nodes):
-            if mark[v] == 0:
+            _bfs(v)
+        dist_mat = np.array(dist_mat)
+        print(dist_mat)
+            #if mark[v] == 0:
                 #print(f"Performing bfs on node {v}")
-                _bfs(v)
+                #_bfs(v)
         #print(f"BFS traversal order: {pre_order}")
 
     def art_point(self):
@@ -212,6 +224,6 @@ graph = Graph(g)
 #graph.describe_graph()
 #graph.dfsearch(mode="recursive")
 #graph.dfsearch(mode="iterative")
-#graph.bfsearch()
+graph.bfsearch()
 #graph.art_point()
-graph.is_graphic()
+#graph.is_graphic()
