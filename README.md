@@ -618,16 +618,25 @@ Pertains to two nodes but network information is needed as shortest path may pas
 **Eccentricity centrality** - graph centrality (Hagge & Harary, 1995)
   * $C_{ecc}(u) = \frac{1}{e(u)}$
   * is the inverse of eccentricity
+  * small eccentricity means high centrality(more nodes close to node in question) and vice versa
   
 **Closeness centrality** - Sabidussi, 1966
   * $C_{close}(u) = \frac{1}{\sum\limits_{v \in V(G)} d(u,v)}$
   * inverse of the sum of distances from node $u$ to all other nodes
+  * Node is more central if the distance to all other nodes is smaller
   
 **Stress centrality** - sum of of shortest paths that pass through a node $u$. i.e.
   * if $\sigma_{st}$ is the number of shortest paths between nodes $s$ and $t$
   * and $\sigma_{st}(u)$ is the number of shortest paths between nodes $s$ and $t$ passing through node $u$
   * stress centrality is given by:
-    - $C_{stress}(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \sigma_{st}(u)$
+    - $C_{stress}(u) = \sum\limits_{s \neq t \neq u in V(G)} \sigma_{st}(u)$
     
 **Betweenness centrality** - is then the number of shortest paths passing through a node $u$ as a fraction of the shortest paths connecting all nodes in the graph. i.e.
-  * $C_b(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \frac{\sigma_{st}(u)}{\sigma_{st}
+  * $C_b(u) = \sum\limits_{s \neq t \neq u in V(G)} \frac{\sigma_{st}(u)}{\sigma_{st}$
+  * Node of high centrality lies on considerable fraction of paths connecting other nodes
+  
+**Bellmans criterion**
+  - Node $u$ is on shrortest path between $s$ and $t$ iff $d(s,t) = d(s,u) + d(u,t)$
+    * $\sigma_{st}(u) = \sigma_{su} * \sigma_{ut}$ if $d(s,t) = d(s,u) + d(u,t)$ and $\sigma_{st}(u) = 0$ otherwise
+    
+    *Betweenness can be detremined by combining BFS and Floyd's algorithm*
