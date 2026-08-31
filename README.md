@@ -507,8 +507,10 @@ Dangling nodes(nodes of degree one-tree leaf) create a problem for clustering co
 Denominator would be 1(1-1) = 0 and division by 0 is not allowed, so they are assigned a clustering coefficient of 0
 
 ##### Transitivity(globoal property)
-Given graph $G$, $c_3$ denotes the number of 3 node cycles and $p_3$ denotes the number of 3 edge paths. Transitivity is then:
+Given graph $G$, $c_3$ denotes the number of 3 node cycles and $p_3$ denotes the number of 3 node paths(even 3 nodes conndecte by 2 edges A - B - C is a $p_3$). Transitivity is then:
   * $T(G) = \frac{3c_3}{p_3}$
+  
+*Averaging with clustering coefficient treats all nodes the same even though some nodes have significantly more information on connectivity that transitivity captures*
 
 ##### Matching index
 How similar are two pairs of nodes?
@@ -567,3 +569,31 @@ Pertains to two nodes but network information is needed as shortest path may pas
 **Diameter** of a graph is then given by the largest eccentricity. i.e.
   * $D(G) = max_{u \in V(G)}e(u)$
 
+**Distance calculation:**
+  - Floyd's algorithm - on weighted non-negative graph with distances of 0 modified to infinity(unreachable) in the distance matrix
+  * Pseudocode
+  ```text
+  function Floyd(A[1...n, 1...n])
+    array D[1...n, 1...n]
+    for k ← 1 to n do
+      for i ← 1 to n do
+        for j ← 1 to n do
+          D[i,j] = min{D[i,j], D[i,k] + D[k,j]}
+    return D
+  ```
+  
+  - BFS - for calculating length of shortest paths between a source node and every other node
+  - works with two arrays: 
+    * dist[] for storing the length of the shortest path from source -initialized to infinity for all entries but the source = 0
+    * paths[] for storing number of shortest paths from the source - initialized to 0 for all entries but the source = 1
+  * Pseudocode
+  ```text
+  Perform BFS from source u
+  For every neighbor v of w, where w is visted in BFS
+  if dist[v] > dist[w] + 1
+    dist[v] = dist[w] + 1
+    path[v] = path[w]
+  else if dist[v] = dist[w] + 1
+    path[v] = path[w] + path[v]
+  ```
+  - Every node is used as a source(like djikstra's for all pairs shortest paths)
