@@ -612,18 +612,22 @@ Pertains to two nodes but network information is needed as shortest path may pas
 3. combination of measures
 4. combination fo networks and high throughput data
 
-#### Based on position in network
+#### 1. Based on position in network
 **Degree centrality** - equivalent to degree
+
 **Eccentricity centrality** - graph centrality (Hagge & Harary, 1995)
   * $C_ecc(u) = \frac{1}{e(u)}$
   * is the inverse of eccentricity
+  
 **Closeness centrality** - Sabidussi, 1966
   * $C_close(u) = \frac{1}{\sum\limits_{v \in V(G)} d(u,v)}$
   * inverse of the sum of distances from node $u$ to all other nodes
+  
 **Stress centrality** - sum of of shortest paths that pass through a node $u$. i.e.
   * if $\sigma_st$ is the number of shortest paths between nodes $s$ and $t$
   * and $\sigma_st(u)$ is the number of shortest paths between nodes $s$ and $t$ passing through node $u$
   * stress centrality is given by:
     - $C_stress(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \sigma_st(u)$
+    
 **Betweenness centrality** - is then the number of shortest paths passing through a node $u$ as a fraction of the shortest paths connecting all nodes in the graph. i.e.
   * $C_b(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \frac{\sigma_st(u)}{\sigma_st}
