@@ -507,8 +507,8 @@ Dangling nodes(nodes of degree one-tree leaf) create a problem for clustering co
 Denominator would be 1(1-1) = 0 and division by 0 is not allowed, so they are assigned a clustering coefficient of 0
 
 ##### Transitivity(globoal property)
-Given graph $G$, $c_3$ denotes the number of 3 node cycles and $p_3$ denotes the number of 3 node paths(even 3 nodes conndecte by 2 edges A - B - C is a $p_3$). Transitivity is then:
-  * $T(G) = \frac{3c_3}{p_3}$
+Given graph $G$, $c_3$ denotes the number of 3 node cycles and $p_3$ denotes the number of 3 node paths(even 3 nodes connected by 2 edges. e.g. A - B - C is a $p_3$). Transitivity is then:
+  * $T(G) = \frac{3c_3}{p_3}$ *multiplication by 3 because each traingle has 3 possible centers*
   
 *Averaging with clustering coefficient treats all nodes the same even though some nodes have significantly more information on connectivity that transitivity captures*
 
@@ -582,7 +582,7 @@ Pertains to two nodes but network information is needed as shortest path may pas
     return D
   ```
   
-  - BFS - for calculating length of shortest paths between a source node and every other node
+  - BFS - on non-weighted graphs for calculating length of shortest paths between a source node and every other node
   - works with two arrays: 
     * dist[] for storing the length of the shortest path from source -initialized to infinity for all entries but the source = 0
     * paths[] for storing number of shortest paths from the source - initialized to 0 for all entries but the source = 1
@@ -597,3 +597,33 @@ Pertains to two nodes but network information is needed as shortest path may pas
     path[v] = path[w] + path[v]
   ```
   - Every node is used as a source(like djikstra's for all pairs shortest paths)
+  
+### Centrality
+
+- Centrally located nodes in a network may be important/essential to network function
+- essentiality exists even with lack of articulation points
+- biological approaches involve: knockouts, multiple experiments under varying conditions (labor intensive and time consuming)
+- centrally located proteins have evolved slowly and are essential for survival
+- There is evidence of cerrelation(0.75) between the degree and essentiality
+
+**How is centrality established?**
+1. Based on position of node in network
+2. Based on centrality of neighbors
+3. combination of measures
+4. combination fo networks and high throughput data
+
+#### Based on position in network
+**Degree centrality** - equivalent to degree
+**Eccentricity centrality** - graph centrality (Hagge & Harary, 1995)
+  * $C_ecc(u) = \frac{1}{e(u)}$
+  * is the inverse of eccentricity
+**Closeness centrality** - Sabidussi, 1966
+  * $C_close(u) = \frac{1}{\sum\limits_{v \in V(G)} d(u,v)}$
+  * inverse of the sum of distances from node $u$ to all other nodes
+**Stress centrality** - sum of of shortest paths that pass through a node $u$. i.e.
+  * if $\sigma_st$ is the number of shortest paths between nodes $s$ and $t$
+  * and $\sigma_st(u)$ is the number of shortest paths between nodes $s$ and $t$ passing through node $u$
+  * stress centrality is given by:
+    - $C_stress(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \sigma_st(u)$
+**Betweenness centrality** - is then the number of shortest paths passing through a node $u$ as a fraction of the shortest paths connecting all nodes in the graph. i.e.
+  * $C_b(u) = \sum\limits_{s \neq t \neq \neq u in V(G)} \frac{\sigma_st(u)}{\sigma_st}
