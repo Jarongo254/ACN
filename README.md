@@ -716,5 +716,30 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
   * $\frac{x(u)}{d^+(u)}$(value of node divided by no. of receiving neighbors)
 - Each node also simultaneously recieves the values distributed from nodes connected by incoming edges making the value of a node $u$ at each iteration
   * $x(u) = \sum\limits_{v \in N^{1,-}} \frac{x(v)}{d^+(v)}$
-- the transfer proceeds until convergence(changes become negligible)
+- The distribution proceeds until convergence(changes become negligible)
+- Each state/iteration $t$ of the pagerank distribution has a probability $x_t^i$ which gives the probability of being at node i at the respective iteration(after $t$ steps)
+- For all nodes the values at each iteration are then in the vector $x_t$ and the subsequent iteration is then 
+  * $x_{t+1} = x_tP$
+  * which means the vector at the next iteration is given by the vector at the current one * the probability of distribution
+  * if $x_{t+1} = x_t$ then distribution is stationary (P is 1 since 1 * x_t = x_t)
+- $P$ is a matrix given by $D^{-1}A whereD_out is a diagonal matrix of outdegrees for all nodes in a directed graph $G$ and A is the associated adjacency matrix of the graph
+  * *The inverse of D is just the diagonal entries in inverse form i.e. 3 to $\frac{1}{3}$*
+- $P is the adjacency matrix of the weighted graph with every weight corresponding to the probability of moving from one node to an outneighbor if all out edges are of equal probability to be chosen, and every row of P sums up to 1
+  *probability of being in a new state = probabilty of being in a previous state $\times$ the probability of moving to the new state
+- sink nodes and cycles however create a problem because movement to another node is then not possible.
+- A modified weighted graph is then used such that
+  * $P\alpha = \alphaP + \frac{1}{n}(1 - \alpha)E$ where E is a matrix of ones(1's) so the initial P matrix is simply modified
+  * which essentially means the random walker moves to a neighborhood with probability $\alpha$ and/or jumps to a random node with probability $(1 - \alpha)$
+  
+- pagerank is then a vector with the probability scores for each node, which are also the pagerank centrality scores
+
+#### 3. Combinations of centrality measures
+- Use different centrality measures by combining them through multivariate statistical analysis
+- Principle Component Analysis(PCA) is used for this purpose
+
+**PCA**
+- Dimentionality reduction tool
+- Reduces a large set of possibly correlated variables(centrality scores) into a smaller set of uncorrelated variables without loss of information
+- Seeks a linear combination of the variables such that maximum variance is extracted, removes unexplained variance and seeks another linear combination
+
   
