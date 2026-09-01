@@ -391,9 +391,9 @@ Articulation points: [3, 0]
 #### Isomorphism
 - two graphs are isomorphic if there is a one-to-one mapping(bijection)
 
-i.e. $\phi: V(G) \rightarrow V(H)$ such that ${u, v} \in E(G)$ if and only if ${\phi(u),\phi(v)} \in E(H)$
+i.e. $\varphi: V(G) \rightarrow V(H)$ such that ${u, v} \in E(G)$ if and only if ${\varphi(u),\varphi(v)} \in E(H)$
 
-$\phi$ being the mapping function that maps the vertices and edges of graph G to graph H
+$\varphi$ being the mapping function that maps the vertices and edges of graph G to graph H
 
 #### Classification of network properties
 - is it on a subset of nodes/edges or the entire network?
@@ -669,4 +669,19 @@ i.e.
     - $(a_i - \lambda e_i)v = 0$ where $e_i$ is the $i^{th}$ row of an Identity matrix $I$
     - $(A - \lambda I)v = 0$
     - There exists a non-zero $v$ if and only if $(A - \lambda I)$ is not invertible, i.e. if its determinant is 0
+  * Solving for eigen values of a square matrix results in multiple eigen values, but of interest in the context of eigen value centrality is the leading eigen value, i.e. the eigen value with the largest absolute value, based on Perron-Frobenius theorem
+
+- Every non-negative real square matrix $A$ can be associated a directed graph such that
+  * A positive element $a_{ij} > 0$ corresponds to a directed edge from node $i$ to $j$ of weight $a_{ij}$
+- Matrix $A$ is ***irreducible*** if the corresponding directed graph is strongly connected
+
+**The Perron-Frobenius** then states that if $A$ is an *irreducible* non-negative square matrix, then the principle eigenvalue is simple(occurs once if more then one eigen value) and is associated with a unique eigenvector whose components are all positive
+
+Eigenvector centrality factors in neghbor centrality when defining centrality of a node $u$.
+
+A node $u_i$ is central if its neighbors are central.
+  * Let $\varphi (u_i)$ denote centrality of a node $u_i$
+  * the centrality is then an eigen vector problem, i.e.
+    * $\varphi (u) = \frac{1}{\lambda}A \varphi (u) \rightarrow A \varphi (u) = \lambda \varphi (u)
+    * where \varphi is a vector of the centrality of each node obtained from the leading eigen vector
 
