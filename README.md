@@ -725,10 +725,10 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 - $P$ is a matrix given by $D^{-1}A whereD_out is a diagonal matrix of outdegrees for all nodes in a directed graph $G$ and A is the associated adjacency matrix of the graph
   * *The inverse of D is just the diagonal entries in inverse form i.e. 3 to $\frac{1}{3}$*
 - $P$ is the adjacency matrix of the weighted graph with every weight corresponding to the probability of moving from one node to an outneighbor if all out edges are of equal probability to be chosen, and every row of P sums up to 1
-  *probability of being in a new state = probabilty of being in a previous state $\times$ the probability of moving to the new state
+  * probability of being in a new state = probabilty of being in a previous state $\times$ the probability of moving to the new state
 - sink nodes and cycles however create a problem because movement to another node is then not possible.
 - A modified weighted graph is then used such that
-  * $P\alpha = \alphaP + \frac{1}{n}(1 - \alpha)E$ where E is a matrix of ones(1's) so the initial P matrix is simply modified
+  * $P\alpha = \alpha P + \frac{1}{n}(1 - \alpha)E$ where E is a matrix of ones(1's) so the initial P matrix is simply modified
   * which essentially means the random walker moves to a neighborhood with probability $\alpha$ and/or jumps to a random node with probability $(1 - \alpha)$
   
 - pagerank is then a vector with the probability scores for each node, which are also the pagerank centrality scores
