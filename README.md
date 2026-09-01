@@ -715,6 +715,6 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 - Each node then distributes this value equally to nodes connected through its outgoing edges such that each recieving neighbor gets 
   * $\frac{x(u)}{d^+(u)}$(value of node divided by no. of receiving neighbors)
 - Each node also simultaneously recieves the values distributed from nodes connected by incoming edges making the value of a node $u$ at each iteration
-  * $x(u) = \sum\limits_{v \in N^{1,-}} \frac{x(v)}{d^+(v)}
+  * $x(u) = \sum\limits_{v \in N^{1,-}} \frac{x(v)}{d^+(v)}$
 - the transfer proceeds until convergence(changes become negligible)
   
