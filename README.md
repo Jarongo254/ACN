@@ -612,7 +612,7 @@ Pertains to two nodes but network information is needed as shortest path may pas
 3. combination of measures
 4. combination fo networks and high throughput data
 
-#### 1. Based on position in network
+#### 1. Centrality based on position in network
 **Degree centrality** - equivalent to degree
 
 **Eccentricity centrality** - graph centrality (Hagge & Harary, 1995)
@@ -640,3 +640,33 @@ Pertains to two nodes but network information is needed as shortest path may pas
     * $\sigma_{st}(u) = \sigma_{su} * \sigma_{ut}$ if $d(s,t) = d(s,u) + d(u,t)$ and $\sigma_{st}(u) = 0$ otherwise
     
     *Betweenness can be detremined by combining BFS and Floyd's algorithm*
+
+### Determining walks of length l
+- Adjacency matrix gives the number of walks of distance 1 between any two nodes(if there exists an edge)
+- A walk of distance 2 would then be obtained by combining any two walks of distance 1 that share a starting and ending node.
+i.e.
+  * $a_{ij}^2 = \sum\limits_{k=1}^n a_{ik} * a_{kj}$
+  * simply counts the number of walks of length 2 between the nodes $i$ and $j$ by multiplying the two entries for walks through an intermediate node
+ 
+- For a walk of length $l$, this is generalized to
+  * $a_{ij}^l = \sum\limits_{k=1}^n a_{ik}^{l-1} * a_{kj}$
+  * to count the combination of walks from i to k and from k to j
+  
+  *It is not important that it is the shortest length*
+  
+#### 2. Centraliy based on neighbors
+*A node $u$ is central if its neighbors are central*
+
+**Collinearity** - two vectors are collinear if there exists a scalar \lambda such that $x = \lambda y$
+
+**Eigenvector** of a square matrix $A$ is a non-zero vector $v$ that changes by a scalar factor when multiplied by the matrix, i.e.
+  * $Av = \lambda v$, $\lambda$ being the eigen value
+  * The vector $w$ given by $Av$ and the vector v are then collinear
+  * The entries of $w$ are then given by:
+    - $w_i = \sum\limits_{j=1}^n a_{ij}v_j$ which is also equal to $\lambda v_i$,
+    - $w_i = \sum\limits_{j=1}^n a_{ij}v_j = \lambda v_i$
+    - $\sum\limits_{j=1}^n a_{ij}v_j - \lambda v_i = 0$
+    - $ (a_i - \lambda e_i)v = 0$ where $e_i$ is the $i^{th}$ row of an Identity matrix $I$
+    - $(A - \lambda I)v = 0$
+    - There exists a non-zero $v$ if and only if $(A - \lambda I)$ is not invertible, i.e. if its determinant is 0
+
