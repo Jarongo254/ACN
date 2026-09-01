@@ -741,5 +741,3 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 - Dimentionality reduction tool
 - Reduces a large set of possibly correlated variables(centrality scores) into a smaller set of uncorrelated variables without loss of information
 - Seeks a linear combination of the variables such that maximum variance is extracted, removes unexplained variance and seeks another linear combination
-
-  
