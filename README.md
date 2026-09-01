@@ -666,7 +666,7 @@ i.e.
     - $w_i = \sum\limits_{j=1}^n a_{ij}v_j$ which is also equal to $\lambda v_i$,
     - $w_i = \sum\limits_{j=1}^n a_{ij}v_j = \lambda v_i$
     - $\sum\limits_{j=1}^n a_{ij}v_j - \lambda v_i = 0$
-    - $ (a_i - \lambda e_i)v = 0$ where $e_i$ is the $i^{th}$ row of an Identity matrix $I$
+    - $(a_i - \lambda e_i)v = 0$ where $e_i$ is the $i^{th}$ row of an Identity matrix $I$
     - $(A - \lambda I)v = 0$
     - There exists a non-zero $v$ if and only if $(A - \lambda I)$ is not invertible, i.e. if its determinant is 0
 
