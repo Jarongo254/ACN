@@ -682,6 +682,6 @@ Eigenvector centrality factors in neghbor centrality when defining centrality of
 A node $u_i$ is central if its neighbors are central.
   * Let $\varphi (u_i)$ denote centrality of a node $u_i$
   * the centrality is then an eigen vector problem, i.e.
-    * $\varphi (u) = \frac{1}{\lambda}A \varphi (u) \rightarrow A \varphi (u) = \lambda \varphi (u)
+    * $\varphi (u) = \frac{1}{\lambda}A \varphi (u) \rightarrow A \varphi (u) = \lambda \varphi (u)$
     * where \varphi is a vector of the centrality of each node obtained from the leading eigen vector
 
