@@ -683,5 +683,19 @@ A node $u_i$ is central if its neighbors are central.
   * Let $\varphi (u_i)$ denote centrality of a node $u_i$
   * the centrality is then an eigen vector problem, i.e.
     * $\varphi (u) = \frac{1}{\lambda}A \varphi (u) \rightarrow A \varphi (u) = \lambda \varphi (u)$
-    * where \varphi is a vector of the centrality of each node obtained from the leading eigen vector
+    * where $\varphi$ is a vector of the centrality of each node obtained from the leading eigen vector
 
+*start with the adjacency matrix(square irrideucible matrix with non-negative entries), use it to get the eigen values, based on Perron-frobenius select the leading(largest absolute value) eigen value and get its eigen vectors, and the entries of the eigen vectors are the eigen value centrality scores of each node based on the centrality of its neighbors*
+
+#### Generalizations and variations of eigen value centrality
+***Bonacich centrality**
+  * $\varphi(\alpha,\beta) = \alpha(I - \beta A)^{-1}a1$
+  * where 1 is a column vector of ones
+  * $\alpha$ parameter affects the length of the centrality vector, can be selected so square length of vector corresponds to order of network
+  * $\beta$ is the attenuating effect of neighbors
+***As $\beta$ approaches the inverse of the leading eigen value, Bonacich centrality converges to eigenvalue centrality***
+
+***Katz centrality***
+  * $C_l(u_i) = \sum\limits_{l=1}^{\infty}\sum\limits_{j=1}^n \beta^la_{ji}^l$
+  * where $\beta$ is an attenuation factor in (0,1)
+  
