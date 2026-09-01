@@ -722,8 +722,8 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
   * $x_{t+1} = x_tP$
   * which means the vector at the next iteration is given by the vector at the current one * the probability of distribution
   * if $x_{t+1} = x_t$ then distribution is stationary (P is 1 since 1 * x_t = x_t)
-- $P$ is a matrix given by $D^{-1}A$ where $D_out$ is a diagonal matrix of out-degrees for all nodes in a directed graph $G$ and A is the associated adjacency matrix of the graph
-  * *The inverse of D is just the diagonal entries in inverse form i.e. 3 to $\frac{1}{3}$*
+- $P$ is a matrix given by $D^{-1}A$ where $D_{out}$ is a diagonal matrix of out-degrees for all nodes in a directed graph $G$ and A is the associated adjacency matrix of the graph
+  * *The inverse of D is just the diagonal entries in inverse form i.e. 3 to* $\frac{1}{3}$
 - $P$ is the adjacency matrix of the weighted graph with every weight corresponding to the probability of moving from one node to an outneighbor if all out edges are of equal probability to be chosen, and every row of P sums up to 1
   * probability of being in a new state = probabilty of being in a previous state $\times$ the probability of moving to the new state
 - sink nodes and cycles however create a problem because movement to another node is then not possible.
