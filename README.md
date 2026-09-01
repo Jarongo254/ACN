@@ -688,14 +688,33 @@ A node $u_i$ is central if its neighbors are central.
 *start with the adjacency matrix(square irrideucible matrix with non-negative entries), use it to get the eigen values, based on Perron-frobenius select the leading(largest absolute value) eigen value and get its eigen vectors, and the entries of the eigen vectors are the eigen value centrality scores of each node based on the centrality of its neighbors*
 
 #### Generalizations and variations of eigen value centrality
-***Bonacich centrality**
+**Bonacich centrality**
+- controls the contribution of neighboring nodes to the centrality score of a node using $\beta$ and $\alpha$ parameters
+- Centrality of a node is influenced recursively by neighboring nodes and therefore propagates through walks of varying length
+- Does not depend on eigen vectors/values but weights the contribution of the centralities of neighboring nodes through their distance from the node of interest in the form of number of walks i.e. $\beta^l$
   * $\varphi(\alpha,\beta) = \alpha(I - \beta A)^{-1}a1$
   * where 1 is a column vector of ones
   * $\alpha$ parameter affects the length of the centrality vector, can be selected so square length of vector corresponds to order of network
   * $\beta$ is the attenuating effect of neighbors
 ***As $\beta$ approaches the inverse of the leading eigen value, Bonacich centrality converges to eigenvalue centrality***
 
-***Katz centrality***
+***$\alpha$ and $\beta$ are constants that are selected***
+
+Based on the Neumann series, Bonacich centrality can be rewritten as 
+  * $\varphi_{\alpha,\beta} = \alpha \sum\limits_{n=0}^{\infty} \beta^n A^{n+1}1$
+
+**Katz centrality**
+- A nodes centrality is based on the centralities of other nodes that can reach it
+- Only relvant walks are walks from node j to i, how reachabel is the node from other nodes given a directed graph
+- Longer walks contribute less because of multiplication by an attenuation factor $\beta^l$
   * $C_l(u_i) = \sum\limits_{l=1}^{\infty}\sum\limits_{j=1}^n \beta^la_{ji}^l$
   * where $\beta$ is an attenuation factor in (0,1)
+  
+**Page rank**
+- In page rank, a value x(u) is assigned to each node
+- Each node then distributes this value equally to nodes connected through its outgoing edges such that each recieving neighbor gets 
+  * $\frac{x(u)}{d^+(u)}$(value of node divided by no. of receiving neighbors)
+- Each node also simultaneously recieves the values distributed from nodes connected by incoming edges making the value of a node $u$ at each iteration
+  * $x(u) = \sum\limits_{v \in N^{1,-}} \frac{x(v)}{d^+(v)}
+- the transfer proceeds until convergence(changes become negligible)
   
