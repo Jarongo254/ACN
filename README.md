@@ -735,9 +735,36 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 
 #### 3. Combinations of centrality measures
 - Use different centrality measures by combining them through multivariate statistical analysis
+- combining centrality scores can be useful fo predicting gene/protein essentiality
 - Principle Component Analysis(PCA) is used for this purpose
 
 **PCA**
 - Dimentionality reduction tool
 - Reduces a large set of possibly correlated variables(centrality scores) into a smaller set of uncorrelated variables without loss of information
 - Seeks a linear combination of the variables such that maximum variance is extracted, removes unexplained variance and seeks another linear combination
+- PCA can be used on a data matrix with nodes as rows and centrality scores from diffrnet centrality measures as columns(variables)
+- PCA steps:
+  1. Center each variable in the data set
+    * simply take the mean of each column and subtract from each column entry(centering around the mean)
+  2. compute covariance matrix of the centered variables
+    * pairwise covariance between each column/variable is calculated to compute the covariance matrix, with diagonal entries being the variances
+  3. computes eigenvalue decomposition fo the covariance matrix
+    * Simply calculate the eigen values of the resulting covariance matrix and the associated eigen vectors, i.e.
+      * $(matrix_{cov} - I\lambda)v = 0$
+  4. Sort eigen values highest to lowest, their corresponding eigen vectors are the principle components
+    * The loading matrix is obtained from a $p \times k$ i.e. k eigen vectors with respect to ordered eigen values, and k being the required number of principle components that captures the most variance
+  5. Data with reduced variables is then obtained by the product of centered variables($n \times p$ matrix) and matrix of k leading eigen vectors
+
+### Statistical significance of network properties
+- Statistical significance tells us if a network property is biologically relevant
+- To be statistically significant we need to be able to reject the null hypothesis
+  * Null hypothesis is what is assumed to be true until evidence indicates otherwise
+
+- **P-value** is the probability of an observed result assuming that the null hypothesis is true(usually the extreme observation)
+- P-value requirements:
+  * the value of the statistic for the data(t, chi, rank sum)
+  * distribution of the statistic under null hypothesis which is specified by:
+    * theoretical probability distribution of the statistic(represents an approximation)
+    * permutation/randomization to approximate the distribution
+      - involves permuting the labels of datapoints and recalculating the statistic
+    
