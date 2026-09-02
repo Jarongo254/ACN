@@ -797,8 +797,8 @@ Given the possibility of generating multiple classes of graphs after randomizati
 
 
 #### Unbiased network randomization
-- Given a network $G$, a set of all possible randomizations is given by P(G)
-- Each element in $P(G)$is a network of the same order, size, and degree sequence as G
+- Given a network $G$, a set of all possible randomizations is given by $P(G)$
+- Each element in $P(G)$is a network of the same order, size, and degree sequence as $G$
 - Two elements $G_i$ and $G_j$ are then adjacent if one can create the other by a switch operation
   * the precursor network and the new resulting network are then said to be connected by an edge(created by the fact that they are the same except for a switched edge)
 - The resulting set of possible randomizations is then a larger network with its nodes being the random networks generated (***Network of Networks***).
