@@ -752,19 +752,65 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
     * Simply calculate the eigen values of the resulting covariance matrix and the associated eigen vectors, i.e.
       * $(matrix_{cov} - I\lambda)v = 0$
   4. Sort eigen values highest to lowest, their corresponding eigen vectors are the principle components
-    * The loading matrix is obtained from a $p \times k$ i.e. k eigen vectors with respect to ordered eigen values, and k being the required number of principle components that captures the most variance
+    * The loading matrix is obtained from a $(p \times k)$ matrix i.e. k eigen vectors with respect to ordered eigen values, and k being the required number of principle components that captures the most variance
   5. Data with reduced variables is then obtained by the product of centered variables($n \times p$ matrix) and matrix of k leading eigen vectors
 
 ### Statistical significance of network properties
 - Statistical significance tells us if a network property is biologically relevant
 - To be statistically significant we need to be able to reject the null hypothesis
-  * Null hypothesis is what is assumed to be true until evidence indicates otherwise
+  * **Null hypothesis** is what is assumed to be true until evidence indicates otherwise
+    * The null hypothesis tells us that the observed data would still be observed with high likelihood if the networks(data) were randomized, so we can decide if the observation is statistically significant
+    * A statistically significant observation therefore occurs with low frequency in a random scenario which is expressed by the emperical p-value(fraction/percentage of occurences of observed data in a randomized dataset)
 
 - **P-value** is the probability of an observed result assuming that the null hypothesis is true(usually the extreme observation)
 - P-value requirements:
   * the value of the statistic for the data(t, chi, rank sum)
   * distribution of the statistic under null hypothesis which is specified by:
     * theoretical probability distribution of the statistic(represents an approximation)
-    * permutation/randomization to approximate the distribution
-      - involves permuting the labels of datapoints and recalculating the statistic
-    
+    * permutation/randomization to approximate the distribution - gives emperical approximation of the null distribution
+      - **permutation test**: involves permuting the labels of data points and recalculating the statistic (needs more than one groups of data points, when ther's usually only one network)
+      - The aproaches should be able to generate new properties while low level properties(number of nodes/edges, degree sequence) are maintained
+      - There should also be no bias i.e. each random network of the same degree sequence has an equal probability of being generated
+        * Switch randomization
+        * configuration/pairing/stub matching
+
+#### Stub matching
+Given a degree sequence:
+1. Associate as many stubs(half edges) to a node as a degree from the sequence
+2. Label the stubs
+3. The stubs are then randomly paired to form edges
+Results in multiple random networks that share the same degree sequence, no. of nodes and number of edges
+
+#### Switch randomization
+Given a graph
+1. Randomly sample two edges
+2. Switch the edges such that they swap an endpoint to each other
+3. repeat multiple times
+Also results in multiple random networks that maintains number of nodes and edges
+
+Issues:
+  * sampling two edges that share an endpoint and switching them creates loops
+  * sampling two edges that don't share an endpoint but have adjacent endpoints creates a multiedge after switching
+  *stub matching also can generate multigraphs with loops and multi-edges unless additional constraints are enforced*
+
+Given the possibility of generating multiple classes of graphs after randomization, the set constraints determine what can be included in the null distribution, and more restrictive constraints result in a more biased null distribution
+
+
+#### Unbiased network randomization
+- Given a network $G$, a set of all possible randomizations is given by P(G)
+- Each element in $P(G)$is a network of the same order, size, and degree sequence as G
+- Two elements $G_i$ and $G_j$ are then adjacent if one can create the other by a switch operation
+  * the precursor network and the new resulting network are then said to be connected by an edge(created by the fact that they are the same except for a switched edge)
+- The resulting set of possible randomizations is then a larger network with its nodes being the random networks generated (***Network of Networks***).
+- Networks/subnetworks are to be sampled from the set $P$ such that they meet the required constraints, and some subnetworks of $P$ being more connected than others would mean a specific group of connected networks are sampled more than others, resulting in a bias - which we want to avoid
+- solution is a regular Network of networks, wher every node has the same number of incoming and outgoing edges, giving a uniform stationary distribution, and every possible network is samled with equal probability, i.e.
+  * $x = xP$ where $x$ is the probaility of being in a state during a random walk, and P is the transition matrix
+  * So even after transitioning from one state/node to the next, the probality of being at either nodes when taking the next step in the walk is the same, so even a network that was already sampled can be resampled
+  * stationary distribution(probability) is given by the inverse of node degrees
+  
+#### Applications of network randomization
+- Determining if nodes of particular degrees, $k_1$ and $k_2$ are more adjacent than expected by chance
+- Determining assortativity/ disassortativity of biological networks
+- $\dots$
+
+
