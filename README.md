@@ -814,3 +814,48 @@ Given the possibility of generating multiple classes of graphs after randomizati
 - $\dots$
 
 
+
+- Cells react to encironmental stimulus/signals by synthesizing task specific proteins
+- The pathways involved make up the transcriptional regulatory network involving DNA, RNA, ad proteins(both target proteins and regulatory proteins)
+- Proteins that influence trasncription of protein genes are **transcription factors** and they bind to promoter regions of protein encoding genes to allow transcription to take place
+
+### Gene regulatory networks
+- Gene can encode for a transcription factor or another protein(enzymes e.t.c.)
+- Transcription factors modulate/regulate expression rate(transcription by RNA polymerase to produce mRNA) of genes
+- In representing these networks, we can either only consider the genes, or consider genes and their products(proteins)
+
+**Only genes considered**
+  * In this case edges would be interactions(regulatory) between TF encoding genes and other genes
+  * TF-coding genes can also regulate other TF-coding genes resulting in a regulatory cascade
+  * The edges are directed(regulator to target); have magnitude(regulatory strength); and have sign (+ve for activation and -ve for repression)
+  * A TF can regulate multiple genes , represented by multiple outgoing edges, and can also be regulated by multiple TFs, represented by multiple incoming edges
+  - The network can receive external signals from the environment, affecting TF activity and resulting in signal propagation
+
+**Genes and Proteins considered**
+Leads to a bipartite network model
+
+#### Bipartite network model
+- Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G) such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
+  * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$)
+- In a GRN these partitions represent proteing and Genes(both form the same network but can be partitioned)
+- They can then be studied by:
+  * **comparing node properties** - which nodes are important for signal propagation(hub nodes with wigh degree centrality)
+  * **Degree distributions** - evolution of GRNs; revealing duplication patterns in GRN structure
+  * **Distribution of paths** - for signal propagation
+  
+#### Network Motifs
+- A network motif is a subnetwork/pattern which occurs in a network more often than in randomized networks
+- The high frequency of occurence of these patterns in real networks implies functional significance
+- Allows decomposision of a network represented system into smaller modules
+
+##### Classes of Network Motifs
+**Negative autoregulation**
+  * The gene product represses its own promoter(binds to promoter site and prevents an activtor, turning off its own transcription)
+  * leads to response acceleration
+  * increased stability of gene product against noise
+  * has a simple mathematical model
+
+**Positive autoregulation**
+  * slows response
+  * creates bimodal distributions(bistability - where some cells have high and others low expression)
+
