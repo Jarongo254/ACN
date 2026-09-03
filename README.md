@@ -837,7 +837,7 @@ Leads to a bipartite network model
 
 #### Bipartite network model
 - Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G) such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
-  * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$)
+  * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$ )
 - In a GRN these partitions represent proteing and Genes(both form the same network but can be partitioned)
 - They can then be studied by:
   * **comparing node properties** - which nodes are important for signal propagation(hub nodes with wigh degree centrality)
