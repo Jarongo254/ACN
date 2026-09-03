@@ -814,6 +814,7 @@ Given the possibility of generating multiple classes of graphs after randomizati
 - $\dots$
 
 
+## Cells to GRNs
 
 - Cells react to encironmental stimulus/signals by synthesizing task specific proteins
 - The pathways involved make up the transcriptional regulatory network involving DNA, RNA, ad proteins(both target proteins and regulatory proteins)
