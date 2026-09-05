@@ -799,7 +799,7 @@ Given the possibility of generating multiple classes of graphs after randomizati
 
 #### Unbiased network randomization
 - Given a network $G$, a set of all possible randomizations is given by $P(G)$
-- Each element in $P(G)$is a network of the same order, size, and degree sequence as $G$
+- Each element in $P(G)$ is a network of the same order, size, and degree sequence as $G$
 - Two elements $G_i$ and $G_j$ are then adjacent if one can create the other by a switch operation
   * the precursor network and the new resulting network are then said to be connected by an edge(created by the fact that they are the same except for a switched edge)
 - The resulting set of possible randomizations is then a larger network with its nodes being the random networks generated (***Network of Networks***).
@@ -839,7 +839,7 @@ Given the possibility of generating multiple classes of graphs after randomizati
 - Leads to a bipartite network model
 
 #### Bipartite network model
-- Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G) such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
+- Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G)$ such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
 ***Graph cannot be bipartite if it has a cycle with odd number of edges, but can be if it has even number of edges***
   * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$ )
 - In a GRN these partitions represent proteing and Genes(both form the same network but can be partitioned)
@@ -872,8 +872,8 @@ Given the possibility of generating multiple classes of graphs after randomizati
   
 #### How to find network motifs
 **By Concentration**
-  * If $ N_i$ is the number of $n$ -node subnetworks s of type $i$ and $\sum\limits_i Ni$ is the number of $n$ -node subnetworks, concentration of the subnetworks of type $i$ is given by
-    * $C_i = frac{N_i}{\sum\limits_i Ni}
+  * If $N_i$ is the number of $n$-node subnetworks of type $i$ and $\sum\limits_i Ni$ is the number of $n$-node subnetworks, concentration of the subnetworks of type $i$ is given by
+    * $C_i = frac{N_i}{\sum\limits_i Ni}$
     * Given a specific type of FFL, what is its number as a fraction of all present/possible 3-node subnetworks
 
 * After determining the concentration of the FFL in the network, we then have to find out if we would get the same from randomly sampled 3 node induced subnetworks
