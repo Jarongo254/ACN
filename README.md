@@ -946,6 +946,8 @@ Crisp vs Soft
 #### Hierarchical clustering
 - Is agglomerative in nature(starts with each object in its own cluster, groups by distance with recalculation of distance and eventually ends with all objects in the same cluster)
 - Results in a dendogram(can be cut at any given height or distance)
+- is applicable to any objects and distance measures which do not have to be metric
+- Dissimilarity scores between merged clusters increases during agglomeration
 
 Pseudocode:
 ```text
@@ -963,8 +965,47 @@ end while
 - Determining distances between clusters
   * **Single linkage**
     - distance between clusters is defined as the minimum distance between any two pairs of objects, one from each cluster, i.e.
-      * $D(C_i, C_j) = \min\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * $D[C_i, C_j] = \min\limits_{u \in C_i, v \in Cj} D[u,v]$
       * After every clustering step, the distance between the new cluster and any other cluster is then the minimum of pairwise distances between all objects in one cluster and those in another cluster(for this the original distance matrix is used)
+      * suffers from chaining where two objects might be actually far apart but still end up in the same cluster because they are chained to other intermediate objects with smaller distances
   * **Complete linkage** 
     - distance between clusters is defined as the maximum distance between any two pairs of objects, one from each cluster, i.e.
-      * $D(C_i, C_j) = \max\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * $D[C_i, C_j] = \max\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * After every clustering step, the distance between the new cluster and any other cluster is then the maximum of pairwise distances between all objects in one cluster and those in another cluster(for this the original distance matrix is used)
+      * suffers from crowding where an object ends up ina cluster but is still very close to an object in another cluster, making multiple clusters crowd together
+  * **Average linkage**
+    - distance between clusters is defined as the average distance of objects in both clusters i.e.
+      * $D[C_i, C_j] = \frac{1}{|C_i||C_j|} \sum\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * results in clusters relatively far apart and relatively compact making it difficult to interpret
+  * **Ward's distance for clusters**
+    - Is given by the difference between total within cluster sum of squares for the two clusters separately and the within cluster sum of squares from merging the two clusters, i.e. 
+      * $D[C_i,C_j] = \sum\limits_{u \in C_i} (u - r_i)^2 + \sum\limits_{v \in C_j} (v - r_j)^2 - \sum\limits_{x \in C_i \cup C_j} (x - r_ij)^2$ where $r$ is the centroid of the repective cluster
+      * similar to average linkage, less susceptible to noise and outliers and is the hierarchical analogue to k-means
+
+#### K-means clustering
+- no method for initial choice means: you can do several random assignments or use wards method for assignment
+- Results are sensitive to initial guesses
+- k is often not known and difficult to estimate
+
+
+Pseudocode:
+```text
+input: number of clusters K for n objects  # How many clusters do you want for the given data
+Output: cluster assignment
+
+choose K cluster centroids
+while centroids change
+  assign each object to the closest centroid
+  recalculate the new centroids
+    𝑟𝑖=1/|𝐶𝑖| ∑_𝑢∈𝐶𝑖 𝑢
+end while
+```
+
+#### Quality threshold(QT) clustering
+- Number of clusters not required, but requires diameter D of a cluster as input
+
+Pseudocode:
+```text
+Input: D
+
+while there are objects left
