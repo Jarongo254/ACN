@@ -1,3 +1,4 @@
+\usepackage{amssymb}
 ### Introduction
 
 - Biological systems => Multiple interacting components
@@ -79,7 +80,7 @@ A path is a cycle if $v_i = v_k$
 4. Perform DFS on the node
 5. Return to other nodes adjacent to v and perform DFS until all neghbors of v have been visited
 
-##### Pseusdocode:
+##### Pseudocode:
 ```text
 procedure dfsearch(G)
   for each v ∈ V(G) do
@@ -823,6 +824,7 @@ Given the possibility of generating multiple classes of graphs after randomizati
 ### Gene regulatory networks
 - Gene can encode for a transcription factor or another protein(enzymes e.t.c.)
 - Transcription factors modulate/regulate expression rate(transcription by RNA polymerase to produce mRNA) of genes
+- TF activation happens quickly relative to downstream gene expression responses(is therefore considered to be at steady state)
 - In representing these networks, we can either only consider the genes, or consider genes and their products(proteins)
 
 **Only genes considered**
@@ -833,10 +835,12 @@ Given the possibility of generating multiple classes of graphs after randomizati
   - The network can receive external signals from the environment, affecting TF activity and resulting in signal propagation
 
 **Genes and Proteins considered**
-Leads to a bipartite network model
+
+- Leads to a bipartite network model
 
 #### Bipartite network model
 - Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G) such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
+***Graph cannot be bipartite if it has a cycle with odd number of edges, but can be if it has even number of edges***
   * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$ )
 - In a GRN these partitions represent proteing and Genes(both form the same network but can be partitioned)
 - They can then be studied by:
@@ -851,12 +855,116 @@ Leads to a bipartite network model
 
 ##### Classes of Network Motifs
 **Negative autoregulation**
-  * The gene product represses its own promoter(binds to promoter site and prevents an activtor, turning off its own transcription)
-  * leads to response acceleration
+  * The gene product represses its own promoter(binds to promoter site and prevents an activator, turning off its own transcription)
+  * leads to response acceleration - production of a protein is steady until it reaches a threshold that triggers repression which happens faster, then production gradually increases again towards the threshold
   * increased stability of gene product against noise
   * has a simple mathematical model
 
 **Positive autoregulation**
-  * slows response
+  * slows response - amount of target protein grows gradually until it reaches threshold for self activation that just maintains its production
   * creates bimodal distributions(bistability - where some cells have high and others low expression)
 
+#### Feed forward loops
+- Outlines the relationship between aregulator X, a gene Y which is regulated by X and a gene Z regulated by both X and Y
+- Given both activator and repressor activity of regulators, there $2^3 = 8$ possible FFLs
+  * **Coherent** - both pathways achieve the same outcome
+  * **Incoherent** - pathways have opposite outcomes
+  
+#### How to find network motifs
+**By Concentration**
+  * If $ N_i$ is the number of $n$ -node subnetworks s of type $i$ and $\sum\limits_i Ni$ is the number of $n$ -node subnetworks, concentration of the subnetworks of type $i$ is given by
+    * $C_i = frac{N_i}{\sum\limits_i Ni}
+    * Given a specific type of FFL, what is its number as a fraction of all present/possible 3-node subnetworks
+
+* After determining the concentration of the FFL in the network, we then have to find out if we would get the same from randomly sampled 3 node induced subnetworks
+  *A probability based correction factor(for the probability of appearance of a particular network) is necessary to avoid bias*
+* How do we get these randomized subnetworks?
+  1. Randomly select a starting point(edge if edge induced, node if node induced)
+  2. Grow the subnetwork by adding edges(random adjacent edge if edge induced, random edge incident to the existing subgraph and not the starting node if node induced)
+  3. Stop when desired number of nodes is achieved
+  
+#### Finding the motifs
+**MCIS**
+  - A maximum common induced subgraph of two graphs $G$ and $H$ is a subgraph that occurs in both $G$ and $H$ with as many vertices as possible(without breaking the commonness)
+  - If a motif $H$ appears in a graph $G$, and we are trying to find the maximum common induced subgraph for the two, then $H$ is already the MCIS for both $G$ and $H$.
+**MCES**
+  - Is a graph subgraph of two graphs $G$ and $H$ that contains as many edges as possible such that the resulting subgraphs are isomorphic
+
+*MCIS and MCES are both NP hard. additional operations required*
+
+**Graph cartesian product**
+  - Given two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their Cartesian product $J = G_1 \boxdot G_2$ is a graph with nodes set $V_1 \times V_2$ and $u = (u_1, u_2)$ adjacent with $v = (v_1, v_2)$ if $u_1 = v_1$ and $(u_2, v_2) \in E_2$ or $u_2 = v_2$ and $(u_1, v_1) \in E_1$
+    * in the graph cartesian product, node pairs are adjacent if they share(have the same) a node component from one graph(one of the original graphs), and have the other two components adjacent in their original graph
+
+**Modular graph product**
+  - Given two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their Modular product $J = G_1 \odot G_2$ is a graph with nodes set $V_1 \times V_2$ and $u = (u_1, u_2)$ adjacent with $v = (v_1, v_2)$ if $(u_1, v_1) \in E_1$ and $(u_2, v_2) \in E_2$ or $(u_1, v1) \notin E_1$ and $(u_2, v_2) \notin E_2$
+    * in the modular graph product, node pairs are adjacent if their components were both adjacent in their original graphs, or if none of their components were adjacent in their original graphs
+    * The MGP therefore outlines how two graphs map onto each other, where a node pair in the MGP shows which node in $G_1$(first component in the node pair) corresponds to which node in $G_2$(second component in the node pair) and their respective edges showing the "isomorphic" connection
+
+The Maximum Induced Subgraph of two graphs $G_1$ and $G_2$ is then the maximum clique in their modular graph product. *Finding the maximum clique is still NP-hard*
+
+Solution: **Bon-Kerbosch algorithm**
+  - The purpose of Bron-Kerbosch is to find maximal cliques using recursive backtracking
+  
+How Bron-Kerbosch works:
+* Given the Modular Graph Product $J$ of two graphs $G_1$ and $G_2$, the algorithm is run recursively on each of the nodes in $J$. For each recursive call, there are three sets $R$, $P$ and $X$ where $R$ contains the node set being considered as a clique, $P$ contains all nodes from $J$ that are incident on all the nodes in the set $R$, and $X$ contains the branches(through the node entries in the set) that have been explored recursively and exhaustively, and will not be considered at that level. After a node in $P$ has been considered fully, it gets removed from $P$ and added to $X$ until all nodes initially in $P$ at that level have been considered. The sets $P$ and $X$ are initially empty at each recursive call so should it be a dead end, i.e. the current set $R$ has no possible nodes from $J$ that qualify for consideration and so $P$ remains empty, and at that level there have also been no nodes considered meaning $X$ is also empty, so the $R$ at that level of whatever length gets reported as a maximal clique. We can then compare all reported maximal cliques and take the maximum as the MCIS of the the two graphs $G_1$ and $G_2$.
+
+Pseudocode:
+```text
+procedure INIT
+  input: graph J # the MGP of two graphs G1 ad G2
+  output: maximal cliques
+  start recursion: BronKerbosch(∅,V,∅) # V is all nodes in J
+
+procedure BronKerbosch(R,P,X)
+  if P = ∅ and X = ∅ then
+    return R as a maximal clique
+  for all v ∈ P do
+    BronKerbosch(𝑅∪v,𝑃∩𝑁(v),𝑋∩𝑁(v)
+    P ← P\{v}
+    X ← X∪{v}
+  end for
+```
+
+### Clustering (There is no best way for this)
+- Involves dividing objects from a given set that are desrcibed by some features into groups based on similarity/shared features
+- Is based on:
+  * an objective function that models relationship to be satisfied within and outside the group
+  * Distance measure that determines similarity(euclidean, manhattan, correlation,...)
+
+Biological components have relationships/features that overlap. single cluster for a single object may be insufficient. maybe soft clustering?
+
+#### Clustering types
+Crisp vs Soft
+  * **Crisp** clustering places an object into only one cluster. it either is or isn't in a cluster
+    - hierarchical
+    - K-means
+    - QT-clustering
+  * **Soft** clustering allows objects to be members of more than one cluster(probability of being in a cluster ranges from 0 to 1)
+    - fuzzy K-means
+    
+#### Hierarchical clustering
+- Is agglomerative in nature(starts with each object in its own cluster, groups by distance with recalculation of distance and eventually ends with all objects in the same cluster)
+- Results in a dendogram(can be cut at any given height or distance)
+
+Pseudocode:
+```text
+input: D # an n × n distance matrix for n objects
+output: M # merging vector
+
+initialize each object in its own cluster
+while there are at least two clusters do
+  find two closest clusters C_i and C_j # minimum distance entry in the matrix
+  merge C_i with C_j # put them in the same cluster
+  add pair (i,j) to M
+  recompute distances between cluster representatives # generate a new distance matrix
+end while
+```
+- Determining distances between clusters
+  * **Single linkage**
+    - distance between clusters is defined as the minimum distance between any two pairs of objects, one from each cluster, i.e.
+      * $D(C_i, C_j) = \min\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * After every clustering step, the distance between the new cluster and any other cluster is then the minimum of pairwise distances between all objects in one cluster and those in another cluster(for this the original distance matrix is used)
+  * **Complete linkage** 
+    - distance between clusters is defined as the maximum distance between any two pairs of objects, one from each cluster, i.e.
+      * $D(C_i, C_j) = \max\limits_{u \in C_i, v \in Cj} D[u,v]$
