@@ -948,6 +948,7 @@ Crisp vs Soft
 - Results in a dendogram(can be cut at any given height or distance)
 - is applicable to any objects and distance measures which do not have to be metric
 - Dissimilarity scores between merged clusters increases during agglomeration
+- Each step is committing and is also computationally expensive(repeated distance calculation)
 
 Pseudocode:
 ```text
@@ -979,11 +980,11 @@ end while
       * results in clusters relatively far apart and relatively compact making it difficult to interpret
   * **Ward's distance for clusters**
     - Is given by the difference between total within cluster sum of squares for the two clusters separately and the within cluster sum of squares from merging the two clusters, i.e. 
-      * $D[C_i,C_j] = \sum\limits_{u \in C_i} (u - r_i)^2 + \sum\limits_{v \in C_j} (v - r_j)^2 - \sum\limits_{x \in C_i \cup C_j} (x - r_ij)^2$ where $r$ is the centroid of the repective cluster
+      * $D[C_i,C_j] = \sum\limits_{u \in C_i} (u - r_i)^2 + \sum\limits_{v \in C_j} (v - r_j)^2 - \sum\limits_{x \in C_i \cup C_j} (x - r_{ij})^2$ where $r$ is the centroid of the repective cluster
       * similar to average linkage, less susceptible to noise and outliers and is the hierarchical analogue to k-means
 
 #### K-means clustering
-- no method for initial choice means: you can do several random assignments or use wards method for assignment
+- no method for initial choice of means: you can do several random assignments or use wards method for assignment
 - Results are sensitive to initial guesses
 - k is often not known and difficult to estimate
 
@@ -997,15 +998,115 @@ choose K cluster centroids
 while centroids change
   assign each object to the closest centroid
   recalculate the new centroids
-    𝑟𝑖=1/|𝐶𝑖| ∑_𝑢∈𝐶𝑖 𝑢
+    𝑟𝑖=1/|𝐶𝑖| ∑_𝑢∈𝐶𝑖 𝑢  # calculate from coordinates
 end while
 ```
 
 #### Quality threshold(QT) clustering
 - Number of clusters not required, but requires diameter D of a cluster as input
+- All data objects would be initaially candidate clusters, and for each the closest object is added to the cluster until the cumulative diameter of the cluster exeeds D(crosses the threshold). The resulting clusters from the initial objects are then compared, and the largest taken as cluster and removed, then the proceedure repeated for the remaining objects - until all objects are done
+ *Choice of D determines the number of clusters(inverse proportionality)*
 
 Pseudocode:
 ```text
 Input: D
 
 while there are objects left
+  for each point, keep adding the closest object until the diameter of the group is greater than D
+  find the largest cluster and remove it
+end while
+```
+
+#### Evaluation of Clusters
+- Do the clusters represent groups of closely related objects? how well?
+- within-cluster distance should be small and between-cluster distance should be large
+
+**Davies-Bouldin index**
+- Has no fixed bounds but smaller value is better, with 0 being the best possible clustering achievable
+  * given $n$ clusters where $r_i$ is the centroid of cluster $C_i$
+  * Average distance within a cluster is given by:   $S_i = \sqrt{frac{1}{|C_i|} \sum\limits_{u \in C_i} (u - r_i)^2}$  Good clustering has small S
+  * And the measure of cluster separation is given by: $M_{i,j} = \sqrt{\sum\limits_{p=1}^k (r_{i,p} - r_{j,p})^2}$  Good clustering has large M
+  * and $R_{i,j} = \frac{S_i + S_j}{M_{i,j}}$ smaller is better
+  * $\delta_i = \max\limits_{j \neq i} R_{i,j}$
+  * The DB index is then $\delta_{DB} = \frac{1}{n} \sum\limits_{i=1}^n \delta_i$
+  
+**Dunn index**
+- higher values mean higher intercluster distance and smaller intracluster distance and are therefor ideal
+  * Given $\Delta_i$, the maximum/average distance to the centroid of each cluster $C_i$ and the inter cluster distance $\delta_{C_i,C_j}$
+  * $\delta_D = \frac{\min\limits_{1 \leq i < j \leq n} \delta_{C_i,C_j}}{\max\limits_{1 \leq i \leq n}\Delta_i}
+
+**Silhouette index**
+- values range from -1 to 1, with larger values preferred
+  * Given $a(i)$, the average distance of of object $i$ to objects in its cluster and $b(i)$, minimum average distance of object $i$ to objects in other clusters
+  * $s(i) = \frac{b(i)-a(i)}{max{a(i),b(i)}}$  and
+  * $\delta_{S} = \frac{1}{n} \sum\limits_{i=1}^n s_i$
+
+### Network clustering
+- A community/network cluster is a dense subnetwork within a larger network
+  * Communities correspond to functional units/modules e.g. protein complexes in PPIs 
+- Is a group of nodes with more edges within the group than to the rest of the network
+- Given a network with genes annotated to their functions and others not annotated, fucntion of unannotated gene can be inferred from known functions in community(A module/community contains functionally related genes)
+
+#### Hierarchical Network clustering
+- Given a network with nodes as the objects and features on which to do the clustering as the node properties(degree, eccentricities,nighborhoods,Matching index or it variations), a similarity/distance matrix for all node pairs can be generated. e.g. cosine similarity given by
+  * $D[u,v] = \frac{|N(u) \cap N(v)|}{\sqrt{d(u)*d(v)}$}
+  and using it to generate clustering usig hierarchical clustering method
+- Communities are then formed by connected subgraphs
+***Hierarchical clustering however does not ensure connectivity***
+
+#### Edge betweenness netwrok clustering
+- Find edges connecting communities and remove them
+- Edges connecting separate modules have high edge betweenness as all shortest paths fromone module to another are expected to pass through them
+- Edge betweenness is similar to node betweenness in that, an edge has high betweenness if the number of shortest paths passing through the edge as a fraction of all total shortest paths is large
+  * All shortest paths from one module to another are expected to pass through it
+1. Find and remove edge of high betweenness
+2. recalculate edge betweenness with respect to subnetworks
+3. repeat from 1 until a given number of communities is reached or no edge remains
+
+- Is a form of divisive clustering which generates a tree with entire graph as root that splits into subtrees after removal of edges
+- Is too slow for large and dense graphs(many edges to consider) with unsatisfactory results
+
+#### Spectral Network clustering
+- Goal: obtain information about community structure fron eigenvectors
+- Requires a graph Lalacian, which is simply given by 
+  * $L= D - A$ for an undirected graph where $D$ is a diagonal matrix of node degrees
+- Given graph $G$ with $n$ nodes, L entries become
+  * $l_{ij} = d_i if i = j$ because diagonal entries are 0 if no loops so degree - 0 = degree
+  * $l_{ij} = -1 if a_{ij} = 1$ an exiting edge in $A$ means 0 - 1 (non diagonal entries in $D$ are all zeros) 
+  * $l_{ij} = 0$ otherwise
+  
+**Properties of Laplacian matrix**
+  - Every row sums to 0
+  - 0 is always an eigen value of the Laplacian with an eigen vector of 1(all entries in the vector are 1)
+  - L is symmetric for an undirected graph
+  - For an undirected graph smallest eigen value is 0 so all eigen values are non-negative
+  - Eigen values correspondig to non-degenerate(non-repeating) eigen values are orthogonal
+  - All eigen vectors, except the one corresponding to the lowest eigen value(0) must have $+ve$ and $-ve$ entries - due to orthogonality
+  - Given multiple diconnected components, their Laplacian matricis has a block structure, where each individual connected component has its own L and having a general L for the larger network places the smaller Ls as diagonal entries in L of the larger network.
+  - For every connected component, there is then an eigen vector which has $v_u = 1$ if u belongs to the component and $v_u=0$ otherwise, and each of the eigen vectors has an eigen value of 0
+    * The k $\lambda = 0$ eigen vectors can also be expressed as as linear combinations, resulting in eigen vectors wth positive and negative signs as well as 0s 
+  - Differently for a single connected component, we only get one 0 eigen value(smallest) so the clustering information is obtained from the second smallest eigen value, whose corresponding eigenvector has values with $-ve$ or $+ve$ signs, identifying which nodes belong together and which do not by virtue of these signs.
+
+#### Qualities of network clustering
+- Given two disjoint subsets of nodes, $S$ and $\bar{S}$, where $S \cup \bar{S} = V(G)$,
+  * $a(S) = \sum\limits_{i \in S}\sum\limits_{j \in V} a_{ij}$ is the number of edges incident on nodes in S
+  * $f(S,\bar{S})= \sum\limits_{i \in S, j \in \bar{S}} a_{ij} is the number of edges in the cut producing the node partition, i.e. the number of edges shared by the two sets
+
+**Conductance** of S is then
+  * $\varphi(S) = \frac{f(S,\bar{S})}{\min(a(S), a(\bar{S})}$
+  * while conductance of the graph $G$ is the minimum over conductances of all cuts
+    * $\phi(G) = \min\limits_S{\varphi(S)}
+  *conductance is small if the graph can be naturaly bisected*
+**Coverage** of an edge cut that results in a clustering C is the number of intracluster edges divided by the number of all edges in the network, i.e. 
+  * if $f(C)$ is the number of edges in the cut(edges between clusters)
+  * then $m - f(C)$ is the number of intra-cluster edges and the coverage becomes
+  * $\gamma(C) = \frac{m - f(C)}{m}$
+  * the range is betwenn 0 and 1 and putting all edges in one cluster gives $\gamma(C) = 1$ which is a trivial result
+**Modularity** is based on a relation between the difference of a cluster from random expectation
+  * It is a local index based on summation over clusters
+  * I $E(C_i)$ is the set of intercluster edges
+  * $q(C) = \sum\limits_{C_i \in C}[\frac{E(C_i)}{m} - (\frac{\sum\limits_{v \in C_i} d(v)}{2m})^2]
+  * No need to specify clusters
+  * maximization of modularity extracts the appropriate groups
+  * Negatives:
+    - Addition of a node can drastically affect clusters even though neighborhoods haven't been altered
