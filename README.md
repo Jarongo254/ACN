@@ -1240,8 +1240,8 @@ output: True if H and G have the same color count, False otherwise
 - An **st-cut** is a partition$(A,B)$ of the nodes with $s \in A$ and $t \in B$
   * Capacity of $(A,B)$ is the sum of capacities of edges from partition A to B(backwards edges from B to A are not included in this capacity)
 - st-flow has to satisfy:
-  * for each $e \in E: 0 \leq f(e) \leq c(e)$
-  * for each $v \in V - \\{s,t\\}$
+  * for each $e \in E: 0 \leq f(e) \leq c(e)$ capacity cannot be exeeded
+  * for each $v \in V - \\{s,t\\}: \sum\limits_{e into v} f(e) = \sum\limits_{e out of v} f(e)$ flow concervation
   
  
 ## Extras
