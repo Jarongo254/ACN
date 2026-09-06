@@ -1106,7 +1106,151 @@ end while
   * It is a local index based on summation over clusters
   * $E(C_i)$ is the set of intercluster edges
   * $q(C) = \sum\limits_{C_i \in C}[\frac{E(C_i)}{m} - (\frac{\sum\limits_{v \in C_i} d(v)}{2m})^2]$
+  * In words:
+    - For each cluster get the fraction of edges in the cluster over all edges in the graph, subtract from it the squared fraction of cumulative degrees of the nodes in the cluster over all possible edges in the graph(2m because it's undirected) and sum up the resulting values for each cluster to get the modularity score for the clustering
   * No need to specify clusters
   * maximization of modularity extracts the appropriate groups
   * Negatives:
     - Addition of a node can drastically affect clusters even though neighborhoods haven't been altered
+
+**Greedy modularity-based clustering**
+  1. Start with all nodes in clusters of their own
+  2. Merge two clusters that increase modularity
+  3. Repeat step 2 until at least one cluster increases modularity
+  
+Pseudocode:
+```text
+repeat
+  find a node that yield biggest modularity increase if moved to a diffferent community, the node having not been moved
+until all nodes have been moved or no move with increase in modularity can be found
+return clustering oflargets observed improvement
+```
+
+### Gene Ontology
+- An Ontology is a specification of concepts and relationship that can exist in a domain of interest
+- Gene ontology provides consistent descriptions of gene products
+- GO creates terms for
+  * Biological processes
+  * Molecular function
+  * Cellular component;
+  as a Directed acyclic graph(DAG) with more specific terms occuring at deeper levels
+- GO-terms are controlled and have specific parent-child relationships
+- queries typically check for predominant functions for clusters of genes which can vary depend on genes relevant to a given study
+
+#### GO data interpretation
+- Given a set of measured genes of size $m$ and a set of genes of iterest of size $n$, where $m_t$ denotes the set of genes annotated with a function $t$ and $n_t$ is the set of genes of interest annotated with function $t$,
+  * How likely is it that $n_t$ is observed by chance
+  
+- $n$ genes from the set $m$ are sampled without replacement and $q_t$ denotes the set of genes among the sampled n genes annotated witha function $t$, the probability that $q_t = k$ is given by the **hypergeometric didtribution
+  * $$P(q_t = k) = \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
+- and the probability of seeing $n_t$ or more annotated genes is given by
+  *  $$P(q_t \geq n_t) = \sum\limits_{k=n_t}^{\min(m_t,n)} \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
+  * which is equivalent to a one-sided Fisher exact test
+
+- Results in a set of p-values for GO term in set of genes of interest ech of which is corrected for multiple hypothesis testing(MHT) 
+  * Through Bonferroni correction
+  * Benjamini-Hochberg
+  
+### Network representation of data
+- Networks can be used to represent biochemical(GRNs, PPIs, metablic networks) as well as biological relationships(food-chains, pollination networks)
+
+- GRN network reconstrution:
+  * Genes represented by vector of expression levels over multiple experiments
+  * Edges inferred by applying statistical similarity or using distance measures
+    - Pearson correlation (linear indirect relationships)
+    - Partial correlation(direct relationships)
+    - Mutual information(non-linear relationships)
+  * Then thresholding where relstionships for which the measure is below a given threshold is excluded from the network
+  
+**Thresholding network model** 
+  * Given a graph $G$ with weights associated with edges, different network representations can be obtained by applying different thresholds
+  * Network properties in different networks can be used to predict a property of interest
+  
+**K-nearest neighbor(kNN) network model**
+  * Given data profiles for n objects(points) and an intger k, 
+  * For each object, establish edges with k nearest neighbors(based on any metric distance)
+    * *Metric means it satisfies triangle inequality, symmetry, and evaluates to 0 when object is compared with itself*
+  * in a directed graph, edges are directed from the node whose NNs are determined
+    * depending on the data profiles used, kNN may not be unique
+
+**Gabriel graph**
+  * Given data profiles for $n$ objects
+  * Two objects $p$ and $q$ are considered adjacent if the closed ball, of which the segment $pq$ is of length that equals the diameter and $p$ differs from $q$, does not contain any other point
+  * Gabriel graph is undirected
+  * Euclidean MST and 1NN are subgraphs of the Gabriel graph
+
+**beta-skeleton graph**
+
+### Multidimentional scaling
+- Provides means to visualize similarity of objects in a data set
+- places objects in a lower dimensional space
+- MDS tries to make the distance between objects in a new space as close as possible to what is in the original distance matrix with pairwise distances of the objects
+- MDS steps are:
+  1. Eigen value decomposition for doubly centered D (subtract row mean from each row and column mean from each column and add back total mean)
+  2. The N largest eigen values/vectors are used to construct teh coordinates of the daata points in the new N-dimensional space
+  
+### Manifold
+- is an abstract mathematical space which locally resembles Euclidean space
+- Two dimesional data embedded in 3-D space
+- measurements along manifolds are geodesics
+
+### Isomap
+- select local neighborhood and create a kNN network with edge lengths given by Euclidean distance
+- Find geodesic distances between all pairs of points(local distances- short; longer distances are discarded)- geodesics are approximated from shortest paths along retained distances
+- Use classical MDS to find best lower dimensional space with the Euclidean distances
+- If data is from a convex set, procedure recovers true geometry since geodesic length = Eclidean distance. If not it introduces distorsions
+***The point of isomap is to recover 2-D information embedded in a 3 dimensional space***
+
+**Complexity**
+  * Naive iplementation with:
+    - all pairs shortest paths give $O(n^3)$
+    - eigen value decomposition $O(n^3)$
+  * Using only subset of points $m$ for transformation:
+    - with shortest paths: $O(mn^2)$
+    - with eigen value decomposition: $O(m^2n)$
+    
+### Weisfeller-Lehman Graph Isomorphism test
+- Is a heusristic algorithm do discern isomorphic graphs(may not always work)
+- How it works:
+  1. Initialize a uniform discrete signal over a graph(seen as colors)
+  2. Iteratively update the colors until they do not further change
+  3. If the two graphs have the same count of colors then they are likely isomorphic
+
+Pseudocode:
+```text
+Input: 2 graphs H and G
+
+initialize all nodes in H and G to the same color
+while coloring changes repeat
+  two nodes u,v get a different color if
+    they had a different color before
+        or
+    there is a color c such that u and v have a different number of c-colored neighbors
+output: True if H and G have the same color count, False otherwise
+```
+
+
+### Network Flow
+- A flow network is a directed graph with a source $s$ and  a sink $t$, and  edges withe capacities $c(e)$ denoting the maximum flow each edge can carry *All nodes are reachable from s*
+- Each edge gets a flow $f(e)$ such that $0 \leq f(e) \leq c(e)$
+- There is also flow conservation in each edge excep $s$ and $t$ where flow in = flow out
+- $val(f)$ is then thevalue of the flow, that is how much gets from $s$ to $t$
+- **Max flow** is how much we can push from $s$ to $t$ without exeeding any edge capacity
+- **Min-cut** is the smallest total capacity taht if cut would separate $s$ from $t$
+- An **st-cut** is a partition$(A,B)$ of the nodes with $s \in A$ and $t \in B$
+  * Capacity of $(A,B)$ is the sum of capacities of edges from partition A to B(backwards edges from B to A are not included in this capacity)
+- st-flow has to satisfy:
+  * for each $e \in E: 0 \leq f(e) \leq c(e)$
+  * for each $v \in V - \{s,t\}$
+  
+ 
+## Extras
+
+**Line Graph**
+- Given a graph $G$, its line graph, $L(G)$, is given by:
+  * for every edge in G, there is a node in L(G); two nodes are connected in L(G) if the corresponding edges are adjacent in G. 
+
+**Graph Compliment**
+- The complement of graph G is defined as the graph G’ on the same nodes of G; two nodes are connected in G’ if and only if they are not connected in G.  
+
+
