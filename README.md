@@ -1241,7 +1241,7 @@ output: True if H and G have the same color count, False otherwise
   * Capacity of $(A,B)$ is the sum of capacities of edges from partition A to B(backwards edges from B to A are not included in this capacity)
 - st-flow has to satisfy:
   * for each $e \in E: 0 \leq f(e) \leq c(e)$
-  * for each $v \in V - \{s,t\}$
+  * for each $v \in V - \\{s,t\\}$
   
  
 ## Extras
