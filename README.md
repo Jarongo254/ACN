@@ -1049,10 +1049,10 @@ end while
 
 #### Hierarchical Network clustering
 - Given a network with nodes as the objects and features on which to do the clustering as the node properties(degree, eccentricities,nighborhoods,Matching index or it variations), a similarity/distance matrix for all node pairs can be generated. e.g. cosine similarity given by
-  * $D[u,v] = \frac{|N(u) \cap N(v)|}{\sqrt{d(u)*d(v)}$}
+  * $D[u,v] = \frac{|N(u) \cap N(v)|}{\sqrt{d(u)*d(v)}}$
   and using it to generate clustering usig hierarchical clustering method
 - Communities are then formed by connected subgraphs
-***Hierarchical clustering however does not ensure connectivity***
+- ***Hierarchical clustering however does not ensure connectivity***
 
 #### Edge betweenness netwrok clustering
 - Find edges connecting communities and remove them
@@ -1090,10 +1090,10 @@ end while
 #### Qualities of network clustering
 - Given two disjoint subsets of nodes, $S$ and $\bar{S}$, where $S \cup \bar{S} = V(G)$,
   * $a(S) = \sum\limits_{i \in S}\sum\limits_{j \in V} a_{ij}$ is the number of edges incident on nodes in S
-  * $f(S,\bar{S})= \sum\limits_{i \in S, j \in \bar{S}} a_{ij} is the number of edges in the cut producing the node partition, i.e. the number of edges shared by the two sets
+  * $f(S,\bar{S})= \sum\limits_{i \in S, j \in \bar{S}} a_{ij}$ is the number of edges in the cut producing the node partition, i.e. the number of edges shared by the two sets
 
 **Conductance** of S is then
-  * $\varphi(S) = \frac{f(S,\bar{S})}{\min(a(S), a(\bar{S})}$
+  * $\varphi(S) = \frac{f(S,\bar{S})}{\min{a(S), a(\bar{S})}}$
   * while conductance of the graph $G$ is the minimum over conductances of all cuts
     * $\phi(G) = \min\limits_S{\varphi(S)}
   *conductance is small if the graph can be naturaly bisected*
@@ -1104,8 +1104,8 @@ end while
   * the range is betwenn 0 and 1 and putting all edges in one cluster gives $\gamma(C) = 1$ which is a trivial result
 **Modularity** is based on a relation between the difference of a cluster from random expectation
   * It is a local index based on summation over clusters
-  * I $E(C_i)$ is the set of intercluster edges
-  * $q(C) = \sum\limits_{C_i \in C}[\frac{E(C_i)}{m} - (\frac{\sum\limits_{v \in C_i} d(v)}{2m})^2]
+  * $E(C_i)$ is the set of intercluster edges
+  * $q(C) = \sum\limits_{C_i \in C}[\frac{E(C_i)}{m} - (\frac{\sum\limits_{v \in C_i} d(v)}{2m})^2]$
   * No need to specify clusters
   * maximization of modularity extracts the appropriate groups
   * Negatives:
