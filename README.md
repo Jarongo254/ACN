@@ -1240,17 +1240,86 @@ output: True if H and G have the same color count, False otherwise
 - An **st-cut** is a partition$(A,B)$ of the nodes with $s \in A$ and $t \in B$
   * Capacity of $(A,B)$ is the sum of capacities of edges from partition A to B(backwards edges from B to A are not included in this capacity)
 - st-flow has to satisfy:
-  * for each $e \in E: 0 \leq f(e) \leq c(e)$ capacity cannot be exeeded
-  * for each $v \in V - \\{s,t\\}: \sum\limits_{e into v} f(e) = \sum\limits_{e out of v} f(e)$ flow concervation
+  * for each $e \in E: 0 \leq f(e) \leq c(e)$   # capacity cannot be exeeded
+  * for each $v \in V - \\{s,t\\}: \sum\limits_{e \text{in to} v} f(e) = \sum\limits_{e \text{out of} v} f(e)$   # flow conservation
   
- 
+- The value of a flow is then
+  * $val(f) = \sum\limits_{e \text{out of} s} f(e) - \sum\limits_{e \text{in to} s} f(e)$ # the net amount leaving $s$
+
+- Goal is to find a flow of maximum value
+
+#### Greedy algorithm
+1. start with $f(e) = 0$ for each edge $e \in E$
+2. Find an $s \rightarrow t$ path $P$ where each edge has $f(e) < c(e)$
+3. Augment flow along path $P$
+4. Repeat until you get stuck
+
+- Once the flow of an edge is increased it is never decreased
+- Gready gives a local optimum that might not be the global optimum
+- we need to be able to undo a bad decision
+- we use a residual graph, where back edges are introduced and we can undo flow already sent through an edge, and also have the reisdual capacity from unused capacity
+- An **augmenting path** is therefore a simple $s \rightarrow t$ path in the residual network $G_f$
+- A **bottleneck capacity** of an augmenting path $P$ is the minimum residual capacity of any edge in $P$
+
+Pseudocode:
+```text
+Augment (f,c,P)
+  δ ← bottleneck capacity of augmenting path P
+  for each edge e ∈ P
+    if (e ∈ E) f(e) ← f(e) + δ
+    else f (ereverse) ← f (ereverse) – δ.
+  return f
+```
+- The point of the augment function is to determine the amount of flow for each path to the sink $t$, accounting for all present bottlenecks along the path, where if the ege along the path exists in the original network, its flow becomes the initial flow plus the bottleneck, if not then it is a reverse edge in the residual graph which has the same flow as the initial edge, but its flow is - the bottleneck.
+
+```text
+function Ford_fulkerson(G)
+for each edge e ∈ E: f(e) ← 0
+Gf ← residual network of G with respect to flow f.
+while there exists an s↝t path P in Gf
+  f ← Augment( f, c, P).
+  Update Gf
+return f
+```
+
+- **Flow value lemma**
+  * The value of flow f across an st-cut is given by the net flow across the cut, which is the flow out of A - the flow into A
+- **Weak duality**
+  * the flow of a cut(flow lemma) $\leq$ the total capacity of the cut
+***If the flow lemma of a cut is equal to the capacity of the cut, f is the max flow and the cut is a min cut***
+  * *value of a max flow = capacity of a min cut* (strong duality)
+If the strong duality condition is met then there would be no augmenting path with respect to f and ford fulkerson would terminate
+
 ## Extras
 
 **Line Graph**
 - Given a graph $G$, its line graph, $L(G)$, is given by:
   * for every edge in G, there is a node in L(G); two nodes are connected in L(G) if the corresponding edges are adjacent in G. 
+  
+```text
+function Line_Graph(G)
+  A ← empty m by m matrix where m is the number of edges
+  for i ← 1 to m do
+    for j ← 1 to m do
+      if e_i and e_j are adjacent in G (share a node)
+        A_ij ← 1
+      0 otherwise
+  return A
+```
 
 **Graph Compliment**
-- The complement of graph G is defined as the graph G’ on the same nodes of G; two nodes are connected in G’ if and only if they are not connected in G.  
+- The complement of graph G is defined as the graph G’ on the same nodes of G; two nodes are connected in G’ if and only if they are not connected in G.
+
+```text
+function compliment(G)
+  A is the adjacency matrix of G
+  A' ← empty n by n matrix where n is the number of nodes
+  for i ← 1 to n do
+    for j ← 1 to n do
+      if A_ij = 1 then
+        A'_ij ← 0
+      else if A_ij = 0 then
+        A'_ij ← 1
+  retrun A'
 
 
