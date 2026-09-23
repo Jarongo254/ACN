@@ -448,7 +448,7 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
 
 #### Degree distribution
 
-specificies the probability that a randomely chosen node is of degree k. i.e. 
+specificies the probability that a randomly chosen node is of degree k. i.e. 
 
 $P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number of nodes of degree k
 
@@ -1141,13 +1141,13 @@ return clustering oflargets observed improvement
 - Given a set of measured genes of size $m$ and a set of genes of iterest of size $n$, where $m_t$ denotes the set of genes annotated with a function $t$ and $n_t$ is the set of genes of interest annotated with function $t$,
   * How likely is it that $n_t$ is observed by chance
   
-- $n$ genes from the set $m$ are sampled without replacement and $q_t$ denotes the set of genes among the sampled n genes annotated witha function $t$, the probability that $q_t = k$ is given by the **hypergeometric didtribution
+- $n$ genes from the set $m$ are sampled without replacement and $q_t$ denotes the set of genes among the sampled n genes annotated with a function $t$, the probability that $q_t = k$ is given by the **hypergeometric didtribution
   * $$P(q_t = k) = \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
 - and the probability of seeing $n_t$ or more annotated genes is given by
   *  $$P(q_t \geq n_t) = \sum\limits_{k=n_t}^{\min(m_t,n)} \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
   * which is equivalent to a one-sided Fisher exact test
 
-- Results in a set of p-values for GO term in set of genes of interest ech of which is corrected for multiple hypothesis testing(MHT) 
+- Results in a set of p-values for GO term in set of genes of interest each of which is corrected for multiple hypothesis testing(MHT) 
   * Through Bonferroni correction
   * Benjamini-Hochberg
   
@@ -1321,5 +1321,87 @@ function compliment(G)
       else if A_ij = 0 then
         A'_ij ← 1
   retrun A'
+```
 
+### Network alignment
+- We align sequences(DNA, RNA, Proteins) to identify regions of similarity. Same can be done for networks
+- Network alignment seeks to find regions of topological and functional similarity between molecular networks of different species/organs/tissues/cell types
+  * Knowledge on functions of model/known systems can be transeferred to less weel understood systems(based on this similarity) 
 
+**Global Network Alignment(GNA)**
+  * Finds large conserved regions
+  * Identifies one to one mappings between nodes of the input networks
+  * The mappings are transitive $A_1$ mapping to $A_2$ and $A_2$ mapping to $A_3$ means $A_1$ also maps to $A_3$
+  * Allows investigation of cross-species variations and detection of functional orthologs
+  
+**Local Network Alignment(LNA)**
+  * Finds small highly conserved network regions
+  * Finds multiple unrelated regions of isomorphism between two input networks with the mapping of each region independent of the other
+  * Results in many-to-many inconsistent node mappings
+
+#### IsoRank
+**IsoRank is a GNA algorithm**
+
+- Given two networks $G_1$ and $G_2$ where nodes correspond to proteins and edges correspond to interactions, the edges are weighted to quantify experimental evidence, transcience, or other properties i.e. 
+  * $0 \leq w(e) \leq 1$
+- and similarity scores between the nodes of $G_1$ and $G_2$ based on BLAST, synteny or functional similarity
+
+- It produces a mapping between the nodes that maximizes a combination of:
+  * size of the common graph implied by the mapping(topological mapping)
+  * aggregate similarity between the nodes mapped to each other(based on the similarity measure)
+  
+**IsoRank stages**
+1. Associate a functional similarity score $R_{ij} with each possible match bewteen nodes of the two networks for each node pai $i$ and $j$
+  * Similarity determined by eigenvalues
+  * Models trade-offs between the two objectives
+  * $(i,j)$ is a good match if 
+    * sequences of $i$ and $j$ have a global alignment of good score
+    * Their neighbors are a good match to each other - similar logic to eigenvalue centrality
+    
+  * $R_{ij}$ is obtained from scores of neighbors of $i$ ($u \in V(i)$) and neighbors of $j$ ($v \in N(j)$)weighted on the degree/cardinality of these neighbors, i.e.
+    * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{R_{uv}}|{N(u)||N(v)}|$
+    * which recursively goes over neighbors of neighbors
+    * It can be cast as an eigenvalue problem
+      * $R = AR$
+    * Where $A$ is a topology scoring matrix such that
+      * $A_{ij,uv} = \frac{1}|{N(u)||N(v)}|$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
+    * *This calculates the contribution of network topology to the score since two nodes can have a good BLAST score but lack connectivity in the larger network*
+    * Matrix $A$ has as many rows as there are matches between nodes and therefore needs an efficient approach to determine principle eigen vector - given by the power method
+      * $R(k + 1) = \frac{AR(k)}{||AR(k)||}$
+      * Starts with an initial vector(like a vector of ones) then recalculates until the eigen vector convergence to a dominant eigen vector, which is more efficient than calculating all possible eigen vectors to find the leading one
+  * To capture contributions of both topological information and sequence information on the score, we also use information from the pairwise alignment scores of all possible node pairs betwen the two candidate networks in the form of a matrix $B$, where $B_{ij}$ corresponds to the alignment scores between node/protein sequence $i$ from a network $G$ and that of another node/protein sequence $j$ from a second network $H$ which is normalized to avoid large values i.e.
+    * $E = frac{B}{||B||} \text{all entries in B are modified by dividing by the overall magnitude of B}$
+  * The normalized matrix is combined with the initial topological matrix and the eigenvector problem is modified to
+    * $R = (\alpha A + (1 - \alpha)E)R \text{so we recursively calculate the eigen vector R, starting from an initial guess such as a vector of ones until convergence such that the eigen vector does not change}$
+
+Pseudocode:
+```text
+function get_score(G, H, B, α) # argument is the adjacency matrix of the two candidate networks
+  nG ← nodes in G
+  nH ← nodes in H
+  A ← 0 matrix of dimensions (nG*nH) x (nGnH)
+  for i ← 1 to nG
+    for j ← 1 to nH
+      for u ← 1 to nG
+        for v ← 1 to nH
+          if G[i,u] = 1 and H[j,v] = 1
+            A[ij,uv] = 1/(degree(u)*degree(v))
+          else
+            A[ij,uv] = 0
+  # B contains pairwise BLAST scores between all node pairs between the two networks
+  E ← 0 matrix of dimensions (nG*nH) x (nGnH)
+  for i ← 1 to nG*nH
+    for j ← 1 to nG*nH
+      E[i,j] = B[i,j]/||B||
+    
+  combined_matrix ← αA + (1 - α)E
+  R_k = vector of ones of length nG * nH
+  while True
+    R_0 = R_k
+    R_k = (combined_matrix*R_k)/magnitude(combined_matrix*R_k)
+    if R_0 = R_k
+      break
+  return R_k
+```
+      
+2. Use score to extract set of highly scoring mutually consistent matches
