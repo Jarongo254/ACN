@@ -1359,20 +1359,23 @@ function compliment(G)
     * Their neighbors are a good match to each other - similar logic to eigenvalue centrality
     
   * $R_{ij}$ is obtained from scores of neighbors of $i$ ($u \in V(i)$) and neighbors of $j$ ($v \in N(j)$)weighted on the degree/cardinality of these neighbors, i.e.
-    * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{R_{uv}}|{N(u)||N(v)}|$
+    * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{R_{uv}}{|N(u)| |N(v)}|$
     * which recursively goes over neighbors of neighbors
     * It can be cast as an eigenvalue problem
       * $R = AR$
     * Where $A$ is a topology scoring matrix such that
-      * $A_{ij,uv} = \frac{1}|{N(u)||N(v)}|$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
+      * $A_{ij,uv} = \frac{1}{|N(u)| |N(v)}|$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
     * *This calculates the contribution of network topology to the score since two nodes can have a good BLAST score but lack connectivity in the larger network*
     * Matrix $A$ has as many rows as there are matches between nodes and therefore needs an efficient approach to determine principle eigen vector - given by the power method
       * $R(k + 1) = \frac{AR(k)}{||AR(k)||}$
       * Starts with an initial vector(like a vector of ones) then recalculates until the eigen vector convergence to a dominant eigen vector, which is more efficient than calculating all possible eigen vectors to find the leading one
-  * To capture contributions of both topological information and sequence information on the score, we also use information from the pairwise alignment scores of all possible node pairs betwen the two candidate networks in the form of a matrix $B$, where $B_{ij}$ corresponds to the alignment scores between node/protein sequence $i$ from a network $G$ and that of another node/protein sequence $j$ from a second network $H$ which is normalized to avoid large values i.e.
-    * $E = frac{B}{||B||} \text{all entries in B are modified by dividing by the overall magnitude of B}$
+  * To capture contributions of both topological information and sequence information on the score, we also use information from the pairwise alignment scores of all possible node pairs between the two candidate networks in the form of a matrix $B$, where $B_{ij}$ corresponds to the alignment scores between node/protein sequence $i$ from a network $G$ and that of another node/protein sequence $j$ from a second network $H$ which is normalized to avoid large values i.e.
+    * $E = \frac{B}{||B||}$
+    * all entries in B are modified by dividing by the overall magnitude of B
   * The normalized matrix is combined with the initial topological matrix and the eigenvector problem is modified to
-    * $R = (\alpha A + (1 - \alpha)E)R \text{so we recursively calculate the eigen vector R, starting from an initial guess such as a vector of ones until convergence such that the eigen vector does not change}$
+    * $R = (\alpha A + (1 - \alpha)E)R$
+  * so we recursively calculate the eigen vector $R$, starting from an initial guess such as a vector of ones until convergence such that the eigen vector no longer changes, i.e.
+    * $R(k+1) = \frac{AR(k)}{||AR(k)||} 
 
 Pseudocode:
 ```text
