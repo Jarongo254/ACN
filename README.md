@@ -1054,7 +1054,7 @@ end while
 - Communities are then formed by connected subgraphs
 - ***Hierarchical clustering however does not ensure connectivity***
 
-#### Edge betweenness netwrok clustering
+#### Edge betweenness network clustering
 - Find edges connecting communities and remove them
 - Edges connecting separate modules have high edge betweenness as all shortest paths fromone module to another are expected to pass through them
 - Edge betweenness is similar to node betweenness in that, an edge has high betweenness if the number of shortest paths passing through the edge as a fraction of all total shortest paths is large
@@ -1374,8 +1374,9 @@ function compliment(G)
     * all entries in B are modified by dividing by the overall magnitude of B
   * The normalized matrix is combined with the initial topological matrix and the eigenvector problem is modified to
     * $R = (\alpha A + (1 - \alpha)E)R$
+    * where $\alpha$ determines the weight of contribution of either objectives
   * so we recursively calculate the eigen vector $R$, starting from an initial guess such as a vector of ones until convergence such that the eigen vector no longer changes, i.e.
-    * $R(k+1) = \frac{AR(k)}{||AR(k)||} 
+    * $R(k+1) = \frac{AR(k)}{||AR(k)||}$ 
 
 Pseudocode:
 ```text
@@ -1408,3 +1409,8 @@ function get_score(G, H, B, α) # argument is the adjacency matrix of the two ca
 ```
       
 2. Use score to extract set of highly scoring mutually consistent matches
+- The resulting vector R is of length $nGnH$ whose entries correspond to aligning node pairs between the two candidate networks, and can therefore be used as the pairwise scoring matrix with reshaping.
+- Incase of more than two networks we execute the algorithm on all possible pairs of input networks
+- Transitivity has to hold for the node mapping, i.e. if node a maps to b and b to c, then a also maps to c
+- For one to one mapping of the nodes, a maximum bipartite weighted matching is performed. This means we create an edge-induced subgraph, where ever node has a degree of one and no two edges share an endpoint
+- This problem can be considered a maximum flow problem
