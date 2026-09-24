@@ -78,7 +78,7 @@ A path is a cycle if $v_i = v_k$
 2. Mark node v as visited
 3. If node adjacent to v is not marked as visited, select as starting point
 4. Perform DFS on the node
-5. Return to other nodes adjacent to v and perform DFS until all neghbors of v have been visited
+5. Return to other nodes adjacent to v and perform DFS until all neighbors of v have been visited
 
 ##### Pseudocode:
 ```text
@@ -223,13 +223,13 @@ Uses Queue as the data structure(First in first out).
 
 Generates a tree for a connected graph and a forest for a disconnected graph.
 
-It checks the nodes by order of increasing distance from the reference/starting node, therefor it gives the shortest path fro a start node to all other nodes **(but for non-weighted graphs)**.
+It checks the nodes by order of increasing distance from the reference/starting node, therefore it gives the shortest path from a start node to all other nodes **(but for non-weighted graphs)**.
 
 Same complexity as DFS
 
 Pseudocode:
 ```text
-procudure bfsearch(G)
+procedure bfsearch(G)
   for each v ∈ V(G) do
     mark[v] ← 0
   for each v ∈ V(G) do
@@ -303,7 +303,7 @@ BFS traversal order: [0, 1, 2, 3, 4, 5, 6, 7]
 ### Articulation point
 - Is a vertex whose removal(as well as its incident edges) disconnects the graph
 
-- Naive approach to determining articulation points is performing dfs on the graph with each of the nodes removed, to dtermine which ones result in more than one connected component. i.e.
+- Naive approach to determining articulation points is performing dfs on the graph with each of the nodes removed, to determine which ones result in more than one connected component. i.e.
 
 Pseudocode:
 ```text
@@ -375,9 +375,9 @@ Articulation points: [3, 0]
 - **Biconnected graph** - graph without an articulation point
     * Functionality is maintained even without any of the nodes - biological aspect would be a missing component in a biochemical reaction does not affect the process. Its absence is remedied through an alternative pathway
 - **Bicoherent graph** - Every articulation point is connected by two edges to each component of remaining graph
-    * Functionality is preserved even if a connection is lost(the edge only - node loss would result in loss of function). A process is not dependent on a single pathway (contigencies are available). e.g. protein that can bind to more than one enzyme ensures catalysis remains possible even if one of the enzymes is missing
+    * Functionality is preserved even if a connection is lost(the edge only - node loss would result in loss of function). A process is not dependent on a single pathway (contingencies are available). e.g. protein that can bind to more than one enzyme ensures catalysis remains possible even if one of the enzymes is missing
     
-- **Interactome** - Totallity of Protein-protein interactions that happen in a cell or organism
+- **Interactome** - Totality of Protein-protein interactions that happen in a cell or organism
 
 - Interactomes can be determined using large-scale PPI screening techniques:
     * High-throughput affinity purification with mass spectrometry - exploiting protein binding to isolate targets
@@ -398,7 +398,7 @@ $\varphi$ being the mapping function that maps the vertices and edges of graph G
 
 #### Classification of network properties
 - is it on a subset of nodes/edges or the entire network?
-- which information is needed to dtermine the property: local info about node/edge or global network info?
+- which information is needed to determine the property: local info about node/edge or global network info?
 
 These criteria classify a property as:
   - Local: pertaining to a subset of nodes/edges, info on nodes/edges is enough to calculate
@@ -442,22 +442,22 @@ Given a graph G, degree sequence is a non-increasing(decreasing) sequence of nod
         - given a graph, we consider nodes of k largest degrees(1, 2, 3...k highest degrees)e.g. {4, 3, 3, 3, 3, 2, 2, 2}; the 3 largest degrees would be the first 3 node degrees 4, 3, 3
         - How many edges the nodes collectively demand = 4 + 3 + 3 = 10 i.e. $\sum_{i=1}^k d_i$
         - Can this requirement be satisfied by the available connections: connections between the nodes themselves( $k(k-1)$ ) + connections to other remaining nodes( $\sum_{i=k+1}^n min(d_i,k)$ )
- * The two theorems have some similarities in that Havel Hakimi checks that the condition holds for a node degree at a time but for all node degrees, and Erdos Galai checks the condition for k largest node degrees at a time, and has to hold for every k from 1 to the numrber of elements in the degree sequence/total number of nodes
+ * The two theorems have some similarities in that Havel Hakimi checks that the condition holds for a node degree at a time but for all node degrees, and Erdos Galai checks the condition for k largest node degrees at a time, and has to hold for every k from 1 to the number of elements in the degree sequence/total number of nodes
  
 **Isomorphic graphs** have the same degree sequence but not every graph with same degree sequence are isomorphic; same case for degree distribution
 
 #### Degree distribution
 
-specificies the probability that a randomly chosen node is of degree k. i.e. 
+specifies the probability that a randomly chosen node is of degree k. i.e. 
 
-$P(d(u)=k) = \frac{|{u|d(u)=k}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number of nodes of degree k
+$P(d(u)=k) = \frac{|\{u \mid d(u)=k\}|}{n} = \frac{n_k}{n}$ where $n_k$ is the number of nodes of degree k
 
 #### Networks types based on degree distribution
 
-**Erdos-Renyi**: applys to regular/almost regular graphs whose degree distribution follows a poisson distribution
+**Erdos-Renyi**: applies to regular/almost regular graphs whose degree distribution follows a poisson distribution
   - For an Erdos-Renyi graph, the expected number of edges for the graph is given by $E[m]=\frac{n(n-1)}{2}p$ while the expected average degree of nodes is given by $E[d(u)]=(n-1)p$ where $n$ is the number of nodes and $p$ is the probability of the edge $(u,v)$ being in the graph $G$
 
-**Preferrential attachment(Barabasi-Albert)**: applies to graphs whose degree distribution follows power law
+**Preferential attachment(Barabasi-Albert)**: applies to graphs whose degree distribution follows power law
   - Nodes with already higher degrees are more likely to get more new edges from each new node $u$ added to graph $G$
   - Graph have scale invariance
   - Networks have some nodes as hubs(having higher degree)
@@ -475,7 +475,7 @@ In words:
 
 $\overline{d}(G)=\frac{\sum_{i=1}^n n_i}{n} = \frac{2m}{n}$
 
-#### Clusterdness
+#### Clusteredness
 
 Some networks have denser neighborhoods than others
 
@@ -485,19 +485,19 @@ Determined using:
   - matching index
   
 ##### Clustering coefficient
-**Neighborhood** of a node $u$ consists of nodes that are a specied distance away from the node
+**Neighborhood** of a node $u$ consists of nodes that are a specified distance away from the node
   * First neighborhood $\rightarrow$ neighboring nodes that are distance 1 away from node $u$
   * $k^{th}$ neighborhood $\rightarrow$ neighboring nodes that are distance $k$ away from node $u$
     * $N^k(u)$ - BFS can be used here, floyd's all pairs shortest paths can also be used here
     
 **Node induced subgraph** is a graph induced by a subset of nodes.
-  - Given graph $G=(V,E)$, subgraph $H$ induced by node subset $V' = V(H)\subseteq V(G)$ such that for every $u,v \in V(H)
-    - ${u,v} \in E(H) \text{if and only if} {u,v} \in E(G)$
+  - Given graph $G=(V,E)$, subgraph $H$ induced by node subset $V' = V(H)\subseteq V(G)$ such that for every $u,v \in V(H)$
+    - $\{u,v\} \in E(H) \text{ if and only if } \{u,v\} \in E(G)$
     - $H = G[V']$
 
 **Clustering coefficient**(determined from the first neighborhood of a node) is then:
-  * let $G_u$ denote the frst neighborhood induced subgraph from neighbors of node $u$. i.e. $G_u = G[N^1(u)]$
-  * Clustering cofficient of node $u$ is then: $C(u)= \frac{|E(G_u)|}{\frac{|V(G_u)|(|V(G_u)|-1)}{2}} = \frac{2|E(G_u)|}{|V(G_u)|(|V(G_u)|-1)}$
+  * let $G_u$ denote the first neighborhood induced subgraph from neighbors of node $u$. i.e. $G_u = G[N^1(u)]$
+  * Clustering coefficient of node $u$ is then: $C(u)= \frac{|E(G_u)|}{\frac{|V(G_u)|(|V(G_u)|-1)}{2}} = \frac{2|E(G_u)|}{|V(G_u)|(|V(G_u)|-1)}$
   * or in words: $C_u = \frac{\text{number of edges between neighbors of u}}{\text{maximum possible edges between the neighbors of u}}$
   
 The clustering coefficient of the graph is then obtained as an average of the clustering coefficients of all nodes in the graph. i.e.
@@ -507,17 +507,17 @@ Dangling nodes(nodes of degree one-tree leaf) create a problem for clustering co
 
 Denominator would be 1(1-1) = 0 and division by 0 is not allowed, so they are assigned a clustering coefficient of 0
 
-##### Transitivity(globoal property)
+##### Transitivity(global property)
 Given graph $G$, $c_3$ denotes the number of 3 node cycles and $p_3$ denotes the number of 3 node paths(even 3 nodes connected by 2 edges. e.g. A - B - C is a $p_3$). Transitivity is then:
-  * $T(G) = \frac{3c_3}{p_3}$ *multiplication by 3 because each traingle has 3 possible centers*
+  * $T(G) = \frac{3c_3}{p_3}$ *multiplication by 3 because each triangle has 3 possible centers*
   
 *Averaging with clustering coefficient treats all nodes the same even though some nodes have significantly more information on connectivity that transitivity captures*
 
 ##### Matching index
 How similar are two pairs of nodes?
 
-This similraity is obtained with respect to the immediate neighbors they share(first neighborhood)
-  * Functionally related compenents may not be directly related but share common neighbors, e.g. two proteins may not directly interact in a chain of reactions but may share a reation with a third protein
+This similarity is obtained with respect to the immediate neighbors they share(first neighborhood)
+  * Functionally related components may not be directly related but share common neighbors, e.g. two proteins may not directly interact in a chain of reactions but may share a reaction with a third protein
 
 given by:
 
@@ -528,11 +528,11 @@ In words:  $M(u,v) = \frac{\text{shared first neighbors between two nodes}}{\tex
 ### Assortativity
 
 The goal is to capture:
-  * high degree node - high degree node adjascency
-  * high degree node - low degree node adjascency
-  * lack of adjascency between low degree nodes
+  * high degree node - high degree node adjacency
+  * high degree node - low degree node adjacency
+  * lack of adjacency between low degree nodes
   
-Given a node $u$ and its neighbors, $s(u)$ denotes denotes the average degree of first neighbors of $u$ i.e.
+Given a node $u$ and its neighbors, $s(u)$ denotes the average degree of first neighbors of $u$ i.e.
   - $s(u) = \frac{\sum_{v \in N^1}d(v)}{d(u)}$
 
 or in words
@@ -540,10 +540,10 @@ or in words
 
 And the resulting values for each $u$ can be store in a vector i.e. $[s(u_1),s(u_2), \dots ,s(u_n)]$
 
-And with the vector of degrees for all nodes in the graph i.e. $[d(u_1),d(u_2, \dots ,d(u_n))]$, we can calculate the Pearson correlation coefficient $r$ from the two vectors
+And with the vector of degrees for all nodes in the graph i.e. $[d(u_1),d(u_2), \dots ,d(u_n)]$, we can calculate the Pearson correlation coefficient $r$ from the two vectors
 
 And the correlation interpreted as:
-  * $r > 0$ then the network is assortative i.e. high degree nodes tend to be adjascent to high degree nodes
+  * $r > 0$ then the network is assortative i.e. high degree nodes tend to be adjacent to high degree nodes
   * $r < 0$ then the network is disassortative i.e. high degree nodes tend to be adjacent to low degree nodes
   * $r = 0$ then there is no trend between the node degrees
   
@@ -583,7 +583,7 @@ Distance between two nodes $u$ and $v$ in a network $G$ is given by length of th
 Pertains to two nodes but network information is needed as shortest path may pass through one or multiple other nodes, hence **local-global**.
 
 #### Average path length(characteristic path length)
-- Is the average distance bewteen any pair of nodes.
+- Is the average distance between any pair of nodes.
 - Given by:
   - For undirected graph:
     - $l(G) = \frac{\sum\limits_{u,v \in V(G)}d(u,v)}{\frac{n(n-1)}{2}} = \frac{2\sum\limits_{u,v \in V(G)}d(u,v)}{n(n-1)}$
@@ -619,14 +619,14 @@ Pertains to two nodes but network information is needed as shortest path may pas
   * Pseudocode
   ```text
   Perform BFS from source u
-  For every neighbor v of w, where w is visted in BFS
+  For every neighbor v of w, where w is visited in BFS
   if dist[v] > dist[w] + 1
     dist[v] = dist[w] + 1
     path[v] = path[w]
   else if dist[v] = dist[w] + 1
     path[v] = path[w] + path[v]
   ```
-  - Every node is used as a source(like djikstra's for all pairs shortest paths)
+  - Every node is used as a source(like Dijkstra's for all pairs shortest paths)
   
 ### Centrality
 
@@ -634,13 +634,13 @@ Pertains to two nodes but network information is needed as shortest path may pas
 - essentiality exists even with lack of articulation points
 - biological approaches involve: knockouts, multiple experiments under varying conditions (labor intensive and time consuming)
 - centrally located proteins have evolved slowly and are essential for survival
-- There is evidence of cerrelation(0.75) between the degree and essentiality
+- There is evidence of correlation(0.75) between the degree and essentiality
 
 **How is centrality established?**
 1. Based on position of node in network
 2. Based on centrality of neighbors
 3. combination of measures
-4. combination fo networks and high throughput data
+4. combination of networks and high throughput data
 
 #### 1. Centrality based on position in network
 **Degree centrality** - equivalent to degree
@@ -655,7 +655,7 @@ Pertains to two nodes but network information is needed as shortest path may pas
   * inverse of the sum of distances from node $u$ to all other nodes
   * Node is more central if the distance to all other nodes is smaller
   
-**Stress centrality** - sum of of shortest paths that pass through a node $u$. i.e.
+**Stress centrality** - sum of shortest paths that pass through a node $u$. i.e.
   * if $\sigma_{st}$ is the number of shortest paths between nodes $s$ and $t$
   * and $\sigma_{st}(u)$ is the number of shortest paths between nodes $s$ and $t$ passing through node $u$
   * stress centrality is given by:
@@ -666,10 +666,10 @@ Pertains to two nodes but network information is needed as shortest path may pas
   * Node of high centrality lies on considerable fraction of paths connecting other nodes
   
 **Bellmans criterion**
-  - Node $u$ is on shrortest path between $s$ and $t$ iff $d(s,t) = d(s,u) + d(u,t)$
+  - Node $u$ is on shortest path between $s$ and $t$ iff $d(s,t) = d(s,u) + d(u,t)$
     * $\sigma_{st}(u) = \sigma_{su} * \sigma_{ut}$ if $d(s,t) = d(s,u) + d(u,t)$ and $\sigma_{st}(u) = 0$ otherwise
     
-    *Betweenness can be detremined by combining BFS and Floyd's algorithm*
+    *Betweenness can be determined by combining BFS and Floyd's algorithm*
 
 ### Determining walks of length l
 - Adjacency matrix gives the number of walks of distance 1 between any two nodes(if there exists an edge)
@@ -684,10 +684,10 @@ i.e.
   
   *It is not important that it is the shortest length*
   
-#### 2. Centraliy based on neighbors
+#### 2. Centrality based on neighbors
 *A node $u$ is central if its neighbors are central*
 
-**Collinearity** - two vectors are collinear if there exists a scalar \lambda such that $x = \lambda y$
+**Collinearity** - two vectors are collinear if there exists a scalar $\lambda$ such that $x = \lambda y$
 
 **Eigenvector** of a square matrix $A$ is a non-zero vector $v$ that changes by a scalar factor when multiplied by the matrix, i.e.
   * $Av = \lambda v$, $\lambda$ being the eigen value
@@ -707,7 +707,7 @@ i.e.
 
 **The Perron-Frobenius** then states that if $A$ is an *irreducible* non-negative square matrix, then the principle eigenvalue is simple(occurs once if more then one eigen value) and is associated with a unique eigenvector whose components are all positive
 
-Eigenvector centrality factors in neghbor centrality when defining centrality of a node $u$.
+Eigenvector centrality factors in neighbor centrality when defining centrality of a node $u$.
 
 A node $u_i$ is central if its neighbors are central.
   * Let $\varphi (u_i)$ denote centrality of a node $u_i$
@@ -715,7 +715,7 @@ A node $u_i$ is central if its neighbors are central.
     * $\varphi (u) = \frac{1}{\lambda}A \varphi (u) \rightarrow A \varphi (u) = \lambda \varphi (u)$
     * where $\varphi$ is a vector of the centrality of each node obtained from the leading eigen vector
 
-*start with the adjacency matrix(square irrideucible matrix with non-negative entries), use it to get the eigen values, based on Perron-frobenius select the leading(largest absolute value) eigen value and get its eigen vectors, and the entries of the eigen vectors are the eigen value centrality scores of each node based on the centrality of its neighbors*
+*start with the adjacency matrix(square irreducible matrix with non-negative entries), use it to get the eigen values, based on Perron-Frobenius select the leading(largest absolute value) eigen value and get its eigen vectors, and the entries of the eigen vectors are the eigen value centrality scores of each node based on the centrality of its neighbors*
 
 #### Generalizations and variations of eigen value centrality
 **Bonacich centrality**
@@ -735,16 +735,16 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 
 **Katz centrality**
 - A nodes centrality is based on the centralities of other nodes that can reach it
-- Only relvant walks are walks from node j to i, how reachabel is the node from other nodes given a directed graph
+- Only relevant walks are walks from node j to i, how reachable is the node from other nodes given a directed graph
 - Longer walks contribute less because of multiplication by an attenuation factor $\beta^l$
   * $C_l(u_i) = \sum\limits_{l=1}^{\infty}\sum\limits_{j=1}^n \beta^la_{ji}^l$
   * where $\beta$ is an attenuation factor in (0,1)
   
 **Page rank**
 - In page rank, a value x(u) is assigned to each node
-- Each node then distributes this value equally to nodes connected through its outgoing edges such that each recieving neighbor gets 
+- Each node then distributes this value equally to nodes connected through its outgoing edges such that each receiving neighbor gets 
   * $\frac{x(u)}{d^+(u)}$(value of node divided by no. of receiving neighbors)
-- Each node also simultaneously recieves the values distributed from nodes connected by incoming edges making the value of a node $u$ at each iteration
+- Each node also simultaneously receives the values distributed from nodes connected by incoming edges making the value of a node $u$ at each iteration
   * $x(u) = \sum\limits_{v \in N^{1,-}} \frac{x(v)}{d^+(v)}$
 - The distribution proceeds until convergence(changes become negligible)
 - Each state/iteration $t$ of the pagerank distribution has a probability $x_t^i$ which gives the probability of being at node i at the respective iteration(after $t$ steps)
@@ -755,7 +755,7 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 - $P$ is a matrix given by $D^{-1}A$ where $D_{out}$ is a diagonal matrix of out-degrees for all nodes in a directed graph $G$ and A is the associated adjacency matrix of the graph
   * *The inverse of D is just the diagonal entries in inverse form i.e. 3 to* $\frac{1}{3}$
 - $P$ is the adjacency matrix of the weighted graph with every weight corresponding to the probability of moving from one node to an outneighbor if all out edges are of equal probability to be chosen, and every row of P sums up to 1
-  * probability of being in a new state = probabilty of being in a previous state $\times$ the probability of moving to the new state
+  * probability of being in a new state = probability of being in a previous state $\times$ the probability of moving to the new state
 - sink nodes and cycles however create a problem because movement to another node is then not possible.
 - A modified weighted graph is then used such that
   * $P\alpha = \alpha P + \frac{1}{n}(1 - \alpha)E$ where E is a matrix of ones(1's) so the initial P matrix is simply modified
@@ -765,20 +765,20 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 
 #### 3. Combinations of centrality measures
 - Use different centrality measures by combining them through multivariate statistical analysis
-- combining centrality scores can be useful fo predicting gene/protein essentiality
+- combining centrality scores can be useful for predicting gene/protein essentiality
 - Principle Component Analysis(PCA) is used for this purpose
 
 **PCA**
-- Dimentionality reduction tool
+- Dimensionality reduction tool
 - Reduces a large set of possibly correlated variables(centrality scores) into a smaller set of uncorrelated variables without loss of information
 - Seeks a linear combination of the variables such that maximum variance is extracted, removes unexplained variance and seeks another linear combination
-- PCA can be used on a data matrix with nodes as rows and centrality scores from diffrnet centrality measures as columns(variables)
+- PCA can be used on a data matrix with nodes as rows and centrality scores from different centrality measures as columns(variables)
 - PCA steps:
   1. Center each variable in the data set
     * simply take the mean of each column and subtract from each column entry(centering around the mean)
   2. compute covariance matrix of the centered variables
     * pairwise covariance between each column/variable is calculated to compute the covariance matrix, with diagonal entries being the variances
-  3. computes eigenvalue decomposition fo the covariance matrix
+  3. computes eigenvalue decomposition of the covariance matrix
     * Simply calculate the eigen values of the resulting covariance matrix and the associated eigen vectors, i.e.
       * $(matrix_{cov} - I\lambda)v = 0$
   4. Sort eigen values highest to lowest, their corresponding eigen vectors are the principle components
@@ -790,16 +790,16 @@ Based on the Neumann series, Bonacich centrality can be rewritten as
 - To be statistically significant we need to be able to reject the null hypothesis
   * **Null hypothesis** is what is assumed to be true until evidence indicates otherwise
     * The null hypothesis tells us that the observed data would still be observed with high likelihood if the networks(data) were randomized, so we can decide if the observation is statistically significant
-    * A statistically significant observation therefore occurs with low frequency in a random scenario which is expressed by the emperical p-value(fraction/percentage of occurences of observed data in a randomized dataset)
+    * A statistically significant observation therefore occurs with low frequency in a random scenario which is expressed by the empirical p-value(fraction/percentage of occurrences of observed data in a randomized dataset)
 
 - **P-value** is the probability of an observed result assuming that the null hypothesis is true(usually the extreme observation)
 - P-value requirements:
   * the value of the statistic for the data(t, chi, rank sum)
   * distribution of the statistic under null hypothesis which is specified by:
     * theoretical probability distribution of the statistic(represents an approximation)
-    * permutation/randomization to approximate the distribution - gives emperical approximation of the null distribution
-      - **permutation test**: involves permuting the labels of data points and recalculating the statistic (needs more than one groups of data points, when ther's usually only one network)
-      - The aproaches should be able to generate new properties while low level properties(number of nodes/edges, degree sequence) are maintained
+    * permutation/randomization to approximate the distribution - gives empirical approximation of the null distribution
+      - **permutation test**: involves permuting the labels of data points and recalculating the statistic (needs more than one groups of data points, when there's usually only one network)
+      - The approaches should be able to generate new properties while low level properties(number of nodes/edges, degree sequence) are maintained
       - There should also be no bias i.e. each random network of the same degree sequence has an equal probability of being generated
         * Switch randomization
         * configuration/pairing/stub matching
@@ -833,9 +833,9 @@ Given the possibility of generating multiple classes of graphs after randomizati
   * the precursor network and the new resulting network are then said to be connected by an edge(created by the fact that they are the same except for a switched edge)
 - The resulting set of possible randomizations is then a larger network with its nodes being the random networks generated (***Network of Networks***).
 - Networks/subnetworks are to be sampled from the set $P$ such that they meet the required constraints, and some subnetworks of $P$ being more connected than others would mean a specific group of connected networks are sampled more than others, resulting in a bias - which we want to avoid
-- solution is a regular Network of networks, wher every node has the same number of incoming and outgoing edges, giving a uniform stationary distribution, and every possible network is samled with equal probability, i.e.
-  * $x = xP$ where $x$ is the probaility of being in a state during a random walk, and P is the transition matrix
-  * So even after transitioning from one state/node to the next, the probality of being at either nodes when taking the next step in the walk is the same, so even a network that was already sampled can be resampled
+- solution is a regular Network of networks, where every node has the same number of incoming and outgoing edges, giving a uniform stationary distribution, and every possible network is sampled with equal probability, i.e.
+  * $x = xP$ where $x$ is the probability of being in a state during a random walk, and P is the transition matrix
+  * So even after transitioning from one state/node to the next, the probability of being at either nodes when taking the next step in the walk is the same, so even a network that was already sampled can be resampled
   * stationary distribution(probability) is given by the inverse of node degrees
   
 #### Applications of network randomization
@@ -846,9 +846,9 @@ Given the possibility of generating multiple classes of graphs after randomizati
 
 ## Cells to GRNs
 
-- Cells react to encironmental stimulus/signals by synthesizing task specific proteins
-- The pathways involved make up the transcriptional regulatory network involving DNA, RNA, ad proteins(both target proteins and regulatory proteins)
-- Proteins that influence trasncription of protein genes are **transcription factors** and they bind to promoter regions of protein encoding genes to allow transcription to take place
+- Cells react to environmental stimulus/signals by synthesizing task specific proteins
+- The pathways involved make up the transcriptional regulatory network involving DNA, RNA, and proteins(both target proteins and regulatory proteins)
+- Proteins that influence transcription of protein genes are **transcription factors** and they bind to promoter regions of protein encoding genes to allow transcription to take place
 
 ### Gene regulatory networks
 - Gene can encode for a transcription factor or another protein(enzymes e.t.c.)
@@ -871,16 +871,16 @@ Given the possibility of generating multiple classes of graphs after randomizati
 - Is a graph $G$ whose node-set $V(G)$ can be partitioned into two sets $V_1(G)$ and $V_2(G)$ such that all the graph edges are incident on either side of the partition, i.e. on a node in $V_1(G)$ and a node in $V_2(G)$
 ***Graph cannot be bipartite if it has a cycle with odd number of edges, but can be if it has even number of edges***
   * The bipartite property is broken if an edge begins from a node in set $V_1(G)$ and ends in the same node set(same for $V_2(G)$ )
-- In a GRN these partitions represent proteing and Genes(both form the same network but can be partitioned)
+- In a GRN these partitions represent proteins and Genes(both form the same network but can be partitioned)
 - They can then be studied by:
-  * **comparing node properties** - which nodes are important for signal propagation(hub nodes with wigh degree centrality)
+  * **comparing node properties** - which nodes are important for signal propagation(hub nodes with high degree centrality)
   * **Degree distributions** - evolution of GRNs; revealing duplication patterns in GRN structure
   * **Distribution of paths** - for signal propagation
   
 #### Network Motifs
 - A network motif is a subnetwork/pattern which occurs in a network more often than in randomized networks
-- The high frequency of occurence of these patterns in real networks implies functional significance
-- Allows decomposision of a network represented system into smaller modules
+- The high frequency of occurrence of these patterns in real networks implies functional significance
+- Allows decomposition of a network represented system into smaller modules
 
 ##### Classes of Network Motifs
 **Negative autoregulation**
@@ -894,15 +894,15 @@ Given the possibility of generating multiple classes of graphs after randomizati
   * creates bimodal distributions(bistability - where some cells have high and others low expression)
 
 #### Feed forward loops
-- Outlines the relationship between aregulator X, a gene Y which is regulated by X and a gene Z regulated by both X and Y
+- Outlines the relationship between a regulator X, a gene Y which is regulated by X and a gene Z regulated by both X and Y
 - Given both activator and repressor activity of regulators, there $2^3 = 8$ possible FFLs
   * **Coherent** - both pathways achieve the same outcome
   * **Incoherent** - pathways have opposite outcomes
   
 #### How to find network motifs
 **By Concentration**
-  * If $N_i$ is the number of $n$-node subnetworks of type $i$ and $\sum\limits_i Ni$ is the number of $n$-node subnetworks, concentration of the subnetworks of type $i$ is given by
-    * $C_i = frac{N_i}{\sum\limits_i Ni}$
+  * If $N_i$ is the number of $n$-node subnetworks of type $i$ and $\sum\limits_i N_i$ is the number of $n$-node subnetworks, concentration of the subnetworks of type $i$ is given by
+    * $C_i = \frac{N_i}{\sum\limits_i N_i}$
     * Given a specific type of FFL, what is its number as a fraction of all present/possible 3-node subnetworks
 
 * After determining the concentration of the FFL in the network, we then have to find out if we would get the same from randomly sampled 3 node induced subnetworks
@@ -926,22 +926,22 @@ Given the possibility of generating multiple classes of graphs after randomizati
     * in the graph cartesian product, node pairs are adjacent if they share(have the same) a node component from one graph(one of the original graphs), and have the other two components adjacent in their original graph
 
 **Modular graph product**
-  - Given two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their Modular product $J = G_1 \odot G_2$ is a graph with nodes set $V_1 \times V_2$ and $u = (u_1, u_2)$ adjacent with $v = (v_1, v_2)$ if $(u_1, v_1) \in E_1$ and $(u_2, v_2) \in E_2$ or $(u_1, v1) \notin E_1$ and $(u_2, v_2) \notin E_2$
+  - Given two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their Modular product $J = G_1 \odot G_2$ is a graph with nodes set $V_1 \times V_2$ and $u = (u_1, u_2)$ adjacent with $v = (v_1, v_2)$ if $(u_1, v_1) \in E_1$ and $(u_2, v_2) \in E_2$ or $(u_1, v_1) \notin E_1$ and $(u_2, v_2) \notin E_2$
     * in the modular graph product, node pairs are adjacent if their components were both adjacent in their original graphs, or if none of their components were adjacent in their original graphs
     * The MGP therefore outlines how two graphs map onto each other, where a node pair in the MGP shows which node in $G_1$(first component in the node pair) corresponds to which node in $G_2$(second component in the node pair) and their respective edges showing the "isomorphic" connection
 
 The Maximum Induced Subgraph of two graphs $G_1$ and $G_2$ is then the maximum clique in their modular graph product. *Finding the maximum clique is still NP-hard*
 
-Solution: **Bon-Kerbosch algorithm**
+Solution: **Bron-Kerbosch algorithm**
   - The purpose of Bron-Kerbosch is to find maximal cliques using recursive backtracking
   
 How Bron-Kerbosch works:
-* Given the Modular Graph Product $J$ of two graphs $G_1$ and $G_2$, the algorithm is run recursively on each of the nodes in $J$. For each recursive call, there are three sets $R$, $P$ and $X$ where $R$ contains the node set being considered as a clique, $P$ contains all nodes from $J$ that are incident on all the nodes in the set $R$, and $X$ contains the branches(through the node entries in the set) that have been explored recursively and exhaustively, and will not be considered at that level. After a node in $P$ has been considered fully, it gets removed from $P$ and added to $X$ until all nodes initially in $P$ at that level have been considered. The sets $P$ and $X$ are initially empty at each recursive call so should it be a dead end, i.e. the current set $R$ has no possible nodes from $J$ that qualify for consideration and so $P$ remains empty, and at that level there have also been no nodes considered meaning $X$ is also empty, so the $R$ at that level of whatever length gets reported as a maximal clique. We can then compare all reported maximal cliques and take the maximum as the MCIS of the the two graphs $G_1$ and $G_2$.
+* Given the Modular Graph Product $J$ of two graphs $G_1$ and $G_2$, the algorithm is run recursively on each of the nodes in $J$. For each recursive call, there are three sets $R$, $P$ and $X$ where $R$ contains the node set being considered as a clique, $P$ contains all nodes from $J$ that are incident on all the nodes in the set $R$, and $X$ contains the branches(through the node entries in the set) that have been explored recursively and exhaustively, and will not be considered at that level. After a node in $P$ has been considered fully, it gets removed from $P$ and added to $X$ until all nodes initially in $P$ at that level have been considered. The sets $P$ and $X$ are initially empty at each recursive call so should it be a dead end, i.e. the current set $R$ has no possible nodes from $J$ that qualify for consideration and so $P$ remains empty, and at that level there have also been no nodes considered meaning $X$ is also empty, so the $R$ at that level of whatever length gets reported as a maximal clique. We can then compare all reported maximal cliques and take the maximum as the MCIS of the two graphs $G_1$ and $G_2$.
 
 Pseudocode:
 ```text
 procedure INIT
-  input: graph J # the MGP of two graphs G1 ad G2
+  input: graph J # the MGP of two graphs G1 and G2
   output: maximal cliques
   start recursion: BronKerbosch(∅,V,∅) # V is all nodes in J
 
@@ -949,14 +949,14 @@ procedure BronKerbosch(R,P,X)
   if P = ∅ and X = ∅ then
     return R as a maximal clique
   for all v ∈ P do
-    BronKerbosch(𝑅∪v,𝑃∩𝑁(v),𝑋∩𝑁(v)
+    BronKerbosch(𝑅∪v,𝑃∩𝑁(v),𝑋∩𝑁(v))
     P ← P\{v}
     X ← X∪{v}
   end for
 ```
 
 ### Clustering (There is no best way for this)
-- Involves dividing objects from a given set that are desrcibed by some features into groups based on similarity/shared features
+- Involves dividing objects from a given set that are described by some features into groups based on similarity/shared features
 - Is based on:
   * an objective function that models relationship to be satisfied within and outside the group
   * Distance measure that determines similarity(euclidean, manhattan, correlation,...)
@@ -974,7 +974,7 @@ Crisp vs Soft
     
 #### Hierarchical clustering
 - Is agglomerative in nature(starts with each object in its own cluster, groups by distance with recalculation of distance and eventually ends with all objects in the same cluster)
-- Results in a dendogram(can be cut at any given height or distance)
+- Results in a dendrogram(can be cut at any given height or distance)
 - is applicable to any objects and distance measures which do not have to be metric
 - Dissimilarity scores between merged clusters increases during agglomeration
 - Each step is committing and is also computationally expensive(repeated distance calculation)
@@ -995,21 +995,21 @@ end while
 - Determining distances between clusters
   * **Single linkage**
     - distance between clusters is defined as the minimum distance between any two pairs of objects, one from each cluster, i.e.
-      * $D[C_i, C_j] = \min\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * $D[C_i, C_j] = \min\limits_{u \in C_i, v \in C_j} D[u,v]$
       * After every clustering step, the distance between the new cluster and any other cluster is then the minimum of pairwise distances between all objects in one cluster and those in another cluster(for this the original distance matrix is used)
       * suffers from chaining where two objects might be actually far apart but still end up in the same cluster because they are chained to other intermediate objects with smaller distances
   * **Complete linkage** 
     - distance between clusters is defined as the maximum distance between any two pairs of objects, one from each cluster, i.e.
-      * $D[C_i, C_j] = \max\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * $D[C_i, C_j] = \max\limits_{u \in C_i, v \in C_j} D[u,v]$
       * After every clustering step, the distance between the new cluster and any other cluster is then the maximum of pairwise distances between all objects in one cluster and those in another cluster(for this the original distance matrix is used)
-      * suffers from crowding where an object ends up ina cluster but is still very close to an object in another cluster, making multiple clusters crowd together
+      * suffers from crowding where an object ends up in a cluster but is still very close to an object in another cluster, making multiple clusters crowd together
   * **Average linkage**
     - distance between clusters is defined as the average distance of objects in both clusters i.e.
-      * $D[C_i, C_j] = \frac{1}{|C_i||C_j|} \sum\limits_{u \in C_i, v \in Cj} D[u,v]$
+      * $D[C_i, C_j] = \frac{1}{|C_i||C_j|} \sum\limits_{u \in C_i, v \in C_j} D[u,v]$
       * results in clusters relatively far apart and relatively compact making it difficult to interpret
   * **Ward's distance for clusters**
     - Is given by the difference between total within cluster sum of squares for the two clusters separately and the within cluster sum of squares from merging the two clusters, i.e. 
-      * $D[C_i,C_j] = \sum\limits_{u \in C_i} (u - r_i)^2 + \sum\limits_{v \in C_j} (v - r_j)^2 - \sum\limits_{x \in C_i \cup C_j} (x - r_{ij})^2$ where $r$ is the centroid of the repective cluster
+      * $D[C_i,C_j] = \sum\limits_{u \in C_i} (u - r_i)^2 + \sum\limits_{v \in C_j} (v - r_j)^2 - \sum\limits_{x \in C_i \cup C_j} (x - r_{ij})^2$ where $r$ is the centroid of the respective cluster
       * similar to average linkage, less susceptible to noise and outliers and is the hierarchical analogue to k-means
 
 #### K-means clustering
@@ -1033,7 +1033,7 @@ end while
 
 #### Quality threshold(QT) clustering
 - Number of clusters not required, but requires diameter D of a cluster as input
-- All data objects would be initaially candidate clusters, and for each the closest object is added to the cluster until the cumulative diameter of the cluster exeeds D(crosses the threshold). The resulting clusters from the initial objects are then compared, and the largest taken as cluster and removed, then the proceedure repeated for the remaining objects - until all objects are done
+- All data objects would be initially candidate clusters, and for each the closest object is added to the cluster until the cumulative diameter of the cluster exceeds D(crosses the threshold). The resulting clusters from the initial objects are then compared, and the largest taken as cluster and removed, then the procedure repeated for the remaining objects - until all objects are done
  *Choice of D determines the number of clusters(inverse proportionality)*
 
 Pseudocode:
@@ -1053,20 +1053,20 @@ end while
 **Davies-Bouldin index**
 - Has no fixed bounds but smaller value is better, with 0 being the best possible clustering achievable
   * given $n$ clusters where $r_i$ is the centroid of cluster $C_i$
-  * Average distance within a cluster is given by:   $S_i = \sqrt{frac{1}{|C_i|} \sum\limits_{u \in C_i} (u - r_i)^2}$  Good clustering has small S
+  * Average distance within a cluster is given by:   $S_i = \sqrt{\frac{1}{|C_i|} \sum\limits_{u \in C_i} (u - r_i)^2}$  Good clustering has small S
   * And the measure of cluster separation is given by: $M_{i,j} = \sqrt{\sum\limits_{p=1}^k (r_{i,p} - r_{j,p})^2}$  Good clustering has large M
   * and $R_{i,j} = \frac{S_i + S_j}{M_{i,j}}$ smaller is better
   * $\delta_i = \max\limits_{j \neq i} R_{i,j}$
   * The DB index is then $\delta_{DB} = \frac{1}{n} \sum\limits_{i=1}^n \delta_i$
   
 **Dunn index**
-- higher values mean higher intercluster distance and smaller intracluster distance and are therefor ideal
+- higher values mean higher intercluster distance and smaller intracluster distance and are therefore ideal
   * Given $\Delta_i$, the maximum/average distance to the centroid of each cluster $C_i$ and the inter cluster distance $\delta_{C_i,C_j}$
-  * $\delta_D = \frac{\min\limits_{1 \leq i < j \leq n} \delta_{C_i,C_j}}{\max\limits_{1 \leq i \leq n}\Delta_i}
+  * $\delta_D = \frac{\min\limits_{1 \leq i < j \leq n} \delta_{C_i,C_j}}{\max\limits_{1 \leq i \leq n}\Delta_i}$
 
 **Silhouette index**
 - values range from -1 to 1, with larger values preferred
-  * Given $a(i)$, the average distance of of object $i$ to objects in its cluster and $b(i)$, minimum average distance of object $i$ to objects in other clusters
+  * Given $a(i)$, the average distance of object $i$ to objects in its cluster and $b(i)$, minimum average distance of object $i$ to objects in other clusters
   * $s(i) = \frac{b(i)-a(i)}{max{a(i),b(i)}}$  and
   * $\delta_{S} = \frac{1}{n} \sum\limits_{i=1}^n s_i$
 
@@ -1074,18 +1074,18 @@ end while
 - A community/network cluster is a dense subnetwork within a larger network
   * Communities correspond to functional units/modules e.g. protein complexes in PPIs 
 - Is a group of nodes with more edges within the group than to the rest of the network
-- Given a network with genes annotated to their functions and others not annotated, fucntion of unannotated gene can be inferred from known functions in community(A module/community contains functionally related genes)
+- Given a network with genes annotated to their functions and others not annotated, function of unannotated gene can be inferred from known functions in community(A module/community contains functionally related genes)
 
 #### Hierarchical Network clustering
-- Given a network with nodes as the objects and features on which to do the clustering as the node properties(degree, eccentricities,nighborhoods,Matching index or it variations), a similarity/distance matrix for all node pairs can be generated. e.g. cosine similarity given by
+- Given a network with nodes as the objects and features on which to do the clustering as the node properties(degree, eccentricities,neighborhoods,Matching index or its variations), a similarity/distance matrix for all node pairs can be generated. e.g. cosine similarity given by
   * $D[u,v] = \frac{|N(u) \cap N(v)|}{\sqrt{d(u)*d(v)}}$
-  and using it to generate clustering usig hierarchical clustering method
+  and using it to generate clustering using hierarchical clustering method
 - Communities are then formed by connected subgraphs
 - ***Hierarchical clustering however does not ensure connectivity***
 
 #### Edge betweenness network clustering
 - Find edges connecting communities and remove them
-- Edges connecting separate modules have high edge betweenness as all shortest paths fromone module to another are expected to pass through them
+- Edges connecting separate modules have high edge betweenness as all shortest paths from one module to another are expected to pass through them
 - Edge betweenness is similar to node betweenness in that, an edge has high betweenness if the number of shortest paths passing through the edge as a fraction of all total shortest paths is large
   * All shortest paths from one module to another are expected to pass through it
 1. Find and remove edge of high betweenness
@@ -1096,12 +1096,12 @@ end while
 - Is too slow for large and dense graphs(many edges to consider) with unsatisfactory results
 
 #### Spectral Network clustering
-- Goal: obtain information about community structure fron eigenvectors
-- Requires a graph Lalacian, which is simply given by 
+- Goal: obtain information about community structure from eigenvectors
+- Requires a graph Laplacian, which is simply given by 
   * $L= D - A$ for an undirected graph where $D$ is a diagonal matrix of node degrees
 - Given graph $G$ with $n$ nodes, L entries become
   * $l_{ij} = d_i if i = j$ because diagonal entries are 0 if no loops so degree - 0 = degree
-  * $l_{ij} = -1 if a_{ij} = 1$ an exiting edge in $A$ means 0 - 1 (non diagonal entries in $D$ are all zeros) 
+  * $l_{ij} = -1 if a_{ij} = 1$ an existing edge in $A$ means 0 - 1 (non diagonal entries in $D$ are all zeros) 
   * $l_{ij} = 0$ otherwise
   
 **Properties of Laplacian matrix**
@@ -1109,11 +1109,11 @@ end while
   - 0 is always an eigen value of the Laplacian with an eigen vector of 1(all entries in the vector are 1)
   - L is symmetric for an undirected graph
   - For an undirected graph smallest eigen value is 0 so all eigen values are non-negative
-  - Eigen values correspondig to non-degenerate(non-repeating) eigen values are orthogonal
+  - Eigen values corresponding to non-degenerate(non-repeating) eigen values are orthogonal
   - All eigen vectors, except the one corresponding to the lowest eigen value(0) must have $+ve$ and $-ve$ entries - due to orthogonality
-  - Given multiple diconnected components, their Laplacian matricis has a block structure, where each individual connected component has its own L and having a general L for the larger network places the smaller Ls as diagonal entries in L of the larger network.
+  - Given multiple disconnected components, their Laplacian matrices has a block structure, where each individual connected component has its own L and having a general L for the larger network places the smaller Ls as diagonal entries in L of the larger network.
   - For every connected component, there is then an eigen vector which has $v_u = 1$ if u belongs to the component and $v_u=0$ otherwise, and each of the eigen vectors has an eigen value of 0
-    * The k $\lambda = 0$ eigen vectors can also be expressed as as linear combinations, resulting in eigen vectors wth positive and negative signs as well as 0s 
+    * The k $\lambda = 0$ eigen vectors can also be expressed as linear combinations, resulting in eigen vectors with positive and negative signs as well as 0s 
   - Differently for a single connected component, we only get one 0 eigen value(smallest) so the clustering information is obtained from the second smallest eigen value, whose corresponding eigenvector has values with $-ve$ or $+ve$ signs, identifying which nodes belong together and which do not by virtue of these signs.
 
 #### Qualities of network clustering
@@ -1124,13 +1124,13 @@ end while
 **Conductance** of S is then
   * $\varphi(S) = \frac{f(S,\bar{S})}{\min{a(S), a(\bar{S})}}$
   * while conductance of the graph $G$ is the minimum over conductances of all cuts
-    * $\phi(G) = \min\limits_S{\varphi(S)}
-  *conductance is small if the graph can be naturaly bisected*
+    * $\phi(G) = \min\limits_S{\varphi(S)}$
+  *conductance is small if the graph can be naturally bisected*
 **Coverage** of an edge cut that results in a clustering C is the number of intracluster edges divided by the number of all edges in the network, i.e. 
   * if $f(C)$ is the number of edges in the cut(edges between clusters)
   * then $m - f(C)$ is the number of intra-cluster edges and the coverage becomes
   * $\gamma(C) = \frac{m - f(C)}{m}$
-  * the range is betwenn 0 and 1 and putting all edges in one cluster gives $\gamma(C) = 1$ which is a trivial result
+  * the range is between 0 and 1 and putting all edges in one cluster gives $\gamma(C) = 1$ which is a trivial result
 **Modularity** is based on a relation between the difference of a cluster from random expectation
   * It is a local index based on summation over clusters
   * $E(C_i)$ is the set of intracluster edges
@@ -1150,7 +1150,7 @@ end while
 Pseudocode:
 ```text
 repeat
-  find a node that yield biggest modularity increase if moved to a diffferent community, the node having not been moved
+  find a node that yield biggest modularity increase if moved to a different community, the node having not been moved
 until all nodes have been moved or no move with increase in modularity can be found
 return clustering of largest observed improvement
 ```
@@ -1162,15 +1162,15 @@ return clustering of largest observed improvement
   * Biological processes
   * Molecular function
   * Cellular component;
-  as a Directed acyclic graph(DAG) with more specific terms occuring at deeper levels
+  as a Directed acyclic graph(DAG) with more specific terms occurring at deeper levels
 - GO-terms are controlled and have specific parent-child relationships
 - queries typically check for predominant functions for clusters of genes which can vary depend on genes relevant to a given study
 
 #### GO data interpretation
-- Given a set of measured genes of size $m$ and a set of genes of iterest of size $n$, where $m_t$ denotes the set of genes annotated with a function $t$ and $n_t$ is the set of genes of interest annotated with function $t$,
+- Given a set of measured genes of size $m$ and a set of genes of interest of size $n$, where $m_t$ denotes the set of genes annotated with a function $t$ and $n_t$ is the set of genes of interest annotated with function $t$,
   * How likely is it that $n_t$ is observed by chance
   
-- $n$ genes from the set $m$ are sampled without replacement and $q_t$ denotes the set of genes among the sampled n genes annotated with a function $t$, the probability that $q_t = k$ is given by the **hypergeometric didtribution
+- $n$ genes from the set $m$ are sampled without replacement and $q_t$ denotes the set of genes among the sampled n genes annotated with a function $t$, the probability that $q_t = k$ is given by the **hypergeometric distribution**
   * $$P(q_t = k) = \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
 - and the probability of seeing $n_t$ or more annotated genes is given by
   *  $$P(q_t \geq n_t) = \sum\limits_{k=n_t}^{\min(m_t,n)} \frac{\binom{m_t}{k} \binom{m - m_t}{n - k}}{\binom{m}{n}}$$
@@ -1181,22 +1181,22 @@ return clustering of largest observed improvement
   * Benjamini-Hochberg
   
 ### Network representation of data
-- Networks can be used to represent biochemical(GRNs, PPIs, metablic networks) as well as biological relationships(food-chains, pollination networks)
+- Networks can be used to represent biochemical(GRNs, PPIs, metabolic networks) as well as biological relationships(food-chains, pollination networks)
 
-- GRN network reconstrution:
+- GRN network reconstruction:
   * Genes represented by vector of expression levels over multiple experiments
   * Edges inferred by applying statistical similarity or using distance measures
     - Pearson correlation (linear indirect relationships)
     - Partial correlation(direct relationships)
     - Mutual information(non-linear relationships)
-  * Then thresholding where relstionships for which the measure is below a given threshold is excluded from the network
+  * Then thresholding where relationships for which the measure is below a given threshold is excluded from the network
   
 **Thresholding network model** 
   * Given a graph $G$ with weights associated with edges, different network representations can be obtained by applying different thresholds
   * Network properties in different networks can be used to predict a property of interest
   
 **K-nearest neighbor(kNN) network model**
-  * Given data profiles for n objects(points) and an intger k, 
+  * Given data profiles for n objects(points) and an integer k, 
   * For each object, establish edges with k nearest neighbors(based on any metric distance)
     * *Metric means it satisfies triangle inequality, symmetry, and evaluates to 0 when object is compared with itself*
   * in a directed graph, edges are directed from the node whose NNs are determined
@@ -1210,36 +1210,36 @@ return clustering of largest observed improvement
 
 **beta-skeleton graph**
 
-### Multidimentional scaling
+### Multidimensional scaling
 - Provides means to visualize similarity of objects in a data set
 - places objects in a lower dimensional space
 - MDS tries to make the distance between objects in a new space as close as possible to what is in the original distance matrix with pairwise distances of the objects
 - MDS steps are:
   1. Eigen value decomposition for doubly centered D (subtract row mean from each row and column mean from each column and add back total mean)
-  2. The N largest eigen values/vectors are used to construct teh coordinates of the daata points in the new N-dimensional space
+  2. The N largest eigen values/vectors are used to construct the coordinates of the data points in the new N-dimensional space
   
 ### Manifold
 - is an abstract mathematical space which locally resembles Euclidean space
-- Two dimesional data embedded in 3-D space
+- Two dimensional data embedded in 3-D space
 - measurements along manifolds are geodesics
 
 ### Isomap
 - select local neighborhood and create a kNN network with edge lengths given by Euclidean distance
 - Find geodesic distances between all pairs of points(local distances- short; longer distances are discarded)- geodesics are approximated from shortest paths along retained distances
 - Use classical MDS to find best lower dimensional space with the Euclidean distances
-- If data is from a convex set, procedure recovers true geometry since geodesic length = Eclidean distance. If not it introduces distorsions
+- If data is from a convex set, procedure recovers true geometry since geodesic length = Euclidean distance. If not it introduces distortions
 ***The point of isomap is to recover 2-D information embedded in a 3 dimensional space***
 
 **Complexity**
-  * Naive iplementation with:
+  * Naive implementation with:
     - all pairs shortest paths give $O(n^3)$
     - eigen value decomposition $O(n^3)$
   * Using only subset of points $m$ for transformation:
     - with shortest paths: $O(mn^2)$
     - with eigen value decomposition: $O(m^2n)$
     
-### Weisfeller-Lehman Graph Isomorphism test
-- Is a heusristic algorithm do discern isomorphic graphs(may not always work)
+### Weisfeiler-Lehman Graph Isomorphism test
+- Is a heuristic algorithm to discern isomorphic graphs(may not always work)
 - How it works:
   1. Initialize a uniform discrete signal over a graph(seen as colors)
   2. Iteratively update the colors until they do not further change
@@ -1260,16 +1260,16 @@ output: True if H and G have the same color count, False otherwise
 
 
 ### Network Flow
-- A flow network is a directed graph with a source $s$ and  a sink $t$, and  edges withe capacities $c(e)$ denoting the maximum flow each edge can carry *All nodes are reachable from s*
+- A flow network is a directed graph with a source $s$ and  a sink $t$, and  edges with capacities $c(e)$ denoting the maximum flow each edge can carry *All nodes are reachable from s*
 - Each edge gets a flow $f(e)$ such that $0 \leq f(e) \leq c(e)$
-- There is also flow conservation in each edge excep $s$ and $t$ where flow in = flow out
-- $val(f)$ is then thevalue of the flow, that is how much gets from $s$ to $t$
-- **Max flow** is how much we can push from $s$ to $t$ without exeeding any edge capacity
-- **Min-cut** is the smallest total capacity taht if cut would separate $s$ from $t$
+- There is also flow conservation in each edge except $s$ and $t$ where flow in = flow out
+- $val(f)$ is then the value of the flow, that is how much gets from $s$ to $t$
+- **Max flow** is how much we can push from $s$ to $t$ without exceeding any edge capacity
+- **Min-cut** is the smallest total capacity that if cut would separate $s$ from $t$
 - An **st-cut** is a partition$(A,B)$ of the nodes with $s \in A$ and $t \in B$
   * Capacity of $(A,B)$ is the sum of capacities of edges from partition A to B(backwards edges from B to A are not included in this capacity)
 - st-flow has to satisfy:
-  * for each $e \in E: 0 \leq f(e) \leq c(e)$   # capacity cannot be exeeded
+  * for each $e \in E: 0 \leq f(e) \leq c(e)$   # capacity cannot be exceeded
   * for each $v \in V - \\{s,t\\}: \sum\limits_{e \text{in to} v} f(e) = \sum\limits_{e \text{out of} v} f(e)$   # flow conservation
   
 - The value of a flow is then
@@ -1284,9 +1284,9 @@ output: True if H and G have the same color count, False otherwise
 4. Repeat until you get stuck
 
 - Once the flow of an edge is increased it is never decreased
-- Gready gives a local optimum that might not be the global optimum
+- Greedy gives a local optimum that might not be the global optimum
 - we need to be able to undo a bad decision
-- we use a residual graph, where back edges are introduced and we can undo flow already sent through an edge, and also have the reisdual capacity from unused capacity
+- we use a residual graph, where back edges are introduced and we can undo flow already sent through an edge, and also have the residual capacity from unused capacity
 - An **augmenting path** is therefore a simple $s \rightarrow t$ path in the residual network $G_f$
 - A **bottleneck capacity** of an augmenting path $P$ is the minimum residual capacity of any edge in $P$
 
@@ -1299,7 +1299,7 @@ Augment (f,c,P)
     else f (ereverse) ← f (ereverse) – δ.
   return f
 ```
-- The point of the augment function is to determine the amount of flow for each path to the sink $t$, accounting for all present bottlenecks along the path, where if the ege along the path exists in the original network, its flow becomes the initial flow plus the bottleneck, if not then it is a reverse edge in the residual graph which has the same flow as the initial edge, but its flow is - the bottleneck.
+- The point of the augment function is to determine the amount of flow for each path to the sink $t$, accounting for all present bottlenecks along the path, where if the edge along the path exists in the original network, its flow becomes the initial flow plus the bottleneck, if not then it is a reverse edge in the residual graph which has the same flow as the initial edge, but its flow is - the bottleneck.
 
 ```text
 function Ford_fulkerson(G)
@@ -1336,11 +1336,11 @@ function Line_Graph(G)
   return A
 ```
 
-**Graph Compliment**
+**Graph Complement**
 - The complement of graph G is defined as the graph G’ on the same nodes of G; two nodes are connected in G’ if and only if they are not connected in G.
 
 ```text
-function compliment(G)
+function complement(G)
   A is the adjacency matrix of G
   A' ← empty n by n matrix where n is the number of nodes
   for i ← 1 to n do
@@ -1349,13 +1349,13 @@ function compliment(G)
         A'_ij ← 0
       else if A_ij = 0 then
         A'_ij ← 1
-  retrun A'
+  return A'
 ```
 
 ### Network alignment
 - We align sequences(DNA, RNA, Proteins) to identify regions of similarity. Same can be done for networks
 - Network alignment seeks to find regions of topological and functional similarity between molecular networks of different species/organs/tissues/cell types
-  * Knowledge on functions of model/known systems can be transeferred to less weel understood systems(based on this similarity) 
+  * Knowledge on functions of model/known systems can be transferred to less well understood systems(based on this similarity) 
 
 **Global Network Alignment(GNA)**
   * Finds large conserved regions
@@ -1380,7 +1380,7 @@ function compliment(G)
   * aggregate similarity between the nodes mapped to each other(based on the similarity measure)
   
 **IsoRank stages**
-1. Associate a functional similarity score $R_{ij} with each possible match bewteen nodes of the two networks for each node pai $i$ and $j$
+1. Associate a functional similarity score $R_{ij}$ with each possible match between nodes of the two networks for each node pair $i$ and $j$
   * Similarity determined by eigenvalues
   * Models trade-offs between the two objectives
   * $(i,j)$ is a good match if 
@@ -1388,12 +1388,12 @@ function compliment(G)
     * Their neighbors are a good match to each other - similar logic to eigenvalue centrality
     
   * $R_{ij}$ is obtained from scores of neighbors of $i$ ($u \in V(i)$) and neighbors of $j$ ($v \in N(j)$)weighted on the degree/cardinality of these neighbors, i.e.
-    * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{R_{uv}}{|N(u)| |N(v)}|$
+    * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{R_{uv}}{|N(u)| |N(v)|}$
     * which recursively goes over neighbors of neighbors
     * It can be cast as an eigenvalue problem
       * $R = AR$
     * Where $A$ is a topology scoring matrix such that
-      * $A_{ij,uv} = \frac{1}{|N(u)| |N(v)}|$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
+      * $A_{ij,uv} = \frac{1}{|N(u)| |N(v)|}$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
     * *This calculates the contribution of network topology to the score since two nodes can have a good BLAST score but lack connectivity in the larger network*
     * Matrix $A$ has as many rows as there are matches between nodes and therefore needs an efficient approach to determine principle eigen vector - given by the power method
       * $R(k + 1) = \frac{AR(k)}{||AR(k)||}$
@@ -1446,9 +1446,9 @@ function get_score(G, H, B, α) # argument is the adjacency matrix of the two ca
 - Transitivity has to hold for the node mapping, i.e. if node a maps to b and b to c, then a also maps to c
 - For one to one mapping of the nodes, a maximum bipartite weighted matching is performed. This means we create an edge-induced subgraph, where every node has a degree of one and no two edges share an endpoint
   * The R matrix is used to construct a weighted bipartite graph between the two networks, where the edge weights are the matching scores for every possible node pair.
-  * The mapping that yields the maximum possible combination of edge weights while maintaining a one to one mapping is the maximm bipartite weighted graph
-- This problem can be considered a maximum flow problem but only for the non-weighted case as the nodes would then be having only a maximm capacity of one
+  * The mapping that yields the maximum possible combination of edge weights while maintaining a one to one mapping is the maximum bipartite weighted graph
+- This problem can be considered a maximum flow problem but only for the non-weighted case as the nodes would then be having only a maximum capacity of one
   * requires addition of a source node to one side of the bipartite model and a sink node from the other side of the bipartite model
   
-- It can also be fomulated as a linear programming(maximization) problem where we maximize the total possible weights of the edges under the constraints of one to one matching, transitivity
+- It can also be formulated as a linear programming(maximization) problem where we maximize the total possible weights of the edges under the constraints of one to one matching, transitivity
 
