@@ -547,6 +547,35 @@ And the correlation interpreted as:
   * $r < 0$ then the network is disassortative i.e. high degree nodes tend to be adjacent to low degree nodes
   * $r = 0$ then there is no trend between the node degrees
   
+Pseudocode:
+```text
+function assortativity(G)
+  A ← adjacency matrix of G
+  degrees ← [0] * n # initialize 0 list for the degrees of length n
+  s ← [0] * n  # initialize 0 list of length n 
+  for i ← 1 to n do
+    degree_i ← 0
+    for j ← 1 to n do
+      if A{i,j} is not 0  ## works for undirected graphs(both weighted and non-weighted)
+        degree_i += 1
+    degrees[i] ← degree_i
+  
+  for i ← 1 to n do
+    sum_nbs_i ← 0
+    for j ← 1 to n do
+      if A[i,j] is not 0
+       sum_nbs_i += degrees[j]
+    s[i] ← sum_nbs_i/degrees[i]
+  
+  r ← pearson_cor(s,degrees)
+  if r > 0
+    return assortative
+  elif r < 0
+    return disassortative
+  else
+    return no correlation
+```
+  
 ### Distance(local-global)
 
 Distance between two nodes $u$ and $v$ in a network $G$ is given by length of the shortest path between the two nodes if it exists, otherwise considered $\infty$ if not existing 
@@ -1104,7 +1133,7 @@ end while
   * the range is betwenn 0 and 1 and putting all edges in one cluster gives $\gamma(C) = 1$ which is a trivial result
 **Modularity** is based on a relation between the difference of a cluster from random expectation
   * It is a local index based on summation over clusters
-  * $E(C_i)$ is the set of intercluster edges
+  * $E(C_i)$ is the set of intracluster edges
   * $q(C) = \sum\limits_{C_i \in C}[\frac{E(C_i)}{m} - (\frac{\sum\limits_{v \in C_i} d(v)}{2m})^2]$
   * In words:
     - For each cluster get the fraction of edges in the cluster over all edges in the graph, subtract from it the squared fraction of cumulative degrees of the nodes in the cluster over all possible edges in the graph(2m because it's undirected) and sum up the resulting values for each cluster to get the modularity score for the clustering
@@ -1123,7 +1152,7 @@ Pseudocode:
 repeat
   find a node that yield biggest modularity increase if moved to a diffferent community, the node having not been moved
 until all nodes have been moved or no move with increase in modularity can be found
-return clustering oflargets observed improvement
+return clustering of largest observed improvement
 ```
 
 ### Gene Ontology
@@ -1410,7 +1439,16 @@ function get_score(G, H, B, α) # argument is the adjacency matrix of the two ca
       
 2. Use score to extract set of highly scoring mutually consistent matches
 - The resulting vector R is of length $nGnH$ whose entries correspond to aligning node pairs between the two candidate networks, and can therefore be used as the pairwise scoring matrix with reshaping.
+  * $R_matrix [i,j]= R_vector[(i-1)nH + j]$
+  * Given the original candidate networks $G$ and $H$ with dimensions $nG$ and $nH$ Every $i^{th}$ row in the matrix is given by every $nH$ entries in the vector
+  
 - Incase of more than two networks we execute the algorithm on all possible pairs of input networks
 - Transitivity has to hold for the node mapping, i.e. if node a maps to b and b to c, then a also maps to c
-- For one to one mapping of the nodes, a maximum bipartite weighted matching is performed. This means we create an edge-induced subgraph, where ever node has a degree of one and no two edges share an endpoint
-- This problem can be considered a maximum flow problem
+- For one to one mapping of the nodes, a maximum bipartite weighted matching is performed. This means we create an edge-induced subgraph, where every node has a degree of one and no two edges share an endpoint
+  * The R matrix is used to construct a weighted bipartite graph between the two networks, where the edge weights are the matching scores for every possible node pair.
+  * The mapping that yields the maximum possible combination of edge weights while maintaining a one to one mapping is the maximm bipartite weighted graph
+- This problem can be considered a maximum flow problem but only for the non-weighted case as the nodes would then be having only a maximm capacity of one
+  * requires addition of a source node to one side of the bipartite model and a sink node from the other side of the bipartite model
+  
+- It can also be fomulated as a linear programming(maximization) problem where we maximize the total possible weights of the edges under the constraints of one to one matching, transitivity
+
