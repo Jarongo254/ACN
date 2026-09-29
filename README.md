@@ -230,21 +230,27 @@ Same complexity as DFS
 Pseudocode:
 ```text
 procedure bfsearch(G)
+  Dist ← []
   for each v ∈ V(G) do
     mark[v] ← 0
+    distance ← {∞} * n # where n is the number of nodes
+    distance[v] ← 0
   for each v ∈ V(G) do
     if mark[v] ≠ 1 then
       bfs(v)
+      Dist ← append distance
       
 procedure bfs(v)
   Q ← empty queue
   mark[v] ← 1 # node is marked as visited
+  enqueue v to Q
   while Q is not empty do
     u ← first(Q)
     dequeue u from Q
     for each node w adjacent to u do
       if mark[w] ≠ 1 then
         mark[w] ← 1
+        distance[w] ← distance[u] + 1
         enqueue w into Q
 ```
 Example:
@@ -1395,6 +1401,9 @@ function complement(G)
     * Where $A$ is a topology scoring matrix such that
       * $A_{ij,uv} = \frac{1}{|N(u)| |N(v)|}$ if $(i,u) \in E(G_1)$ and $(j,v) \in E(G_2)$
     * *This calculates the contribution of network topology to the score since two nodes can have a good BLAST score but lack connectivity in the larger network*
+    * Weighted networks however require the A matrix modified to add wight information, i.e.
+      * $R_{ij} = \sum\limits_{u \in N(i)} \sum\limits_{v \in N(j)} \frac{w(i,u)*w(j,v)}{\sum\limits_{r \in N(u)} w(r,u) * \sum\limits_{q \in N(v)} w(q,v)}$
+      * is simply the weights of the edges from node $i$ to its neighbors $\times$ weight of edges of node $j$ to its neighbors weighted by the importance of these neighbors in terms of the weights of their neighborhoods(recursively)
     * Matrix $A$ has as many rows as there are matches between nodes and therefore needs an efficient approach to determine principle eigen vector - given by the power method
       * $R(k + 1) = \frac{AR(k)}{||AR(k)||}$
       * Starts with an initial vector(like a vector of ones) then recalculates until the eigen vector convergence to a dominant eigen vector, which is more efficient than calculating all possible eigen vectors to find the leading one
